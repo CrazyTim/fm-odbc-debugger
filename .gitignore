@@ -1,0 +1,7 @@
+.vs/
+packages/
+*.vbproj.user
+*.vbproj.bak
+*.app.config.bak
+*/bin/
+*/obj/
