@@ -173,7 +173,7 @@ Public Class sqlControl
             ' Check for syntax errors:
             ' --------------------------------------------------------------------------------------
             If SelectedDriver = 1 Then
-                ShowWarning(FM_CheckErrors(_bw_SQL))
+                ShowSyntaxWarnings(FM_CheckErrors(_bw_SQL))
             End If
 
 
@@ -213,21 +213,20 @@ Public Class sqlControl
         End If
     End Sub
 
+    Public Sub ShowSyntaxWarnings(ByVal Warnings As ArrayList)
 
-    Public Sub ShowWarning(ByVal errors As ArrayList)
-
-        If errors.Count = 0 Then
+        If Warnings.Count = 0 Then
             lblSyntaxWarning.Visible = False
             Return
         End If
 
-        Dim ttt As String = ""
-        For Each s In errors
-            ttt &= s & vbNewLine
+        Dim s As String = ""
+        For Each w In Warnings
+            s &= "- " & w & vbNewLine
         Next
-        ttt = ttt.Trim
+        s = s.Trim
 
-        ToolTip1.SetToolTip(lblSyntaxWarning, ttt)
+        ToolTip1.SetToolTip(lblSyntaxWarning, s)
         lblSyntaxWarning.Visible = True
 
     End Sub

@@ -482,7 +482,7 @@ Module Module1
             r1 = New Regex("WHERE[\s\S]*=[\s\S]*''", RegexOptions.IgnoreCase)
             r2 = New Regex("WHERE[\s\S]*<>[\s\S]*''", RegexOptions.IgnoreCase)
             If r1.Match(SQL).Success Or r2.Match(SQL).Success Then
-                Errors.Add("- FileMaker does not store empty strings, so ""WHERE column = ''"" or ""WHERE column <> ''"" will always return 0 records:")
+                Errors.Add("Note: FileMaker stores empty strings as NULL, so using ""WHERE column = ''"" or ""WHERE column <> ''"" on a ""Text"" field will always return 0 results. Use ""IS NULL"" instead.")
                 Exit Do
             End If
 
@@ -497,7 +497,7 @@ Module Module1
             r1 = New Regex("=\s*?TRUE", RegexOptions.IgnoreCase)
             r2 = New Regex("=\s*?FALSE", RegexOptions.IgnoreCase)
             If r1.Match(SQL).Success Or r2.Match(SQL).Success Then
-                Errors.Add("- FileMaker ODBC does not support boolean TRUE or FALSE.")
+                Errors.Add("Syntax error: FileMaker ODBC does not support the keywords ""TRUE"" or ""FALSE"". Use ""1"" or ""0"" instead.")
                 Exit Do
             End If
 
@@ -511,7 +511,7 @@ Module Module1
             If SQL(i) = "'" Then AposCounter += 1
         Next
         If AposCounter.IsOdd Then
-            Errors.Add("- Error: one or more apostrophes (""'"") need to be escaped!")
+            Errors.Add("Syntax error: one or more apostrophes (""'"") need to be escaped!")
         End If
 
 
@@ -521,7 +521,7 @@ Module Module1
 
             r1 = New Regex("\b(" & "BETWEEN" & ")\b", RegexOptions.IgnoreCase)
             If r1.Match(SQL).Success Then
-                Errors.Add("- Warning: query contains the keyword ""BETWEEN"" which is very slow comparing dates (in FileMaker ODBC). Recommend using "">= AND <="" instead.")
+                Errors.Add("Query contains the keyword ""BETWEEN"" and FileMaker ODBC is VERY slow when comparing dates this way. Use "">="" and ""<="" instead.")
                 Exit Do
             End If
 
