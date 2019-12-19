@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Basic Express 2010
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FileMaker ODBC Query Tester", "FileMaker ODBC Query Tester\FileMaker ODBC Query Tester.vbproj", "{CC05756B-BC75-4300-B46F-8F5B4E50DC26}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FileMaker ODBC Debugger", "FileMaker ODBC Debugger\FileMaker ODBC Debugger.vbproj", "{CC05756B-BC75-4300-B46F-8F5B4E50DC26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
