@@ -23,7 +23,7 @@ Partial Class sqlControl
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
@@ -105,21 +105,22 @@ Partial Class sqlControl
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.cmboRowsToReturn = New System.Windows.Forms.ComboBox()
+        Me.cmbRowLimit = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.cmbSelectedDriver = New System.Windows.Forms.ComboBox()
+        Me.cmbDriver = New System.Windows.Forms.ComboBox()
         Me.btnGo = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.lblLoading = New System.Windows.Forms.Label()
         Me.txtErrorText = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel_Status = New System.Windows.Forms.Panel()
-        Me.lblSyntaxWarning2 = New System.Windows.Forms.Label()
-        Me.lblDuration3 = New System.Windows.Forms.Label()
-        Me.lblDuration2 = New System.Windows.Forms.Label()
-        Me.lblStatus2 = New System.Windows.Forms.Label()
+        Me.lblSyntaxWarning = New System.Windows.Forms.Label()
+        Me.lblDurationExecute = New System.Windows.Forms.Label()
+        Me.lblDurationConnect = New System.Windows.Forms.Label()
+        Me.lblStatus = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Panel_Search = New System.Windows.Forms.Panel()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.txtFind = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.lblFindCount = New System.Windows.Forms.Label()
@@ -135,7 +136,6 @@ Partial Class sqlControl
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ContextMenuStrip3 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.GetTableNamesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Label13 = New System.Windows.Forms.Label()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -797,9 +797,9 @@ Partial Class sqlControl
         '
         'Panel4
         '
-        Me.Panel4.Controls.Add(Me.cmboRowsToReturn)
+        Me.Panel4.Controls.Add(Me.cmbRowLimit)
         Me.Panel4.Controls.Add(Me.Label8)
-        Me.Panel4.Controls.Add(Me.cmbSelectedDriver)
+        Me.Panel4.Controls.Add(Me.cmbDriver)
         Me.Panel4.Controls.Add(Me.btnGo)
         Me.Panel4.Controls.Add(Me.Label6)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
@@ -808,16 +808,16 @@ Partial Class sqlControl
         Me.Panel4.Size = New System.Drawing.Size(772, 32)
         Me.Panel4.TabIndex = 0
         '
-        'cmboRowsToReturn
+        'cmbRowLimit
         '
-        Me.cmboRowsToReturn.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cmboRowsToReturn.FormattingEnabled = True
-        Me.cmboRowsToReturn.Items.AddRange(New Object() {"10", "100", "500", "1000", "5000", "10000"})
-        Me.cmboRowsToReturn.Location = New System.Drawing.Point(608, 5)
-        Me.cmboRowsToReturn.Name = "cmboRowsToReturn"
-        Me.cmboRowsToReturn.Size = New System.Drawing.Size(56, 23)
-        Me.cmboRowsToReturn.TabIndex = 16
-        Me.ToolTip1.SetToolTip(Me.cmboRowsToReturn, "Maximum number of rows to read from the server")
+        Me.cmbRowLimit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cmbRowLimit.FormattingEnabled = True
+        Me.cmbRowLimit.Items.AddRange(New Object() {"10", "100", "500", "1000", "5000", "10000"})
+        Me.cmbRowLimit.Location = New System.Drawing.Point(608, 5)
+        Me.cmbRowLimit.Name = "cmbRowLimit"
+        Me.cmbRowLimit.Size = New System.Drawing.Size(56, 23)
+        Me.cmbRowLimit.TabIndex = 16
+        Me.ToolTip1.SetToolTip(Me.cmbRowLimit, "Maximum number of rows to read from the server")
         '
         'Label8
         '
@@ -827,17 +827,17 @@ Partial Class sqlControl
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(63, 15)
         Me.Label8.TabIndex = 17
-        Me.Label8.Text = "Max Rows:"
+        Me.Label8.Text = "Row Limit:"
         '
-        'cmbSelectedDriver
+        'cmbDriver
         '
-        Me.cmbSelectedDriver.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbSelectedDriver.FormattingEnabled = True
-        Me.cmbSelectedDriver.Items.AddRange(New Object() {"FileMaker ODBC", "Other"})
-        Me.cmbSelectedDriver.Location = New System.Drawing.Point(51, 5)
-        Me.cmbSelectedDriver.Name = "cmbSelectedDriver"
-        Me.cmbSelectedDriver.Size = New System.Drawing.Size(211, 23)
-        Me.cmbSelectedDriver.TabIndex = 0
+        Me.cmbDriver.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbDriver.FormattingEnabled = True
+        Me.cmbDriver.Items.AddRange(New Object() {"FileMaker ODBC", "Other"})
+        Me.cmbDriver.Location = New System.Drawing.Point(51, 5)
+        Me.cmbDriver.Name = "cmbDriver"
+        Me.cmbDriver.Size = New System.Drawing.Size(211, 23)
+        Me.cmbDriver.TabIndex = 0
         '
         'btnGo
         '
@@ -870,7 +870,7 @@ Partial Class sqlControl
         Me.lblLoading.Image = Global.FMDebugger.My.Resources.Resources.loading_2_32
         Me.lblLoading.Location = New System.Drawing.Point(345, 25)
         Me.lblLoading.Name = "lblLoading"
-        Me.lblLoading.Size = New System.Drawing.Size(76, 144)
+        Me.lblLoading.Size = New System.Drawing.Size(76, 140)
         Me.lblLoading.TabIndex = 234
         Me.lblLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblLoading.Visible = False
@@ -888,13 +888,13 @@ Partial Class sqlControl
         Me.txtErrorText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtErrorText.Size = New System.Drawing.Size(163, 76)
         Me.txtErrorText.TabIndex = 10
-        Me.txtErrorText.Text = "[error text]"
+        Me.txtErrorText.Text = "[error-text]"
         Me.txtErrorText.Visible = False
         '
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(648, 90)
+        Me.Button1.Location = New System.Drawing.Point(648, 86)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(79, 25)
         Me.Button1.TabIndex = 11
@@ -904,10 +904,10 @@ Partial Class sqlControl
         '
         'Panel_Status
         '
-        Me.Panel_Status.Controls.Add(Me.lblSyntaxWarning2)
-        Me.Panel_Status.Controls.Add(Me.lblDuration3)
-        Me.Panel_Status.Controls.Add(Me.lblDuration2)
-        Me.Panel_Status.Controls.Add(Me.lblStatus2)
+        Me.Panel_Status.Controls.Add(Me.lblSyntaxWarning)
+        Me.Panel_Status.Controls.Add(Me.lblDurationExecute)
+        Me.Panel_Status.Controls.Add(Me.lblDurationConnect)
+        Me.Panel_Status.Controls.Add(Me.lblStatus)
         Me.Panel_Status.Controls.Add(Me.Label12)
         Me.Panel_Status.Controls.Add(Me.Panel_Search)
         Me.Panel_Status.Dock = System.Windows.Forms.DockStyle.Top
@@ -916,51 +916,51 @@ Partial Class sqlControl
         Me.Panel_Status.Size = New System.Drawing.Size(772, 24)
         Me.Panel_Status.TabIndex = 23
         '
-        'lblSyntaxWarning2
+        'lblSyntaxWarning
         '
-        Me.lblSyntaxWarning2.AutoSize = True
-        Me.lblSyntaxWarning2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.lblSyntaxWarning2.Image = Global.FMDebugger.My.Resources.Resources.alert_16x16
-        Me.lblSyntaxWarning2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblSyntaxWarning2.Location = New System.Drawing.Point(245, 0)
-        Me.lblSyntaxWarning2.Name = "lblSyntaxWarning2"
-        Me.lblSyntaxWarning2.Padding = New System.Windows.Forms.Padding(0, 4, 25, 2)
-        Me.lblSyntaxWarning2.Size = New System.Drawing.Size(142, 21)
-        Me.lblSyntaxWarning2.TabIndex = 26
-        Me.lblSyntaxWarning2.Text = "       [syntax_warning]"
+        Me.lblSyntaxWarning.AutoSize = True
+        Me.lblSyntaxWarning.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lblSyntaxWarning.Image = Global.FMDebugger.My.Resources.Resources.alert_16x16
+        Me.lblSyntaxWarning.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblSyntaxWarning.Location = New System.Drawing.Point(339, 0)
+        Me.lblSyntaxWarning.Name = "lblSyntaxWarning"
+        Me.lblSyntaxWarning.Padding = New System.Windows.Forms.Padding(0, 4, 25, 2)
+        Me.lblSyntaxWarning.Size = New System.Drawing.Size(98, 21)
+        Me.lblSyntaxWarning.TabIndex = 26
+        Me.lblSyntaxWarning.Text = "       Warning"
         '
-        'lblDuration3
+        'lblDurationExecute
         '
-        Me.lblDuration3.AutoSize = True
-        Me.lblDuration3.Dock = System.Windows.Forms.DockStyle.Left
-        Me.lblDuration3.Location = New System.Drawing.Point(160, 0)
-        Me.lblDuration3.Name = "lblDuration3"
-        Me.lblDuration3.Padding = New System.Windows.Forms.Padding(0, 4, 25, 2)
-        Me.lblDuration3.Size = New System.Drawing.Size(85, 21)
-        Me.lblDuration3.TabIndex = 30
-        Me.lblDuration3.Text = "[duration]"
+        Me.lblDurationExecute.AutoSize = True
+        Me.lblDurationExecute.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lblDurationExecute.Location = New System.Drawing.Point(208, 0)
+        Me.lblDurationExecute.Name = "lblDurationExecute"
+        Me.lblDurationExecute.Padding = New System.Windows.Forms.Padding(0, 4, 25, 2)
+        Me.lblDurationExecute.Size = New System.Drawing.Size(131, 21)
+        Me.lblDurationExecute.TabIndex = 30
+        Me.lblDurationExecute.Text = "[duration-execute]"
         '
-        'lblDuration2
+        'lblDurationConnect
         '
-        Me.lblDuration2.AutoSize = True
-        Me.lblDuration2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.lblDuration2.Location = New System.Drawing.Point(75, 0)
-        Me.lblDuration2.Name = "lblDuration2"
-        Me.lblDuration2.Padding = New System.Windows.Forms.Padding(0, 4, 25, 2)
-        Me.lblDuration2.Size = New System.Drawing.Size(85, 21)
-        Me.lblDuration2.TabIndex = 25
-        Me.lblDuration2.Text = "[duration]"
+        Me.lblDurationConnect.AutoSize = True
+        Me.lblDurationConnect.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lblDurationConnect.Location = New System.Drawing.Point(75, 0)
+        Me.lblDurationConnect.Name = "lblDurationConnect"
+        Me.lblDurationConnect.Padding = New System.Windows.Forms.Padding(0, 4, 25, 2)
+        Me.lblDurationConnect.Size = New System.Drawing.Size(133, 21)
+        Me.lblDurationConnect.TabIndex = 25
+        Me.lblDurationConnect.Text = "[duration-connect]"
         '
-        'lblStatus2
+        'lblStatus
         '
-        Me.lblStatus2.AutoSize = True
-        Me.lblStatus2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.lblStatus2.Location = New System.Drawing.Point(0, 0)
-        Me.lblStatus2.Name = "lblStatus2"
-        Me.lblStatus2.Padding = New System.Windows.Forms.Padding(4, 4, 25, 2)
-        Me.lblStatus2.Size = New System.Drawing.Size(75, 21)
-        Me.lblStatus2.TabIndex = 24
-        Me.lblStatus2.Text = "[status]"
+        Me.lblStatus.AutoSize = True
+        Me.lblStatus.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lblStatus.Location = New System.Drawing.Point(0, 0)
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Padding = New System.Windows.Forms.Padding(4, 4, 25, 2)
+        Me.lblStatus.Size = New System.Drawing.Size(75, 21)
+        Me.lblStatus.TabIndex = 24
+        Me.lblStatus.Text = "[status]"
         '
         'Label12
         '
@@ -986,6 +986,17 @@ Partial Class sqlControl
         Me.Panel_Search.Name = "Panel_Search"
         Me.Panel_Search.Size = New System.Drawing.Size(182, 25)
         Me.Panel_Search.TabIndex = 27
+        '
+        'Label13
+        '
+        Me.Label13.BackColor = System.Drawing.Color.Silver
+        Me.Label13.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label13.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(0, 0)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(1, 25)
+        Me.Label13.TabIndex = 32
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'txtFind
         '
@@ -1049,22 +1060,22 @@ Partial Class sqlControl
         Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.ContextMenuStrip = Me.ContextMenuStrip2
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(0, 0, 5, 0)
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(0, 0, 5, 0)
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridView1.Location = New System.Drawing.Point(-1, 24)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersWidth = 25
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridView1.Size = New System.Drawing.Size(773, 161)
+        Me.DataGridView1.Size = New System.Drawing.Size(773, 157)
         Me.DataGridView1.TabIndex = 1
         '
         'ContextMenuStrip2
@@ -1121,24 +1132,13 @@ Partial Class sqlControl
         '
         Me.ContextMenuStrip3.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GetTableNamesToolStripMenuItem})
         Me.ContextMenuStrip3.Name = "ContextMenuStrip3"
-        Me.ContextMenuStrip3.Size = New System.Drawing.Size(164, 26)
+        Me.ContextMenuStrip3.Size = New System.Drawing.Size(163, 26)
         '
         'GetTableNamesToolStripMenuItem
         '
         Me.GetTableNamesToolStripMenuItem.Name = "GetTableNamesToolStripMenuItem"
-        Me.GetTableNamesToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.GetTableNamesToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
         Me.GetTableNamesToolStripMenuItem.Text = "Get Table Names"
-        '
-        'Label13
-        '
-        Me.Label13.BackColor = System.Drawing.Color.Silver
-        Me.Label13.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Label13.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(0, 0)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(1, 25)
-        Me.Label13.TabIndex = 32
-        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'sqlControl
         '
@@ -1246,7 +1246,7 @@ Partial Class sqlControl
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
     Friend WithEvents mnuExportToExcel As ToolStripMenuItem
-    Friend WithEvents cmbSelectedDriver As ComboBox
+    Friend WithEvents cmbDriver As ComboBox
     Private WithEvents Label6 As Label
     Friend WithEvents url_sql_v13 As ToolStripMenuItem
     Friend WithEvents url_sql_v14 As ToolStripMenuItem
@@ -1270,16 +1270,16 @@ Partial Class sqlControl
     Friend WithEvents Panel_Status As Panel
     Private WithEvents Label11 As Label
     Friend WithEvents Panel_Search As Panel
-    Private WithEvents lblSyntaxWarning2 As Label
-    Private WithEvents lblDuration2 As Label
-    Private WithEvents lblStatus2 As Label
+    Private WithEvents lblSyntaxWarning As Label
+    Private WithEvents lblDurationConnect As Label
+    Private WithEvents lblStatus As Label
     Private WithEvents Label12 As Label
     Private WithEvents lblFindCount As Label
     Private WithEvents Label5 As Label
-    Private WithEvents lblDuration3 As Label
+    Private WithEvents lblDurationExecute As Label
     Friend WithEvents url_sql_v17 As ToolStripMenuItem
     Friend WithEvents url_odbc_v17 As ToolStripMenuItem
-    Friend WithEvents cmboRowsToReturn As ComboBox
+    Friend WithEvents cmbRowLimit As ComboBox
     Private WithEvents Label8 As Label
     Friend WithEvents lblLoading As Label
     Private WithEvents Label13 As Label

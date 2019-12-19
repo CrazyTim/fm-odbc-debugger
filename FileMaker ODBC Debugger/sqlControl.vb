@@ -53,13 +53,13 @@ Public Class sqlControl
 
         Select Case e.ProgressPercentage
             Case 100 ' connecting
-                lblStatus2.Text = "Connecting..."
+                lblStatus.Text = "Connecting..."
 
             Case 200 ' executing
-                lblStatus2.Text = "Executing Query. Waiting for response..."
+                lblStatus.Text = "Executing Query. Waiting for response..."
 
             Case 300 ' reading
-                lblStatus2.Text = "Reading Data..."
+                lblStatus.Text = "Reading Data..."
 
         End Select
 
@@ -90,15 +90,15 @@ Public Class sqlControl
             txtErrorText.Visible = False
             'lblReservedWords.Text = ""
             'lblKeywords.Visible = False
-            lblDuration2.Visible = False
-            lblDuration3.Visible = False
+            lblDurationConnect.Visible = False
+            lblDurationExecute.Visible = False
             lblFindCount.Visible = False
             _LastSearch = ""
             DisableSearchBox()
 
-            lblStatus2.Text = ""
-            ToolTip1.SetToolTip(lblSyntaxWarning2, "")
-            lblSyntaxWarning2.Visible = False
+            lblStatus.Text = ""
+            ToolTip1.SetToolTip(lblSyntaxWarning, "")
+            lblSyntaxWarning.Visible = False
             Panel1.Enabled = False
             Me.Refresh()
 
@@ -217,7 +217,7 @@ Public Class sqlControl
     Public Sub ShowWarning(ByVal errors As ArrayList)
 
         If errors.Count = 0 Then
-            lblSyntaxWarning2.Visible = False
+            lblSyntaxWarning.Visible = False
             Return
         End If
 
@@ -227,8 +227,8 @@ Public Class sqlControl
         Next
         ttt = ttt.Trim
 
-        ToolTip1.SetToolTip(lblSyntaxWarning2, ttt)
-        lblSyntaxWarning2.Visible = True
+        ToolTip1.SetToolTip(lblSyntaxWarning, ttt)
+        lblSyntaxWarning.Visible = True
 
     End Sub
 
@@ -240,8 +240,8 @@ Public Class sqlControl
         _bw_Username = txtUsername.Text
         _bw_Password = txtPassword.Text
 
-        If IsNumeric(cmboRowsToReturn.Text) Then
-            _bw_RowsToReturn = CLng(cmboRowsToReturn.Text)
+        If IsNumeric(cmbRowLimit.Text) Then
+            _bw_RowsToReturn = CLng(cmbRowLimit.Text)
         End If
         If _bw_RowsToReturn <= 0 Then _bw_RowsToReturn = 1 ' return at least one row
 
@@ -470,7 +470,7 @@ Public Class sqlControl
         If _bw_Error <> "" Then
 
             ' error before executing
-            lblStatus2.Text = "Error"
+            lblStatus.Text = "Error"
             txtErrorText.Visible = True
             txtErrorText.Text = _bw_Error
             DisableSearchBox()
@@ -527,7 +527,7 @@ Public Class sqlControl
 
                     Refreshrowcount()
                 Else
-                    lblStatus2.Text = "Row 0 of 0"
+                    lblStatus.Text = "Row 0 of 0"
                 End If
 
                 'Dim jf = DataGridView1.Columns()
@@ -548,7 +548,7 @@ Public Class sqlControl
 
             ' show number records affected:
             If _bw_RecordsAffected > -1 Then
-                lblStatus2.Text = _bw_RecordsAffected & " Records Affected"
+                lblStatus.Text = _bw_RecordsAffected & " Records Affected"
             End If
 
         End If
@@ -564,23 +564,23 @@ Public Class sqlControl
 
         ' show elapsed time
         Dim ElapsedTime As TimeSpan = _bw_Time_Conn.Add(_bw_Time_Exe.Add(_bw_Time_Stream))
-        lblDuration2.Visible = True
-        lblDuration3.Visible = True
+        lblDurationConnect.Visible = True
+        lblDurationExecute.Visible = True
         'lblDuration2.Text = ElapsedTime.Minutes.ToString("00") & ":" & ElapsedTime.Seconds.ToString("00") & "." & (ElapsedTime.Milliseconds / 10).ToString("00")
-        lblDuration2.Text = "Connect: " & formattime(_bw_Time_Conn)
+        lblDurationConnect.Text = "Connect: " & formattime(_bw_Time_Conn)
 
         Dim runtime = _bw_Time_Exe + _bw_Time_Stream
-        lblDuration3.Text = "Execute: " & formattime(runtime)
+        lblDurationExecute.Text = "Execute: " & formattime(runtime)
 
         Dim ttt As String = "Process: " & formattime(_bw_Time_Exe) &
                             ", Stream: " & formattime(_bw_Time_Stream)
-        ToolTip1.SetToolTip(lblDuration3, ttt)
+        ToolTip1.SetToolTip(lblDurationExecute, ttt)
 
         ' show/hide status
-        If lblStatus2.Text = "" Then
-            lblStatus2.Visible = False
+        If lblStatus.Text = "" Then
+            lblStatus.Visible = False
         Else
-            lblStatus2.Visible = True
+            lblStatus.Visible = True
         End If
     End Sub
 
@@ -662,7 +662,7 @@ Public Class sqlControl
 
     Public Property SelectedDriver() As Integer
         Get
-            If cmbSelectedDriver.Text.ToLower = "other" Then
+            If cmbDriver.Text.ToLower = "other" Then
                 Return 0
             Else
                 Return 1
@@ -670,23 +670,23 @@ Public Class sqlControl
         End Get
         Set(ByVal value As Integer)
             If value = 0 Then
-                cmbSelectedDriver.SelectedIndex = 1
+                cmbDriver.SelectedIndex = 1
             Else
-                cmbSelectedDriver.SelectedIndex = 0
+                cmbDriver.SelectedIndex = 0
             End If
         End Set
     End Property
 
     Public Property RowsToReturn() As Integer
         Get
-            If IsNumeric(cmboRowsToReturn.Text) Then
-                Return cmboRowsToReturn.Text
+            If IsNumeric(cmbRowLimit.Text) Then
+                Return cmbRowLimit.Text
             Else
                 Return 1000
             End If
         End Get
         Set(ByVal value As Integer)
-            cmboRowsToReturn.Text = value
+            cmbRowLimit.Text = value
         End Set
     End Property
 
@@ -696,10 +696,10 @@ Public Class sqlControl
         ' reset
         txtErrorText.Dock = DockStyle.Fill
         txtErrorText.Text = ""
-        lblStatus2.Text = ""
-        lblDuration2.Visible = False
-        lblDuration3.Visible = False
-        lblSyntaxWarning2.Visible = False
+        lblStatus.Text = ""
+        lblDurationConnect.Visible = False
+        lblDurationExecute.Visible = False
+        lblSyntaxWarning.Visible = False
         txtSQL.Select()
         'lblReservedWords.Text = ""
         DisableSearchBox()
@@ -722,9 +722,9 @@ Public Class sqlControl
         End If
 
         If DataGridView1.SelectedCells.Count = 0 Then
-            lblStatus2.Text = "Row 0 of " & TotalRows
+            lblStatus.Text = "Row 0 of " & TotalRows
         Else
-            lblStatus2.Text = "Row " & DataGridView1.SelectedCells(0).RowIndex + 1 & " of " & TotalRows
+            lblStatus.Text = "Row " & DataGridView1.SelectedCells(0).RowIndex + 1 & " of " & TotalRows
         End If
     End Sub
 
@@ -1153,7 +1153,7 @@ _jobid BETWEEN 10 AND 50 BATCH 10
         Process.Start("https://fmhelp.filemaker.com/docs/17/en/fm16_odbc_jdbc_guide.pdf")
     End Sub
 
-    Private Sub cmbDriverName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSelectedDriver.SelectedIndexChanged
+    Private Sub cmbDriverName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDriver.SelectedIndexChanged
         If SelectedDriver = 0 Then ' other
             Panel_Driver_Custom.Visible = True
             Panel_Driver_FileMaker.Visible = False
@@ -1302,7 +1302,7 @@ _jobid BETWEEN 10 AND 50 BATCH 10
     End Sub
 
     Private Sub SplitContainer1_MouseUp(sender As Object, e As MouseEventArgs) Handles SplitContainer1.MouseUp
-        lblDuration2.Focus()
+        lblDurationConnect.Focus()
     End Sub
 
     Private Sub dataGridView1_CellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridView1.CellFormatting

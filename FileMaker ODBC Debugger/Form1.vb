@@ -161,9 +161,9 @@
         un.ConnectionString = ConnectionString
         un.SQLText = SQL
 
-        un.cmbSelectedDriver.Items.Clear()
-        un.cmbSelectedDriver.Items.Add("FileMaker ODBC (" & FMODBCVersion & ")")
-        un.cmbSelectedDriver.Items.Add("Other")
+        un.cmbDriver.Items.Clear()
+        un.cmbDriver.Items.Add("FileMaker ODBC (" & FMODBCVersion & ")")
+        un.cmbDriver.Items.Add("Other")
 
         AddHandler un.DatabaseNameChanged, AddressOf OnDatabaseNameChange
         AddHandler un.BeginSQLExecute, AddressOf OnBeginSQLExecute
