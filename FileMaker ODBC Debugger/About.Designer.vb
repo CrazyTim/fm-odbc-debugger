@@ -32,6 +32,7 @@ Partial Class About
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblAbout = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -40,13 +41,14 @@ Partial Class About
         '
         Me.Panel2.AutoSize = True
         Me.Panel2.BackColor = System.Drawing.Color.White
+        Me.Panel2.Controls.Add(Me.Label6)
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Controls.Add(Me.lblAppTitle)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(9, 9, 9, 10)
-        Me.Panel2.Size = New System.Drawing.Size(634, 81)
+        Me.Panel2.Size = New System.Drawing.Size(634, 101)
         Me.Panel2.TabIndex = 167
         '
         'Label1
@@ -57,9 +59,9 @@ Partial Class About
         Me.Label1.Location = New System.Drawing.Point(9, 51)
         Me.Label1.Name = "Label1"
         Me.Label1.Padding = New System.Windows.Forms.Padding(0, 0, 0, 5)
-        Me.Label1.Size = New System.Drawing.Size(191, 20)
+        Me.Label1.Size = New System.Drawing.Size(109, 20)
         Me.Label1.TabIndex = 164
-        Me.Label1.Text = "Copyright © 2018 Jason Ballantyne"
+        Me.Label1.Text = "Version: 2020-02-05"
         '
         'lblAppTitle
         '
@@ -82,9 +84,9 @@ Partial Class About
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.lblAbout)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(0, 81)
+        Me.Panel1.Location = New System.Drawing.Point(0, 101)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(634, 314)
+        Me.Panel1.Size = New System.Drawing.Size(634, 294)
         Me.Panel1.TabIndex = 168
         '
         'Label5
@@ -132,7 +134,7 @@ Partial Class About
         Me.Label3.Location = New System.Drawing.Point(0, 395)
         Me.Label3.Name = "Label3"
         Me.Label3.Padding = New System.Windows.Forms.Padding(9, 2, 9, 11)
-        Me.Label3.Size = New System.Drawing.Size(542, 103)
+        Me.Label3.Size = New System.Drawing.Size(543, 103)
         Me.Label3.TabIndex = 171
         Me.Label3.Text = resources.GetString("Label3.Text")
         '
@@ -147,6 +149,18 @@ Partial Class About
         Me.lblAbout.Size = New System.Drawing.Size(610, 395)
         Me.lblAbout.TabIndex = 169
         Me.lblAbout.Text = resources.GetString("lblAbout.Text")
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(9, 71)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Padding = New System.Windows.Forms.Padding(0, 0, 0, 5)
+        Me.Label6.Size = New System.Drawing.Size(191, 20)
+        Me.Label6.TabIndex = 166
+        Me.Label6.Text = "Copyright © 2020 Jason Ballantyne"
         '
         'About
         '
@@ -181,4 +195,5 @@ Partial Class About
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label5 As Label
+    Friend WithEvents Label6 As Label
 End Class
