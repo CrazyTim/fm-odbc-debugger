@@ -854,15 +854,15 @@ Public Class sqlControl
     End Sub
 
     Private Sub DateToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DateToolStripMenuItem.Click
-        txtSQL.Paste("{d '2001-01-01'}")
+        txtSQL.Paste("{d '" & Now.ToString("yyyy-MM-dd") & "'}")
     End Sub
 
     Private Sub TimeToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles TimeToolStripMenuItem.Click
-        txtSQL.Paste("{t '01:01:00'}")
+        txtSQL.Paste("{t '" & Now.ToString("hh:mm:ss") & "'}")
     End Sub
 
     Private Sub TimestampToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles TimestampToolStripMenuItem.Click
-        txtSQL.Paste("{ts '2001-01-01 01:01:00'}")
+        txtSQL.Paste("{ts '" & Now.ToString("yyyy-MM-dd hh:mm:ss") & "'}")
     End Sub
 
     Private Sub DAYOFWEEKToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DAYOFWEEKToolStripMenuItem.Click
