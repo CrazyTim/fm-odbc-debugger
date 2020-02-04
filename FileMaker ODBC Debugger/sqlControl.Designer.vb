@@ -72,6 +72,7 @@ Partial Class sqlControl
         Me.CURRENTDATEToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CURRENTTIMEToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CURRENTTIMESTAMPToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
         Me.DATEVAL01302011ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConstantsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -137,7 +138,6 @@ Partial Class sqlControl
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ContextMenuStrip3 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.GetTableNamesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -226,47 +226,47 @@ Partial Class sqlControl
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCopy1, Me.mnuCut1, Me.mnuPaste, Me.ToolStripSeparator4, Me.mnuSelectAll, Me.ToolStripSeparator3, Me.InsertFileMakerToolStripMenuItem, Me.ConstantsToolStripMenuItem, Me.ToolStripSeparator1, Me.FunctionsToolStripMenuItem, Me.V13ODBCGuideToolStripMenuItem, Me.ToolStripSeparator5, Me.AboutFMODBCDebuggerToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(208, 280)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(208, 258)
         '
         'mnuCopy1
         '
         Me.mnuCopy1.Name = "mnuCopy1"
         Me.mnuCopy1.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.mnuCopy1.Size = New System.Drawing.Size(204, 22)
+        Me.mnuCopy1.Size = New System.Drawing.Size(207, 22)
         Me.mnuCopy1.Text = "Copy"
         '
         'mnuCut1
         '
         Me.mnuCut1.Name = "mnuCut1"
         Me.mnuCut1.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
-        Me.mnuCut1.Size = New System.Drawing.Size(204, 22)
+        Me.mnuCut1.Size = New System.Drawing.Size(207, 22)
         Me.mnuCut1.Text = "Cut"
         '
         'mnuPaste
         '
         Me.mnuPaste.Name = "mnuPaste"
         Me.mnuPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
-        Me.mnuPaste.Size = New System.Drawing.Size(204, 22)
+        Me.mnuPaste.Size = New System.Drawing.Size(207, 22)
         Me.mnuPaste.Text = "Paste"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.AutoSize = False
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(201, 14)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(204, 14)
         '
         'mnuSelectAll
         '
         Me.mnuSelectAll.Name = "mnuSelectAll"
         Me.mnuSelectAll.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
-        Me.mnuSelectAll.Size = New System.Drawing.Size(204, 22)
+        Me.mnuSelectAll.Size = New System.Drawing.Size(207, 22)
         Me.mnuSelectAll.Text = "Select All"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.AutoSize = False
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(201, 14)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(204, 14)
         '
         'InsertFileMakerToolStripMenuItem
         '
@@ -279,7 +279,7 @@ Partial Class sqlControl
         '
         Me.StringsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RTRIMToolStripMenuItem, Me.TRIMToolStripMenuItem, Me.LTRIMToolStripMenuItem, Me.UPPERToolStripMenuItem, Me.LOWERToolStripMenuItem, Me.LEFTstring4ToolStripMenuItem, Me.RIGHTstring4ToolStripMenuItem, Me.SUBSTRINGstring23ToolStripMenuItem, Me.STRVALToolStripMenuItem, Me.CHR67ToolStripMenuItem, Me.USERNAMEToolStripMenuItem, Me.ToolStripSeparator8, Me.DAYNAMEdateToolStripMenuItem, Me.MONTHNAMEToolStripMenuItem})
         Me.StringsToolStripMenuItem.Name = "StringsToolStripMenuItem"
-        Me.StringsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.StringsToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
         Me.StringsToolStripMenuItem.Text = "Return String"
         '
         'RTRIMToolStripMenuItem
@@ -383,7 +383,7 @@ Partial Class sqlControl
         '
         Me.NumbersToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CEILToolStripMenuItem, Me.FLOORToolStripMenuItem, Me.NUMVALstringToolStripMenuItem, Me.MIN6689ToolStripMenuItem, Me.MAX6689ToolStripMenuItem, Me.LENstringToolStripMenuItem, Me.ROUND1234560ToolStripMenuItem, Me.INT64321Returns6ToolStripMenuItem, Me.ToolStripSeparator6, Me.SECONDToolStripMenuItem, Me.MINUTEToolStripMenuItem, Me.HOURToolStripMenuItem, Me.DAYToolStripMenuItem, Me.DAYOFWEEKToolStripMenuItem, Me.MONTHToolStripMenuItem, Me.YEARToolStripMenuItem})
         Me.NumbersToolStripMenuItem1.Name = "NumbersToolStripMenuItem1"
-        Me.NumbersToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.NumbersToolStripMenuItem1.Size = New System.Drawing.Size(156, 22)
         Me.NumbersToolStripMenuItem1.Text = "Return Number"
         '
         'CEILToolStripMenuItem
@@ -501,7 +501,7 @@ Partial Class sqlControl
         '
         Me.DateToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CURRENTDATEToolStripMenuItem1, Me.CURRENTTIMEToolStripMenuItem1, Me.CURRENTTIMESTAMPToolStripMenuItem1, Me.ToolStripSeparator9, Me.DATEVAL01302011ToolStripMenuItem})
         Me.DateToolStripMenuItem1.Name = "DateToolStripMenuItem1"
-        Me.DateToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.DateToolStripMenuItem1.Size = New System.Drawing.Size(156, 22)
         Me.DateToolStripMenuItem1.Text = "Return Date"
         '
         'CURRENTDATEToolStripMenuItem1
@@ -525,6 +525,12 @@ Partial Class sqlControl
         Me.CURRENTTIMESTAMPToolStripMenuItem1.Size = New System.Drawing.Size(263, 22)
         Me.CURRENTTIMESTAMPToolStripMenuItem1.Text = "CURRENT_TIMESTAMP"
         '
+        'ToolStripSeparator9
+        '
+        Me.ToolStripSeparator9.AutoSize = False
+        Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(260, 14)
+        '
         'DATEVAL01302011ToolStripMenuItem
         '
         Me.DATEVAL01302011ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
@@ -536,7 +542,7 @@ Partial Class sqlControl
         '
         Me.ConstantsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DateToolStripMenuItem, Me.TimeToolStripMenuItem, Me.TimestampToolStripMenuItem})
         Me.ConstantsToolStripMenuItem.Name = "ConstantsToolStripMenuItem"
-        Me.ConstantsToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.ConstantsToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
         Me.ConstantsToolStripMenuItem.Text = "Insert ODBC Date Literal"
         '
         'DateToolStripMenuItem
@@ -564,13 +570,13 @@ Partial Class sqlControl
         '
         Me.ToolStripSeparator1.AutoSize = False
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(201, 14)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(204, 14)
         '
         'FunctionsToolStripMenuItem
         '
         Me.FunctionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.url_sql_v16, Me.url_sql_v15, Me.url_sql_v14, Me.url_sql_v13})
         Me.FunctionsToolStripMenuItem.Name = "FunctionsToolStripMenuItem"
-        Me.FunctionsToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.FunctionsToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
         Me.FunctionsToolStripMenuItem.Text = "FileMaker SQL Reference"
         '
         'url_sql_v16
@@ -601,7 +607,7 @@ Partial Class sqlControl
         '
         Me.V13ODBCGuideToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.url_odbc_v16, Me.url_odbc_v15, Me.url_odbc_v14, Me.url_odbc_v13})
         Me.V13ODBCGuideToolStripMenuItem.Name = "V13ODBCGuideToolStripMenuItem"
-        Me.V13ODBCGuideToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.V13ODBCGuideToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
         Me.V13ODBCGuideToolStripMenuItem.Text = "FileMaker ODBC Guide"
         '
         'url_odbc_v16
@@ -632,12 +638,12 @@ Partial Class sqlControl
         '
         Me.ToolStripSeparator5.AutoSize = False
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(201, 14)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(204, 14)
         '
         'AboutFMODBCDebuggerToolStripMenuItem
         '
         Me.AboutFMODBCDebuggerToolStripMenuItem.Name = "AboutFMODBCDebuggerToolStripMenuItem"
-        Me.AboutFMODBCDebuggerToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.AboutFMODBCDebuggerToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
         Me.AboutFMODBCDebuggerToolStripMenuItem.Text = "About..."
         '
         'Label7
@@ -875,7 +881,7 @@ Partial Class sqlControl
         Me.lblLoading.Image = Global.FMDebugger.My.Resources.Resources.loading_2_32
         Me.lblLoading.Location = New System.Drawing.Point(345, 25)
         Me.lblLoading.Name = "lblLoading"
-        Me.lblLoading.Size = New System.Drawing.Size(76, 126)
+        Me.lblLoading.Size = New System.Drawing.Size(76, 125)
         Me.lblLoading.TabIndex = 234
         Me.lblLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblLoading.Visible = False
@@ -899,7 +905,7 @@ Partial Class sqlControl
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(648, 72)
+        Me.Button1.Location = New System.Drawing.Point(648, 71)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(79, 25)
         Me.Button1.TabIndex = 11
@@ -1080,7 +1086,7 @@ Partial Class sqlControl
         Me.DataGridView1.RowHeadersWidth = 25
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridView1.Size = New System.Drawing.Size(773, 143)
+        Me.DataGridView1.Size = New System.Drawing.Size(773, 142)
         Me.DataGridView1.TabIndex = 1
         '
         'ContextMenuStrip2
@@ -1143,12 +1149,6 @@ Partial Class sqlControl
         Me.GetTableNamesToolStripMenuItem.Name = "GetTableNamesToolStripMenuItem"
         Me.GetTableNamesToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
         Me.GetTableNamesToolStripMenuItem.Text = "Get Table Names"
-        '
-        'ToolStripSeparator9
-        '
-        Me.ToolStripSeparator9.AutoSize = False
-        Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(260, 14)
         '
         'sqlControl
         '

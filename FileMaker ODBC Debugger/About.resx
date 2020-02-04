@@ -117,39 +117,45 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Label3.Text" xml:space="preserve">
+  <data name="lblDescription.Text" xml:space="preserve">
+    <value>DESCRIPTION:
+FileMaker supports its own flavour of SQL syntax. For those who prefer T-SQL, this lightweight utility will make your life easier when working with FileMaker over ODBC.
+
+DISCLOSURE:
+This program is provided "as is" and comes without a warranty of any kind. Use at your own risk!</value>
+  </data>
+  <data name="lblNotes.Text" xml:space="preserve">
+    <value>NOTES:
+- Works with 32 bit drivers only.
+- Warning: running simultaneous queries can have a big impact on FileMaker's performance.
+- The FileMaker ODBC Driver doesn't allow you to specify a port other than 2399.</value>
+  </data>
+  <data name="lblFeatures.Text" xml:space="preserve">
+    <value>FEATURES:
+- Show how long the query took to run (seperate connect, process, and stream times).
+- Allows T-SQL single and multi-line comments.
+- Execute multiple queries as a transaction (seperate queries using a semi-colon (;) like T-SQL).
+- Convert line breaks from Windows (CRLF) to FileMaker (CR).
+- Automatically surround field names starting with an underscore with double quotes.
+- Show the version of the FileMaker ODBC driver.
+- Multiple tabs. Each tab has its own connection details and remembers what is on each tab after closing down.
+- Multi-threaded - execute multiple queries at the same time.
+- Links to official FileMaker reference guides.
+- Right-click to insert common FileMaker functions.
+- Warn about various syntax errors and gotchas, some of which are unique to FileMaker.
+- Right-click on results and "copy column as CSV" - handy for executing a follow-up "WHERE IN (x,y,z)" query.
+- Manually specify a driver name and connection string (you can use any installed ODBC driver).
+- Quickly search for a keyword in the results panel.
+- Limit results to a maximum number of rows.
+- Highlight NULL cells yellow.</value>
+  </data>
+  <data name="lblTodo.Text" xml:space="preserve">
     <value>TODO LIST:
 - bug: tabs disappear (and the order will rearrange) if one extends beyond the edge of the window.
 - Capitalise SQL reserved words.
 - text editor supports undo (CTRL-Z).
 - show a list of the ODBC drivers installed on the system.
-- support 64bit drivers.</value>
-  </data>
-  <data name="lblAbout.Text" xml:space="preserve">
-    <value>DESCRIPTION:
-A lightweight (unofficial) utility to make your life easier when working with FileMaker over ODBC.
-
-DISCLOSURE:
-This program is provided "as is" and comes without warranty of any kind. Use at your own risk!
-
-FEATURES:
-- Works with 32 bit drivers only.
-- Show how long the query took to run (seperate connect, process, and stream times).
-- Accept T-SQL single and multi-line comments.
-- Execute multiple queries as a transaction (seperate queries using a semi-colon (;) like T-SQL).
-- Convert line breaks from Windows (CRLF) to FileMaker (CR).
-- Automatically surround field names starting with an underscore ("_") with double quotes.
-- Show the version of the FileMaker ODBC driver.
-- Multiple tabs. Each tab has its own connection details and remembers what is on each tab after closing down.
-- Multi-threaded - execute multiple queries at the same time.
-- Links to official FileMaker reference guides.
-- Right-click to insert common FileMaker ODBC functions and constants.
-- Warn about various syntax errors and gotchas, some of which are unique to FileMaker.
-- Right-click on results and "copy column as CSV" - handy for executing a follow-up "WHERE IN (x,y,z)" query.
-- Get a list of the tables in the specified database.
-- Manually specify a driver name and connection string (use any installed ODBC driver).
-- Quickly search for a keyword in the results.
-- Limit results to a maximum number of rows (may help improve performance).
-- Highlight NULL cells yellow.</value>
+- support 64bit drivers.
+- Get a list of the available tables.</value>
   </data>
 </root>
