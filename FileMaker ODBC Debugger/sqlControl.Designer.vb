@@ -23,7 +23,7 @@ Partial Class sqlControl
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
@@ -35,54 +35,55 @@ Partial Class sqlControl
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuSelectAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ConstantsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TimestampToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InsertFileMakerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StringsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CHR67ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DAYNAMEToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RTRIMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TRIMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LTRIMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UPPERToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LOWERToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LEFTstring4ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MONTHNAMEToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RIGHTstring4ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SUBSTRINGstring23ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.STRVALToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CHR67ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.USERNAMEToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
+        Me.DAYNAMEdateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MONTHNAMEToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NumbersToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DAYOFWEEKToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DAYToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CEILToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FLOORToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SECONDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NUMVALstringToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MINUTEToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MIN6689ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MAX6689ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MONTHToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LENstringToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HOURToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ROUND1234560ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.INT64321Returns6ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SECONDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MINUTEToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HOURToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DAYToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DAYOFWEEKToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MONTHToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.YEARToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DateToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CURRENTDATEToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CURRENTTIMEToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CURRENTTIMESTAMPToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.DATEVAL01302011ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConstantsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TimestampToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.FunctionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.url_sql_v17 = New System.Windows.Forms.ToolStripMenuItem()
         Me.url_sql_v16 = New System.Windows.Forms.ToolStripMenuItem()
         Me.url_sql_v15 = New System.Windows.Forms.ToolStripMenuItem()
         Me.url_sql_v14 = New System.Windows.Forms.ToolStripMenuItem()
         Me.url_sql_v13 = New System.Windows.Forms.ToolStripMenuItem()
         Me.V13ODBCGuideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.url_odbc_v17 = New System.Windows.Forms.ToolStripMenuItem()
         Me.url_odbc_v16 = New System.Windows.Forms.ToolStripMenuItem()
         Me.url_odbc_v15 = New System.Windows.Forms.ToolStripMenuItem()
         Me.url_odbc_v14 = New System.Windows.Forms.ToolStripMenuItem()
@@ -136,6 +137,7 @@ Partial Class sqlControl
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ContextMenuStrip3 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.GetTableNamesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -222,417 +224,420 @@ Partial Class sqlControl
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCopy1, Me.mnuCut1, Me.mnuPaste, Me.ToolStripSeparator4, Me.mnuSelectAll, Me.ToolStripSeparator3, Me.ConstantsToolStripMenuItem, Me.StringsToolStripMenuItem, Me.NumbersToolStripMenuItem1, Me.DateToolStripMenuItem1, Me.ToolStripSeparator1, Me.FunctionsToolStripMenuItem, Me.V13ODBCGuideToolStripMenuItem, Me.ToolStripSeparator5, Me.AboutFMODBCDebuggerToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCopy1, Me.mnuCut1, Me.mnuPaste, Me.ToolStripSeparator4, Me.mnuSelectAll, Me.ToolStripSeparator3, Me.InsertFileMakerToolStripMenuItem, Me.ConstantsToolStripMenuItem, Me.ToolStripSeparator1, Me.FunctionsToolStripMenuItem, Me.V13ODBCGuideToolStripMenuItem, Me.ToolStripSeparator5, Me.AboutFMODBCDebuggerToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(210, 302)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(208, 280)
         '
         'mnuCopy1
         '
         Me.mnuCopy1.Name = "mnuCopy1"
         Me.mnuCopy1.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.mnuCopy1.Size = New System.Drawing.Size(209, 22)
+        Me.mnuCopy1.Size = New System.Drawing.Size(204, 22)
         Me.mnuCopy1.Text = "Copy"
         '
         'mnuCut1
         '
         Me.mnuCut1.Name = "mnuCut1"
         Me.mnuCut1.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
-        Me.mnuCut1.Size = New System.Drawing.Size(209, 22)
+        Me.mnuCut1.Size = New System.Drawing.Size(204, 22)
         Me.mnuCut1.Text = "Cut"
         '
         'mnuPaste
         '
         Me.mnuPaste.Name = "mnuPaste"
         Me.mnuPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
-        Me.mnuPaste.Size = New System.Drawing.Size(209, 22)
+        Me.mnuPaste.Size = New System.Drawing.Size(204, 22)
         Me.mnuPaste.Text = "Paste"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.AutoSize = False
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(206, 14)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(201, 14)
         '
         'mnuSelectAll
         '
         Me.mnuSelectAll.Name = "mnuSelectAll"
         Me.mnuSelectAll.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
-        Me.mnuSelectAll.Size = New System.Drawing.Size(209, 22)
+        Me.mnuSelectAll.Size = New System.Drawing.Size(204, 22)
         Me.mnuSelectAll.Text = "Select All"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.AutoSize = False
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(206, 14)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(201, 14)
         '
-        'ConstantsToolStripMenuItem
+        'InsertFileMakerToolStripMenuItem
         '
-        Me.ConstantsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DateToolStripMenuItem, Me.TimeToolStripMenuItem, Me.TimestampToolStripMenuItem})
-        Me.ConstantsToolStripMenuItem.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ConstantsToolStripMenuItem.Name = "ConstantsToolStripMenuItem"
-        Me.ConstantsToolStripMenuItem.Size = New System.Drawing.Size(209, 22)
-        Me.ConstantsToolStripMenuItem.Text = "Insert Constant"
-        '
-        'DateToolStripMenuItem
-        '
-        Me.DateToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
-        Me.DateToolStripMenuItem.Name = "DateToolStripMenuItem"
-        Me.DateToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
-        Me.DateToolStripMenuItem.Text = "Date {d '2001-01-01'}"
-        '
-        'TimeToolStripMenuItem
-        '
-        Me.TimeToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
-        Me.TimeToolStripMenuItem.Name = "TimeToolStripMenuItem"
-        Me.TimeToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
-        Me.TimeToolStripMenuItem.Text = "Time {t '01:01:00'}"
-        '
-        'TimestampToolStripMenuItem
-        '
-        Me.TimestampToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
-        Me.TimestampToolStripMenuItem.Name = "TimestampToolStripMenuItem"
-        Me.TimestampToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
-        Me.TimestampToolStripMenuItem.Text = "Timestamp {ts '2001-01-01 01:01:00'}"
+        Me.InsertFileMakerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StringsToolStripMenuItem, Me.NumbersToolStripMenuItem1, Me.DateToolStripMenuItem1})
+        Me.InsertFileMakerToolStripMenuItem.Name = "InsertFileMakerToolStripMenuItem"
+        Me.InsertFileMakerToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.InsertFileMakerToolStripMenuItem.Text = "Insert FileMaker Function"
         '
         'StringsToolStripMenuItem
         '
-        Me.StringsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CHR67ToolStripMenuItem, Me.DAYNAMEToolStripMenuItem, Me.RTRIMToolStripMenuItem, Me.TRIMToolStripMenuItem, Me.LTRIMToolStripMenuItem, Me.UPPERToolStripMenuItem, Me.LOWERToolStripMenuItem, Me.LEFTstring4ToolStripMenuItem, Me.MONTHNAMEToolStripMenuItem, Me.RIGHTstring4ToolStripMenuItem, Me.SUBSTRINGstring23ToolStripMenuItem, Me.STRVALToolStripMenuItem, Me.USERNAMEToolStripMenuItem})
+        Me.StringsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RTRIMToolStripMenuItem, Me.TRIMToolStripMenuItem, Me.LTRIMToolStripMenuItem, Me.UPPERToolStripMenuItem, Me.LOWERToolStripMenuItem, Me.LEFTstring4ToolStripMenuItem, Me.RIGHTstring4ToolStripMenuItem, Me.SUBSTRINGstring23ToolStripMenuItem, Me.STRVALToolStripMenuItem, Me.CHR67ToolStripMenuItem, Me.USERNAMEToolStripMenuItem, Me.ToolStripSeparator8, Me.DAYNAMEdateToolStripMenuItem, Me.MONTHNAMEToolStripMenuItem})
         Me.StringsToolStripMenuItem.Name = "StringsToolStripMenuItem"
-        Me.StringsToolStripMenuItem.Size = New System.Drawing.Size(209, 22)
-        Me.StringsToolStripMenuItem.Text = "Insert String Function"
-        '
-        'CHR67ToolStripMenuItem
-        '
-        Me.CHR67ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
-        Me.CHR67ToolStripMenuItem.Name = "CHR67ToolStripMenuItem"
-        Me.CHR67ToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
-        Me.CHR67ToolStripMenuItem.Text = "CHR(67)"
-        '
-        'DAYNAMEToolStripMenuItem
-        '
-        Me.DAYNAMEToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
-        Me.DAYNAMEToolStripMenuItem.Name = "DAYNAMEToolStripMenuItem"
-        Me.DAYNAMEToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
-        Me.DAYNAMEToolStripMenuItem.Text = "DAYNAME()"
+        Me.StringsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.StringsToolStripMenuItem.Text = "Return String"
         '
         'RTRIMToolStripMenuItem
         '
-        Me.RTRIMToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.RTRIMToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.RTRIMToolStripMenuItem.Name = "RTRIMToolStripMenuItem"
         Me.RTRIMToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.RTRIMToolStripMenuItem.Text = "RTRIM()"
         '
         'TRIMToolStripMenuItem
         '
-        Me.TRIMToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.TRIMToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.TRIMToolStripMenuItem.Name = "TRIMToolStripMenuItem"
         Me.TRIMToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.TRIMToolStripMenuItem.Text = "TRIM()"
         '
         'LTRIMToolStripMenuItem
         '
-        Me.LTRIMToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.LTRIMToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.LTRIMToolStripMenuItem.Name = "LTRIMToolStripMenuItem"
         Me.LTRIMToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.LTRIMToolStripMenuItem.Text = "LTRIM()"
         '
         'UPPERToolStripMenuItem
         '
-        Me.UPPERToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.UPPERToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.UPPERToolStripMenuItem.Name = "UPPERToolStripMenuItem"
         Me.UPPERToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.UPPERToolStripMenuItem.Text = "UPPER()"
         '
         'LOWERToolStripMenuItem
         '
-        Me.LOWERToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.LOWERToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.LOWERToolStripMenuItem.Name = "LOWERToolStripMenuItem"
         Me.LOWERToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.LOWERToolStripMenuItem.Text = "LOWER()"
         '
         'LEFTstring4ToolStripMenuItem
         '
-        Me.LEFTstring4ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.LEFTstring4ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.LEFTstring4ToolStripMenuItem.Name = "LEFTstring4ToolStripMenuItem"
         Me.LEFTstring4ToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.LEFTstring4ToolStripMenuItem.Text = "LEFT('string', 4)"
         '
-        'MONTHNAMEToolStripMenuItem
-        '
-        Me.MONTHNAMEToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
-        Me.MONTHNAMEToolStripMenuItem.Name = "MONTHNAMEToolStripMenuItem"
-        Me.MONTHNAMEToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
-        Me.MONTHNAMEToolStripMenuItem.Text = "MONTHNAME"
-        '
         'RIGHTstring4ToolStripMenuItem
         '
-        Me.RIGHTstring4ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.RIGHTstring4ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.RIGHTstring4ToolStripMenuItem.Name = "RIGHTstring4ToolStripMenuItem"
         Me.RIGHTstring4ToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.RIGHTstring4ToolStripMenuItem.Text = "RIGHT('string', 4)"
         '
         'SUBSTRINGstring23ToolStripMenuItem
         '
-        Me.SUBSTRINGstring23ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.SUBSTRINGstring23ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.SUBSTRINGstring23ToolStripMenuItem.Name = "SUBSTRINGstring23ToolStripMenuItem"
         Me.SUBSTRINGstring23ToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.SUBSTRINGstring23ToolStripMenuItem.Text = "SUBSTR('string', 2, 3)"
         '
         'STRVALToolStripMenuItem
         '
-        Me.STRVALToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.STRVALToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.STRVALToolStripMenuItem.Name = "STRVALToolStripMenuItem"
         Me.STRVALToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.STRVALToolStripMenuItem.Text = "STRVAL()"
         '
+        'CHR67ToolStripMenuItem
+        '
+        Me.CHR67ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
+        Me.CHR67ToolStripMenuItem.Name = "CHR67ToolStripMenuItem"
+        Me.CHR67ToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.CHR67ToolStripMenuItem.Text = "CHR(67) returns 'C'"
+        '
         'USERNAMEToolStripMenuItem
         '
-        Me.USERNAMEToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.USERNAMEToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.USERNAMEToolStripMenuItem.Name = "USERNAMEToolStripMenuItem"
         Me.USERNAMEToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
-        Me.USERNAMEToolStripMenuItem.Text = "USERNAME"
+        Me.USERNAMEToolStripMenuItem.Text = "CURRENT_USER"
+        '
+        'ToolStripSeparator8
+        '
+        Me.ToolStripSeparator8.AutoSize = False
+        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(225, 14)
+        '
+        'DAYNAMEdateToolStripMenuItem
+        '
+        Me.DAYNAMEdateToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
+        Me.DAYNAMEdateToolStripMenuItem.Name = "DAYNAMEdateToolStripMenuItem"
+        Me.DAYNAMEdateToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.DAYNAMEdateToolStripMenuItem.Text = "DAYNAME(<date>)"
+        '
+        'MONTHNAMEToolStripMenuItem
+        '
+        Me.MONTHNAMEToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
+        Me.MONTHNAMEToolStripMenuItem.Name = "MONTHNAMEToolStripMenuItem"
+        Me.MONTHNAMEToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.MONTHNAMEToolStripMenuItem.Text = "MONTHNAME(<date>)"
         '
         'NumbersToolStripMenuItem1
         '
-        Me.NumbersToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DAYOFWEEKToolStripMenuItem, Me.DAYToolStripMenuItem, Me.CEILToolStripMenuItem, Me.FLOORToolStripMenuItem, Me.SECONDToolStripMenuItem, Me.NUMVALstringToolStripMenuItem, Me.MINUTEToolStripMenuItem, Me.MIN6689ToolStripMenuItem, Me.MAX6689ToolStripMenuItem, Me.MONTHToolStripMenuItem, Me.LENstringToolStripMenuItem, Me.HOURToolStripMenuItem, Me.ROUND1234560ToolStripMenuItem, Me.INT64321Returns6ToolStripMenuItem, Me.YEARToolStripMenuItem})
+        Me.NumbersToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CEILToolStripMenuItem, Me.FLOORToolStripMenuItem, Me.NUMVALstringToolStripMenuItem, Me.MIN6689ToolStripMenuItem, Me.MAX6689ToolStripMenuItem, Me.LENstringToolStripMenuItem, Me.ROUND1234560ToolStripMenuItem, Me.INT64321Returns6ToolStripMenuItem, Me.ToolStripSeparator6, Me.SECONDToolStripMenuItem, Me.MINUTEToolStripMenuItem, Me.HOURToolStripMenuItem, Me.DAYToolStripMenuItem, Me.DAYOFWEEKToolStripMenuItem, Me.MONTHToolStripMenuItem, Me.YEARToolStripMenuItem})
         Me.NumbersToolStripMenuItem1.Name = "NumbersToolStripMenuItem1"
-        Me.NumbersToolStripMenuItem1.Size = New System.Drawing.Size(209, 22)
-        Me.NumbersToolStripMenuItem1.Text = "Insert Number Function"
-        '
-        'DAYOFWEEKToolStripMenuItem
-        '
-        Me.DAYOFWEEKToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
-        Me.DAYOFWEEKToolStripMenuItem.Name = "DAYOFWEEKToolStripMenuItem"
-        Me.DAYOFWEEKToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
-        Me.DAYOFWEEKToolStripMenuItem.Text = "DAYOFWEEK()"
-        '
-        'DAYToolStripMenuItem
-        '
-        Me.DAYToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
-        Me.DAYToolStripMenuItem.Name = "DAYToolStripMenuItem"
-        Me.DAYToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
-        Me.DAYToolStripMenuItem.Text = "DAY()"
+        Me.NumbersToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.NumbersToolStripMenuItem1.Text = "Return Number"
         '
         'CEILToolStripMenuItem
         '
-        Me.CEILToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.CEILToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.CEILToolStripMenuItem.Name = "CEILToolStripMenuItem"
         Me.CEILToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
         Me.CEILToolStripMenuItem.Text = "CEIL()"
         '
         'FLOORToolStripMenuItem
         '
-        Me.FLOORToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.FLOORToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.FLOORToolStripMenuItem.Name = "FLOORToolStripMenuItem"
         Me.FLOORToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
         Me.FLOORToolStripMenuItem.Text = "FLOOR()"
         '
-        'SECONDToolStripMenuItem
-        '
-        Me.SECONDToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
-        Me.SECONDToolStripMenuItem.Name = "SECONDToolStripMenuItem"
-        Me.SECONDToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
-        Me.SECONDToolStripMenuItem.Text = "SECOND()"
-        '
         'NUMVALstringToolStripMenuItem
         '
-        Me.NUMVALstringToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.NUMVALstringToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.NUMVALstringToolStripMenuItem.Name = "NUMVALstringToolStripMenuItem"
         Me.NUMVALstringToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
         Me.NUMVALstringToolStripMenuItem.Text = "NUMVAL('123') returns 123"
         '
-        'MINUTEToolStripMenuItem
-        '
-        Me.MINUTEToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
-        Me.MINUTEToolStripMenuItem.Name = "MINUTEToolStripMenuItem"
-        Me.MINUTEToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
-        Me.MINUTEToolStripMenuItem.Text = "MINUTE()"
-        '
         'MIN6689ToolStripMenuItem
         '
-        Me.MIN6689ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.MIN6689ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.MIN6689ToolStripMenuItem.Name = "MIN6689ToolStripMenuItem"
         Me.MIN6689ToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
         Me.MIN6689ToolStripMenuItem.Text = "MIN(66, 89) returns 66"
         '
         'MAX6689ToolStripMenuItem
         '
-        Me.MAX6689ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.MAX6689ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.MAX6689ToolStripMenuItem.Name = "MAX6689ToolStripMenuItem"
         Me.MAX6689ToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
         Me.MAX6689ToolStripMenuItem.Text = "MAX(66, 89) returns 89"
         '
-        'MONTHToolStripMenuItem
-        '
-        Me.MONTHToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
-        Me.MONTHToolStripMenuItem.Name = "MONTHToolStripMenuItem"
-        Me.MONTHToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
-        Me.MONTHToolStripMenuItem.Text = "MONTH()"
-        '
         'LENstringToolStripMenuItem
         '
-        Me.LENstringToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.LENstringToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.LENstringToolStripMenuItem.Name = "LENstringToolStripMenuItem"
         Me.LENstringToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
-        Me.LENstringToolStripMenuItem.Text = "LEN('string')"
-        '
-        'HOURToolStripMenuItem
-        '
-        Me.HOURToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
-        Me.HOURToolStripMenuItem.Name = "HOURToolStripMenuItem"
-        Me.HOURToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
-        Me.HOURToolStripMenuItem.Text = "HOUR()"
+        Me.LENstringToolStripMenuItem.Text = "LENGTH('string')"
         '
         'ROUND1234560ToolStripMenuItem
         '
-        Me.ROUND1234560ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.ROUND1234560ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.ROUND1234560ToolStripMenuItem.Name = "ROUND1234560ToolStripMenuItem"
         Me.ROUND1234560ToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
         Me.ROUND1234560ToolStripMenuItem.Text = "ROUND(123.456, 2) returns 123.46"
         '
         'INT64321Returns6ToolStripMenuItem
         '
-        Me.INT64321Returns6ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.INT64321Returns6ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.INT64321Returns6ToolStripMenuItem.Name = "INT64321Returns6ToolStripMenuItem"
         Me.INT64321Returns6ToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
         Me.INT64321Returns6ToolStripMenuItem.Text = "INT(6.4321) returns 6"
         '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.AutoSize = False
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(295, 14)
+        '
+        'SECONDToolStripMenuItem
+        '
+        Me.SECONDToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
+        Me.SECONDToolStripMenuItem.Name = "SECONDToolStripMenuItem"
+        Me.SECONDToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
+        Me.SECONDToolStripMenuItem.Text = "SECOND(<date>)"
+        '
+        'MINUTEToolStripMenuItem
+        '
+        Me.MINUTEToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
+        Me.MINUTEToolStripMenuItem.Name = "MINUTEToolStripMenuItem"
+        Me.MINUTEToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
+        Me.MINUTEToolStripMenuItem.Text = "MINUTE(<date>)"
+        '
+        'HOURToolStripMenuItem
+        '
+        Me.HOURToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
+        Me.HOURToolStripMenuItem.Name = "HOURToolStripMenuItem"
+        Me.HOURToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
+        Me.HOURToolStripMenuItem.Text = "HOUR(<date>)"
+        '
+        'DAYToolStripMenuItem
+        '
+        Me.DAYToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
+        Me.DAYToolStripMenuItem.Name = "DAYToolStripMenuItem"
+        Me.DAYToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
+        Me.DAYToolStripMenuItem.Text = "DAY(<date>)"
+        '
+        'DAYOFWEEKToolStripMenuItem
+        '
+        Me.DAYOFWEEKToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
+        Me.DAYOFWEEKToolStripMenuItem.Name = "DAYOFWEEKToolStripMenuItem"
+        Me.DAYOFWEEKToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
+        Me.DAYOFWEEKToolStripMenuItem.Text = "DAYOFWEEK(<date>)"
+        '
+        'MONTHToolStripMenuItem
+        '
+        Me.MONTHToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
+        Me.MONTHToolStripMenuItem.Name = "MONTHToolStripMenuItem"
+        Me.MONTHToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
+        Me.MONTHToolStripMenuItem.Text = "MONTH(<date>)"
+        '
         'YEARToolStripMenuItem
         '
-        Me.YEARToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.YEARToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.YEARToolStripMenuItem.Name = "YEARToolStripMenuItem"
         Me.YEARToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
-        Me.YEARToolStripMenuItem.Text = "YEAR()"
+        Me.YEARToolStripMenuItem.Text = "YEAR(<date>)"
         '
         'DateToolStripMenuItem1
         '
-        Me.DateToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CURRENTDATEToolStripMenuItem1, Me.CURRENTTIMEToolStripMenuItem1, Me.CURRENTTIMESTAMPToolStripMenuItem1, Me.DATEVAL01302011ToolStripMenuItem})
+        Me.DateToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CURRENTDATEToolStripMenuItem1, Me.CURRENTTIMEToolStripMenuItem1, Me.CURRENTTIMESTAMPToolStripMenuItem1, Me.ToolStripSeparator9, Me.DATEVAL01302011ToolStripMenuItem})
         Me.DateToolStripMenuItem1.Name = "DateToolStripMenuItem1"
-        Me.DateToolStripMenuItem1.Size = New System.Drawing.Size(209, 22)
-        Me.DateToolStripMenuItem1.Text = "Insert Date Function"
+        Me.DateToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.DateToolStripMenuItem1.Text = "Return Date"
         '
         'CURRENTDATEToolStripMenuItem1
         '
-        Me.CURRENTDATEToolStripMenuItem1.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.CURRENTDATEToolStripMenuItem1.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.CURRENTDATEToolStripMenuItem1.Name = "CURRENTDATEToolStripMenuItem1"
-        Me.CURRENTDATEToolStripMenuItem1.Size = New System.Drawing.Size(354, 22)
+        Me.CURRENTDATEToolStripMenuItem1.Size = New System.Drawing.Size(263, 22)
         Me.CURRENTDATEToolStripMenuItem1.Text = "CURRENT_DATE"
         '
         'CURRENTTIMEToolStripMenuItem1
         '
-        Me.CURRENTTIMEToolStripMenuItem1.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.CURRENTTIMEToolStripMenuItem1.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.CURRENTTIMEToolStripMenuItem1.Name = "CURRENTTIMEToolStripMenuItem1"
-        Me.CURRENTTIMEToolStripMenuItem1.Size = New System.Drawing.Size(354, 22)
+        Me.CURRENTTIMEToolStripMenuItem1.Size = New System.Drawing.Size(263, 22)
         Me.CURRENTTIMEToolStripMenuItem1.Text = "CURRENT_TIME"
         '
         'CURRENTTIMESTAMPToolStripMenuItem1
         '
-        Me.CURRENTTIMESTAMPToolStripMenuItem1.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.CURRENTTIMESTAMPToolStripMenuItem1.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.CURRENTTIMESTAMPToolStripMenuItem1.Name = "CURRENTTIMESTAMPToolStripMenuItem1"
-        Me.CURRENTTIMESTAMPToolStripMenuItem1.Size = New System.Drawing.Size(354, 22)
+        Me.CURRENTTIMESTAMPToolStripMenuItem1.Size = New System.Drawing.Size(263, 22)
         Me.CURRENTTIMESTAMPToolStripMenuItem1.Text = "CURRENT_TIMESTAMP"
         '
         'DATEVAL01302011ToolStripMenuItem
         '
-        Me.DATEVAL01302011ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.75!)
+        Me.DATEVAL01302011ToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.DATEVAL01302011ToolStripMenuItem.Name = "DATEVAL01302011ToolStripMenuItem"
-        Me.DATEVAL01302011ToolStripMenuItem.Size = New System.Drawing.Size(354, 22)
-        Me.DATEVAL01302011ToolStripMenuItem.Text = "DATEVAL('01/30/2011') returns 2011-01-30"
+        Me.DATEVAL01302011ToolStripMenuItem.Size = New System.Drawing.Size(263, 22)
+        Me.DATEVAL01302011ToolStripMenuItem.Text = "DATEVAL('<yyyy>/<mm>/<dd>')"
+        '
+        'ConstantsToolStripMenuItem
+        '
+        Me.ConstantsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DateToolStripMenuItem, Me.TimeToolStripMenuItem, Me.TimestampToolStripMenuItem})
+        Me.ConstantsToolStripMenuItem.Name = "ConstantsToolStripMenuItem"
+        Me.ConstantsToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.ConstantsToolStripMenuItem.Text = "Insert ODBC Date Literal"
+        '
+        'DateToolStripMenuItem
+        '
+        Me.DateToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DateToolStripMenuItem.Name = "DateToolStripMenuItem"
+        Me.DateToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.DateToolStripMenuItem.Text = "Date {d '2001-01-01'}"
+        '
+        'TimeToolStripMenuItem
+        '
+        Me.TimeToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
+        Me.TimeToolStripMenuItem.Name = "TimeToolStripMenuItem"
+        Me.TimeToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.TimeToolStripMenuItem.Text = "Time {t '01:01:00'}"
+        '
+        'TimestampToolStripMenuItem
+        '
+        Me.TimestampToolStripMenuItem.Font = New System.Drawing.Font("Consolas", 9.0!)
+        Me.TimestampToolStripMenuItem.Name = "TimestampToolStripMenuItem"
+        Me.TimestampToolStripMenuItem.Size = New System.Drawing.Size(326, 22)
+        Me.TimestampToolStripMenuItem.Text = "Timestamp {ts '2001-01-01 01:01:00'}"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.AutoSize = False
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(206, 14)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(201, 14)
         '
         'FunctionsToolStripMenuItem
         '
-        Me.FunctionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.url_sql_v17, Me.url_sql_v16, Me.url_sql_v15, Me.url_sql_v14, Me.url_sql_v13})
+        Me.FunctionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.url_sql_v16, Me.url_sql_v15, Me.url_sql_v14, Me.url_sql_v13})
         Me.FunctionsToolStripMenuItem.Name = "FunctionsToolStripMenuItem"
-        Me.FunctionsToolStripMenuItem.Size = New System.Drawing.Size(209, 22)
+        Me.FunctionsToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
         Me.FunctionsToolStripMenuItem.Text = "FileMaker SQL Reference"
-        '
-        'url_sql_v17
-        '
-        Me.url_sql_v17.Name = "url_sql_v17"
-        Me.url_sql_v17.Size = New System.Drawing.Size(94, 22)
-        Me.url_sql_v17.Text = "v17"
-        Me.url_sql_v17.Visible = False
         '
         'url_sql_v16
         '
         Me.url_sql_v16.Name = "url_sql_v16"
-        Me.url_sql_v16.Size = New System.Drawing.Size(94, 22)
+        Me.url_sql_v16.Size = New System.Drawing.Size(92, 22)
         Me.url_sql_v16.Text = "v16"
         '
         'url_sql_v15
         '
         Me.url_sql_v15.Name = "url_sql_v15"
-        Me.url_sql_v15.Size = New System.Drawing.Size(94, 22)
+        Me.url_sql_v15.Size = New System.Drawing.Size(92, 22)
         Me.url_sql_v15.Text = "v15"
         '
         'url_sql_v14
         '
         Me.url_sql_v14.Name = "url_sql_v14"
-        Me.url_sql_v14.Size = New System.Drawing.Size(94, 22)
+        Me.url_sql_v14.Size = New System.Drawing.Size(92, 22)
         Me.url_sql_v14.Text = "v14"
         '
         'url_sql_v13
         '
         Me.url_sql_v13.Name = "url_sql_v13"
-        Me.url_sql_v13.Size = New System.Drawing.Size(94, 22)
+        Me.url_sql_v13.Size = New System.Drawing.Size(92, 22)
         Me.url_sql_v13.Text = "v13"
         '
         'V13ODBCGuideToolStripMenuItem
         '
-        Me.V13ODBCGuideToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.url_odbc_v17, Me.url_odbc_v16, Me.url_odbc_v15, Me.url_odbc_v14, Me.url_odbc_v13})
+        Me.V13ODBCGuideToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.url_odbc_v16, Me.url_odbc_v15, Me.url_odbc_v14, Me.url_odbc_v13})
         Me.V13ODBCGuideToolStripMenuItem.Name = "V13ODBCGuideToolStripMenuItem"
-        Me.V13ODBCGuideToolStripMenuItem.Size = New System.Drawing.Size(209, 22)
+        Me.V13ODBCGuideToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
         Me.V13ODBCGuideToolStripMenuItem.Text = "FileMaker ODBC Guide"
-        '
-        'url_odbc_v17
-        '
-        Me.url_odbc_v17.Name = "url_odbc_v17"
-        Me.url_odbc_v17.Size = New System.Drawing.Size(94, 22)
-        Me.url_odbc_v17.Text = "v17"
-        Me.url_odbc_v17.Visible = False
         '
         'url_odbc_v16
         '
         Me.url_odbc_v16.Name = "url_odbc_v16"
-        Me.url_odbc_v16.Size = New System.Drawing.Size(94, 22)
+        Me.url_odbc_v16.Size = New System.Drawing.Size(92, 22)
         Me.url_odbc_v16.Text = "v16"
         '
         'url_odbc_v15
         '
         Me.url_odbc_v15.Name = "url_odbc_v15"
-        Me.url_odbc_v15.Size = New System.Drawing.Size(94, 22)
+        Me.url_odbc_v15.Size = New System.Drawing.Size(92, 22)
         Me.url_odbc_v15.Text = "v15"
         '
         'url_odbc_v14
         '
         Me.url_odbc_v14.Name = "url_odbc_v14"
-        Me.url_odbc_v14.Size = New System.Drawing.Size(94, 22)
+        Me.url_odbc_v14.Size = New System.Drawing.Size(92, 22)
         Me.url_odbc_v14.Text = "v14"
         '
         'url_odbc_v13
         '
         Me.url_odbc_v13.Name = "url_odbc_v13"
-        Me.url_odbc_v13.Size = New System.Drawing.Size(94, 22)
+        Me.url_odbc_v13.Size = New System.Drawing.Size(92, 22)
         Me.url_odbc_v13.Text = "v13"
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.AutoSize = False
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(206, 14)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(201, 14)
         '
         'AboutFMODBCDebuggerToolStripMenuItem
         '
         Me.AboutFMODBCDebuggerToolStripMenuItem.Name = "AboutFMODBCDebuggerToolStripMenuItem"
-        Me.AboutFMODBCDebuggerToolStripMenuItem.Size = New System.Drawing.Size(209, 22)
+        Me.AboutFMODBCDebuggerToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
         Me.AboutFMODBCDebuggerToolStripMenuItem.Text = "About..."
         '
         'Label7
@@ -870,7 +875,7 @@ Partial Class sqlControl
         Me.lblLoading.Image = Global.FMDebugger.My.Resources.Resources.loading_2_32
         Me.lblLoading.Location = New System.Drawing.Point(345, 25)
         Me.lblLoading.Name = "lblLoading"
-        Me.lblLoading.Size = New System.Drawing.Size(76, 140)
+        Me.lblLoading.Size = New System.Drawing.Size(76, 126)
         Me.lblLoading.TabIndex = 234
         Me.lblLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblLoading.Visible = False
@@ -894,7 +899,7 @@ Partial Class sqlControl
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(648, 86)
+        Me.Button1.Location = New System.Drawing.Point(648, 72)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(79, 25)
         Me.Button1.TabIndex = 11
@@ -1060,66 +1065,65 @@ Partial Class sqlControl
         Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.ContextMenuStrip = Me.ContextMenuStrip2
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(0, 0, 5, 0)
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(0, 0, 5, 0)
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.Location = New System.Drawing.Point(-1, 24)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersWidth = 25
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridView1.Size = New System.Drawing.Size(773, 157)
+        Me.DataGridView1.Size = New System.Drawing.Size(773, 143)
         Me.DataGridView1.TabIndex = 1
         '
         'ContextMenuStrip2
         '
-        Me.ContextMenuStrip2.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ContextMenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCopy, Me.mnuCopyWithHeaders, Me.ToolStripSeparator2, Me.mnuCopyAsCSV, Me.ToolStripSeparator7, Me.mnuExportToExcel})
         Me.ContextMenuStrip2.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip2.Size = New System.Drawing.Size(259, 120)
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(252, 120)
         '
         'mnuCopy
         '
         Me.mnuCopy.Name = "mnuCopy"
         Me.mnuCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.mnuCopy.Size = New System.Drawing.Size(258, 22)
+        Me.mnuCopy.Size = New System.Drawing.Size(251, 22)
         Me.mnuCopy.Text = "Copy Selected Cells"
         '
         'mnuCopyWithHeaders
         '
         Me.mnuCopyWithHeaders.Name = "mnuCopyWithHeaders"
-        Me.mnuCopyWithHeaders.Size = New System.Drawing.Size(258, 22)
+        Me.mnuCopyWithHeaders.Size = New System.Drawing.Size(251, 22)
         Me.mnuCopyWithHeaders.Text = "Copy Selected Cells With Headers"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.AutoSize = False
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(255, 14)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(248, 14)
         '
         'mnuCopyAsCSV
         '
         Me.mnuCopyAsCSV.Name = "mnuCopyAsCSV"
-        Me.mnuCopyAsCSV.Size = New System.Drawing.Size(258, 22)
+        Me.mnuCopyAsCSV.Size = New System.Drawing.Size(251, 22)
         Me.mnuCopyAsCSV.Text = "Copy Selected Column(s) As CSV"
         '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.AutoSize = False
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(255, 14)
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(248, 14)
         '
         'mnuExportToExcel
         '
         Me.mnuExportToExcel.Name = "mnuExportToExcel"
-        Me.mnuExportToExcel.Size = New System.Drawing.Size(258, 22)
+        Me.mnuExportToExcel.Size = New System.Drawing.Size(251, 22)
         Me.mnuExportToExcel.Text = "Export Results To Excel"
         '
         'ToolTip1
@@ -1139,6 +1143,12 @@ Partial Class sqlControl
         Me.GetTableNamesToolStripMenuItem.Name = "GetTableNamesToolStripMenuItem"
         Me.GetTableNamesToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
         Me.GetTableNamesToolStripMenuItem.Text = "Get Table Names"
+        '
+        'ToolStripSeparator9
+        '
+        Me.ToolStripSeparator9.AutoSize = False
+        Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(260, 14)
         '
         'sqlControl
         '
@@ -1186,43 +1196,8 @@ Partial Class sqlControl
     Private WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents ConstantsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DateToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CURRENTDATEToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CURRENTTIMEToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CURRENTTIMESTAMPToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DATEVAL01302011ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents StringsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CHR67ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DAYNAMEToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents RTRIMToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TRIMToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents LTRIMToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents UPPERToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents LOWERToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents LEFTstring4ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MONTHNAMEToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents RIGHTstring4ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents SUBSTRINGstring23ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents STRVALToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents USERNAMEToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents NumbersToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents FunctionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DAYOFWEEKToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DAYToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CEILToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ROUND1234560ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents FLOORToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents SECONDToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents YEARToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents NUMVALstringToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MINUTEToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MIN6689ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MAX6689ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MONTHToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents LENstringToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents HOURToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents INT64321Returns6ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ContextMenuStrip2 As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents mnuCopyAsCSV As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuCopy As System.Windows.Forms.ToolStripMenuItem
@@ -1277,10 +1252,47 @@ Partial Class sqlControl
     Private WithEvents lblFindCount As Label
     Private WithEvents Label5 As Label
     Private WithEvents lblDurationExecute As Label
-    Friend WithEvents url_sql_v17 As ToolStripMenuItem
-    Friend WithEvents url_odbc_v17 As ToolStripMenuItem
     Friend WithEvents cmbRowLimit As ComboBox
     Private WithEvents Label8 As Label
     Friend WithEvents lblLoading As Label
     Private WithEvents Label13 As Label
+    Friend WithEvents InsertFileMakerToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NumbersToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents DAYOFWEEKToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DAYToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CEILToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FLOORToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SECONDToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NUMVALstringToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MINUTEToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MIN6689ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MAX6689ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MONTHToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LENstringToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HOURToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ROUND1234560ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents INT64321Returns6ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents YEARToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StringsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CHR67ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RTRIMToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TRIMToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LTRIMToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UPPERToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LOWERToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LEFTstring4ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MONTHNAMEToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RIGHTstring4ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SUBSTRINGstring23ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents STRVALToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents USERNAMEToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DateToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents CURRENTDATEToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents CURRENTTIMEToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents CURRENTTIMESTAMPToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents DATEVAL01302011ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DAYNAMEdateToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
 End Class

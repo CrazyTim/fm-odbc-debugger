@@ -850,7 +850,7 @@ Public Class sqlControl
     End Sub
 
     Private Sub DATEVAL01302011ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DATEVAL01302011ToolStripMenuItem.Click
-        txtSQL.Paste("DATEVAL(")
+        txtSQL.Paste("DATEVAL()")
     End Sub
 
     Private Sub DateToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DateToolStripMenuItem.Click
@@ -894,12 +894,13 @@ Public Class sqlControl
     End Sub
 
     Private Sub USERNAMEToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles USERNAMEToolStripMenuItem.Click
-        txtSQL.Paste("USERNAME()")
+        txtSQL.Paste("CURRENT_USER")
     End Sub
 
-    Private Sub DAYNAMEToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DAYNAMEToolStripMenuItem.Click
+    Private Sub DAYNAMEdateToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DAYNAMEdateToolStripMenuItem.Click
         txtSQL.Paste("DAYNAME()")
     End Sub
+
 
     Private Sub ContextMenuStrip2_Opening(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip2.Opening
         mnuCopy.Enabled = False
@@ -1084,7 +1085,6 @@ _jobid BETWEEN 10 AND 50 BATCH 10
         txtSQL.Paste("SUBSTR('string', 2, 3)")
     End Sub
 
-
     Private Sub AboutFMODBCDebuggerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutFMODBCDebuggerToolStripMenuItem.Click
         About.ShowDialog(Me)
     End Sub
@@ -1126,12 +1126,6 @@ _jobid BETWEEN 10 AND 50 BATCH 10
         Process.Start("https://fmhelp.filemaker.com/docs/16/en/fm16_sql_reference.pdf")
     End Sub
 
-    Private Sub url_sql_v17_Click(sender As Object, e As EventArgs) Handles url_sql_v17.Click
-        Process.Start("https://fmhelp.filemaker.com/docs/17/en/fm17_sql_reference.pdf")
-    End Sub
-
-
-
     Private Sub url_odbc_v13_Click(sender As Object, e As EventArgs) Handles url_odbc_v13.Click
         Process.Start("https://fmhelp.filemaker.com/docs/13/en/fm13_odbc_jdbc_guide.pdf")
     End Sub
@@ -1146,10 +1140,6 @@ _jobid BETWEEN 10 AND 50 BATCH 10
 
     Private Sub url_odbc_v16_Click(sender As Object, e As EventArgs) Handles url_odbc_v16.Click
         Process.Start("https://fmhelp.filemaker.com/docs/16/en/fm16_odbc_jdbc_guide.pdf")
-    End Sub
-
-    Private Sub url_odbc_v17_Click(sender As Object, e As EventArgs) Handles url_odbc_v17.Click
-        Process.Start("https://fmhelp.filemaker.com/docs/17/en/fm16_odbc_jdbc_guide.pdf")
     End Sub
 
     Private Sub cmbDriverName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDriver.SelectedIndexChanged
@@ -1343,6 +1333,29 @@ _jobid BETWEEN 10 AND 50 BATCH 10
         txtFind.Focus()
     End Sub
 
+    Private Sub SECONDToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SECONDToolStripMenuItem.Click
+        txtSQL.Paste("SECOND()")
+    End Sub
+
+    Private Sub MINUTEToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MINUTEToolStripMenuItem.Click
+        txtSQL.Paste("MINUTE()")
+    End Sub
+
+    Private Sub HOURToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HOURToolStripMenuItem.Click
+        txtSQL.Paste("HOUR()")
+    End Sub
+
+    Private Sub DAYToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DAYToolStripMenuItem.Click
+        txtSQL.Paste("DAY()")
+    End Sub
+
+    Private Sub MONTHToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MONTHToolStripMenuItem.Click
+        txtSQL.Paste("MONTH()")
+    End Sub
+
+    Private Sub YEARToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles YEARToolStripMenuItem.Click
+        txtSQL.Paste("YEAR()")
+    End Sub
 End Class
 
 Public Class textChangedArgs
