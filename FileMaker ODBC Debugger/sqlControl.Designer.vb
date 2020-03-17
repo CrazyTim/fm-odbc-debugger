@@ -881,7 +881,7 @@ Partial Class sqlControl
         Me.lblLoading.Image = Global.FMDebugger.My.Resources.Resources.loading_2_32
         Me.lblLoading.Location = New System.Drawing.Point(345, 25)
         Me.lblLoading.Name = "lblLoading"
-        Me.lblLoading.Size = New System.Drawing.Size(76, 125)
+        Me.lblLoading.Size = New System.Drawing.Size(76, 124)
         Me.lblLoading.TabIndex = 234
         Me.lblLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblLoading.Visible = False
@@ -905,7 +905,7 @@ Partial Class sqlControl
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(648, 71)
+        Me.Button1.Location = New System.Drawing.Point(648, 70)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(79, 25)
         Me.Button1.TabIndex = 11
@@ -1086,14 +1086,14 @@ Partial Class sqlControl
         Me.DataGridView1.RowHeadersWidth = 25
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridView1.Size = New System.Drawing.Size(773, 142)
+        Me.DataGridView1.Size = New System.Drawing.Size(773, 141)
         Me.DataGridView1.TabIndex = 1
         '
         'ContextMenuStrip2
         '
         Me.ContextMenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCopy, Me.mnuCopyWithHeaders, Me.ToolStripSeparator2, Me.mnuCopyAsCSV, Me.ToolStripSeparator7, Me.mnuExportToExcel})
         Me.ContextMenuStrip2.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip2.Size = New System.Drawing.Size(252, 120)
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(252, 142)
         '
         'mnuCopy
         '
@@ -1130,7 +1130,8 @@ Partial Class sqlControl
         '
         Me.mnuExportToExcel.Name = "mnuExportToExcel"
         Me.mnuExportToExcel.Size = New System.Drawing.Size(251, 22)
-        Me.mnuExportToExcel.Text = "Export Results To Excel"
+        Me.mnuExportToExcel.Text = "Export Results To .Csv File"
+        Me.mnuExportToExcel.ToolTipText = "Export results to a .csv file and open using the default program"
         '
         'ToolTip1
         '
