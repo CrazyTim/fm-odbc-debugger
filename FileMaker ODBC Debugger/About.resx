@@ -126,7 +126,7 @@ This program is provided "as is" and comes without a warranty of any kind. Use a
   </data>
   <data name="lblNotes.Text" xml:space="preserve">
     <value>NOTES:
-- Works with 32 bit drivers only.
+- Works with 64 bit drivers only.
 - Warning: running simultaneous queries can have a big impact on FileMaker's performance.
 - The FileMaker ODBC Driver doesn't allow you to specify a port other than 2399.</value>
   </data>
