@@ -24,9 +24,9 @@ Partial Class About
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(About))
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblAppTitle = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.lblDescription = New System.Windows.Forms.Label()
         Me.lblNotes = New System.Windows.Forms.Label()
@@ -51,6 +51,18 @@ Partial Class About
         Me.Panel2.Size = New System.Drawing.Size(634, 101)
         Me.Panel2.TabIndex = 167
         '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(9, 71)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Padding = New System.Windows.Forms.Padding(0, 0, 0, 5)
+        Me.Label6.Size = New System.Drawing.Size(191, 20)
+        Me.Label6.TabIndex = 166
+        Me.Label6.Text = "Copyright © 2020 Jason Ballantyne"
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -61,7 +73,7 @@ Partial Class About
         Me.Label1.Padding = New System.Windows.Forms.Padding(0, 0, 0, 5)
         Me.Label1.Size = New System.Drawing.Size(109, 20)
         Me.Label1.TabIndex = 164
-        Me.Label1.Text = "Version: 2020-02-05"
+        Me.Label1.Text = "Version: 2020-03-17"
         '
         'lblAppTitle
         '
@@ -74,18 +86,6 @@ Partial Class About
         Me.lblAppTitle.Size = New System.Drawing.Size(309, 42)
         Me.lblAppTitle.TabIndex = 165
         Me.lblAppTitle.Text = "FileMaker ODBC Debugger"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(9, 71)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Padding = New System.Windows.Forms.Padding(0, 0, 0, 5)
-        Me.Label6.Size = New System.Drawing.Size(191, 20)
-        Me.Label6.TabIndex = 166
-        Me.Label6.Text = "Copyright © 2020 Jason Ballantyne"
         '
         'FlowLayoutPanel1
         '
@@ -152,10 +152,11 @@ Partial Class About
         Me.Label2.Location = New System.Drawing.Point(3, 562)
         Me.Label2.Name = "Label2"
         Me.Label2.Padding = New System.Windows.Forms.Padding(9, 2, 9, 11)
-        Me.Label2.Size = New System.Drawing.Size(512, 43)
+        Me.Label2.Size = New System.Drawing.Size(515, 58)
         Me.Label2.TabIndex = 177
         Me.Label2.Text = "ACKNOWLEDGEMENTS:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "- Icon by David Vignoni (www.iconfinder.com/icons/1230/animal_" &
-    "bug_insect_ladybird_icon)"
+    "bug_insect_ladybird_icon)." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "- Csv code from joshclose.github.io/CsvHelper, Apach" &
+    "e License, Version 2.0."
         '
         'About
         '
