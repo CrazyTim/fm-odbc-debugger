@@ -1091,23 +1091,24 @@ _jobid BETWEEN 10 AND 50 BATCH 10
 
     Private Sub mnuExportToExcel_Click(sender As Object, e As EventArgs) Handles mnuExportToExcel.Click
 
-        Dim rows As New List(Of List(Of String))
         Dim ColumnHeadings As New List(Of String)
-
-        For Each i In DataGridView1.Rows
-            Dim Cells As New List(Of String)
-            For Each c In i.cells
-                Cells.Add(c.value.ToString)
-            Next
-            rows.Add(Cells)
-        Next
-
         For Each i In DataGridView1.Columns
             ColumnHeadings.Add(i.DataPropertyName)
         Next
 
-        ExportToExcel(ColumnHeadings, rows)
-        'Console.WriteLine("done")
+        Dim Data As New List(Of List(Of String))
+        Data.Add(ColumnHeadings)
+
+        For Each i In DataGridView1.Rows
+            Dim Row As New List(Of String)
+            For Each c In i.cells
+                Row.Add(c.value.ToString)
+            Next
+            Data.Add(Row)
+        Next
+
+        ExportToExcel2(Data)
+
     End Sub
 
     Private Sub url_sql_v13_Click(sender As Object, e As EventArgs) Handles url_sql_v13.Click

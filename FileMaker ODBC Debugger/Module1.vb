@@ -628,6 +628,45 @@ Module Module1
 
     End Function
 
+    Public Sub ExportToExcel2(ByVal Data As List(Of List(Of String)))
+
+        ' generate a temp file to save the csv data to
+        Dim TempFolder As String = System.IO.Path.GetTempPath & "fm-odbc-debugger"
+        IO.Directory.CreateDirectory(TempFolder)
+
+        Static FileNumber As Long = 0
+        Dim TempFile As String
+
+        Do
+
+            TempFile = $"{TempFolder}\export-{FileNumber}.csv"
+            FileNumber += 1
+        Loop While System.IO.File.Exists(TempFile)
+
+        ' write the csv data to file
+        Using stream = File.OpenWrite(TempFile)
+            Using writer = New StreamWriter(stream, Text.Encoding.UTF8)
+
+                Using csv = New CsvHelper.CsvWriter(writer, Globalization.CultureInfo.InvariantCulture)
+
+                    For Each row In Data
+
+                        For Each i In row
+                            csv.WriteField(i)
+                        Next
+
+                        csv.NextRecord()
+                    Next
+
+                End Using
+
+            End Using
+        End Using
+
+        Process.Start(TempFile)
+
+    End Sub
+
     Public Sub ExportToExcel(ByVal ColumnHeadings As List(Of String), ByVal Data As List(Of List(Of String)))
         ' -----------------------------------------------------------
         ' LOAD EXCEL:
