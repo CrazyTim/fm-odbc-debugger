@@ -59,7 +59,7 @@
         CreateDir(AppDataDir)
         CreateDir(AppDataDir & "\Debugging")
 
-        CheckDriverVersion()
+        SetFmOdbcDriverVersion()
 
         Try
 
@@ -88,43 +88,23 @@
 
     End Sub
 
-    Public FMODBCVersion As String = ""
+    Public FmOdbcVersion As String = ""
 
+    Public Sub SetFmOdbcDriverVersion()
 
-
-    Public Sub CheckDriverVersion()
-        Dim PathToDll As String
         Dim SYSTEM_DRIVE As String = Environment.GetEnvironmentVariable("windir", EnvironmentVariableTarget.Machine)
 
-        If System.IO.Directory.Exists(SYSTEM_DRIVE & "\SysWOW64") Then
+        Dim PATH_TO_DRIVER As String = SYSTEM_DRIVE & "\System32\fmodbc64.dll"
 
-            PathToDll = SYSTEM_DRIVE & "\SysWOW64\fmodbc32.DLL"
-
-            If System.IO.File.Exists(PathToDll) Then
-                Dim myFileVersionInfo As FileVersionInfo = FileVersionInfo.GetVersionInfo(PathToDll)
-                FMODBCDriverVersion = myFileVersionInfo.FileMajorPart & "." & myFileVersionInfo.FileMinorPart & "." & myFileVersionInfo.FileBuildPart & "." & myFileVersionInfo.FilePrivatePart
-
-                FMODBCVersion &= "v" & FMODBCDriverVersion & " 32bit"
-            Else
-                FMODBCVersion &= "driver not installed"
-            End If
-
+        If System.IO.File.Exists(PATH_TO_DRIVER) Then
+            Dim myFileVersionInfo As FileVersionInfo = FileVersionInfo.GetVersionInfo(PATH_TO_DRIVER)
+            FMODBCDriverVersion = myFileVersionInfo.FileMajorPart & "." & myFileVersionInfo.FileMinorPart & "." & myFileVersionInfo.FileBuildPart & "." & myFileVersionInfo.FilePrivatePart
+            FmOdbcVersion &= "v" & FMODBCDriverVersion
         Else
-
-            PathToDll = SYSTEM_DRIVE & "\System32\fmodbc32.DLL"
-
-            If System.IO.File.Exists(PathToDll) Then
-                Dim myFileVersionInfo As FileVersionInfo = FileVersionInfo.GetVersionInfo(PathToDll)
-                FMODBCDriverVersion = myFileVersionInfo.FileMajorPart & "." & myFileVersionInfo.FileMinorPart & "." & myFileVersionInfo.FileBuildPart & "." & myFileVersionInfo.FilePrivatePart
-                FMODBCVersion &= "v" & FMODBCDriverVersion & "64bit"
-            Else
-                FMODBCVersion &= "driver not installed"
-            End If
-
+            FmOdbcVersion &= "driver not installed"
         End If
 
     End Sub
-
 
     Private Sub TabControl1_DoubleClick(sender As Object, e As System.EventArgs) Handles TabControl1.DoubleClick
         CreateNewTab()
@@ -162,7 +142,7 @@
         un.SQLText = SQL
 
         un.cmbDriver.Items.Clear()
-        un.cmbDriver.Items.Add("FileMaker ODBC (" & FMODBCVersion & ")")
+        un.cmbDriver.Items.Add("FileMaker ODBC (" & FmOdbcVersion & ")")
         un.cmbDriver.Items.Add("Other")
 
         AddHandler un.DatabaseNameChanged, AddressOf OnDatabaseNameChange

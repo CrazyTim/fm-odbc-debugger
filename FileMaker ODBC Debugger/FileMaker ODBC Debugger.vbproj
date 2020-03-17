@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -13,8 +13,9 @@
     <AssemblyName>FileMaker ODBC Debugger</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -33,7 +34,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
@@ -41,6 +42,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>FileMaker ODBC Debugger.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -51,6 +53,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>FileMaker ODBC Debugger.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -70,11 +73,46 @@
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DocumentationFile>FileMaker ODBC Debugger.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DocumentationFile>FileMaker ODBC Debugger.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=15.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.15.0.1\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -174,6 +212,8 @@
     <Content Include="export.xltx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Resources\loading_2_32.gif" />
     <None Include="Resources\IC632969.png" />
     <None Include="My Project\app.manifest" />
