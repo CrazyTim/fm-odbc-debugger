@@ -1086,7 +1086,7 @@ Partial Class sqlControl
         Me.DataGridView1.RowHeadersWidth = 25
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridView1.Size = New System.Drawing.Size(773, 141)
+        Me.DataGridView1.Size = New System.Drawing.Size(773, 162)
         Me.DataGridView1.TabIndex = 1
         '
         'ContextMenuStrip2
