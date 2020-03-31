@@ -5,7 +5,7 @@
 
 # FileMaker ODBC Debugger
 
-FileMaker's ODBC driver has its own flavour of SQL syntax, and there are limitations and gotchas. This lightweight utility hides some of these limitations and allows you to use syntax more like T-SQL. Performance can also be an issue, and so the query execution time is split into three different metrics. All this and more hopefully makes your life easier when working with FileMaker over ODBC.
+FileMaker's ODBC driver has its own flavour of SQL syntax, and there are limitations and gotchas. This lightweight utility hides some of these limitations and allows you to use syntax more like T-SQL (see feature list below). Performance can also be an issue, and so the query execution time is split into three different metrics. Hopefully this makes your life easier when writing and testing queries.
 
 ## Disclosure
 
@@ -13,7 +13,8 @@ This program is provided "as is" and comes without a warranty of any kind. Use a
 
 ## Getting Started
 
-Build the solution in Visual Studio.
+- Build the solution in Visual Studio.
+- Install 64bit FileMaker ODBC Driver (not provided).
 
 ## Technical Notes
 
@@ -23,24 +24,25 @@ Build the solution in Visual Studio.
 
 ## Features
 
-- Show how long the query took to run (separate connect, process, and stream times).
-- Support for T-SQL single and multi-line comments.
-- Execute multiple queries as a transaction (separate queries using a semi-colon (;) like T-SQL).
-- Convert line breaks from Windows (CRLF) to FileMaker (CR).
-- Automatically surround field names starting with an underscore with double quotes.
-- Show the version of the FileMaker ODBC driver.
-- Multiple tabs. Each tab has its own connection details and remembers what is on each tab after closing down.
-- Multi-threaded - execute multiple queries at the same time.
-- Links to official FileMaker reference guides.
-- Right-click to insert common FileMaker functions.
+- Show how long the query took to execute (separate durations for connect, process, and stream).
+- Support for T-SQL style comments (single `--` and multi-line `/*`).
+- Execute multiple queries as a transaction (separate queries using a semi-colon `;`).
+- Convert line breaks to carriage returns (FileMaker natively uses `CR` for line breaks).
+- Field names starting with an underscore will be automatically escaped with double quotes.
+- Multiple tabs. Each tab has its own connection details. Tabs are remembered when opening the program again.
+- Execute multiple queries at the same time (multi-threaded).
+- Provide links to the official FileMaker references/guides.
+- Right-click menu allows you to paste common FileMaker SQL functions.
 - Show warnings for several syntax errors and gotchas, some of which are unique to FileMaker.
-- Right-click on results and "copy column as CSV" - handy for executing a follow-up "WHERE IN (x,y,z)" query.
-- Manually specify a driver name and connection string (you can use any installed ODBC driver).
-- Quickly search for a keyword in the results panel.
+- Right-click on results and `Copy Selected Column(s) As CSV` (handy for executing a follow-up `WHERE IN (x,y,z)` query).
+- Quickly search results for a keyword.
 - Limit results to a maximum number of rows.
-- Highlight NULL cells yellow.
+- Highlight NULL values yellow in the results.
+- Show what version of the FileMaker ODBC driver is installed.
+- Manually specify a driver name and connection string (you can use any installed 64bit ODBC driver).
 
 ## Acknowledgements:
-- Icon by David Vignoni (www.iconfinder.com/icons/1230/animal_bug_insect_ladybird_icon).
-- Csv code from joshclose.github.io/CsvHelper, Apache License, Version 2.0.
-- Tab control code adapted from unknown.
+- Icon by [David Vignoni](www.iconfinder.com/icons/1230/animal_bug_insect_ladybird_icon), GNU Lesser General Public License (LGPL).
+- Tab control code adapted from [MDI tab control](https://www.codeproject.com/Articles/16436/A-highly-configurable-MDI-tab-control-from-scratch) by Eduardo Oliveira, The Code Project Open License (CPOL). 
+- [CsvHelper](joshclose.github.io/CsvHelper), Apache License, Version 2.0.
+- [Json.NET](https://www.newtonsoft.com/json), MIT license.
