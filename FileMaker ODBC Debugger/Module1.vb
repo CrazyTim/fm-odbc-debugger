@@ -2,7 +2,6 @@
 Imports System.Text.RegularExpressions
 Imports System.Xml.Serialization
 Imports System.IO
-Imports Microsoft.Office.Interop
 
 Module Module1
 
@@ -628,7 +627,7 @@ Module Module1
 
     End Function
 
-    Public Sub ExportToExcel2(ByVal Data As List(Of List(Of String)))
+    Public Sub ExportToExcel(ByVal Data As List(Of List(Of String)))
 
         ' generate a temp file to save the csv data to
         Dim TempFolder As String = System.IO.Path.GetTempPath & "fm-odbc-debugger"
@@ -664,80 +663,6 @@ Module Module1
         End Using
 
         Process.Start(TempFile)
-
-    End Sub
-
-    Public Sub ExportToExcel(ByVal ColumnHeadings As List(Of String), ByVal Data As List(Of List(Of String)))
-        ' -----------------------------------------------------------
-        ' LOAD EXCEL:
-        ' -----------------------------------------------------------
-
-        Dim PathToTemplate As String = AppDomain.CurrentDomain.BaseDirectory.TrimEnd(1) & "/export.xltx"
-
-        Dim xlsApp As New Excel.Application
-        Dim xlsBook As Excel.Workbook
-        Dim xlsSheet As Excel.Worksheet
-
-        If File.Exists(PathToTemplate) Then
-            xlsBook = xlsApp.Workbooks.Open(PathToTemplate)
-        Else
-            xlsBook = xlsApp.Application.Workbooks.Add()
-        End If
-
-        Dim cRow As Integer = 2
-        Dim cCol As Integer = 1
-
-        xlsApp.DisplayAlerts = 0 ' prevent dialog alerts, eg: when deleting worksheets
-        'xlsApp.Visible = True
-        xlsApp.Visible = False
-        xlsApp.Application.ScreenUpdating = False
-
-        xlsSheet = xlsBook.Worksheets("Sheet1")
-        xlsSheet.Select()
-
-        With xlsSheet
-
-            ' create columns
-            For Each cell In Data(0)
-                xlsSheet.Columns(2).Insert(Excel.XlDirection.xlToRight, Excel.XlInsertFormatOrigin.xlFormatFromLeftOrAbove)
-            Next
-            xlsSheet.Columns(2).Delete(Excel.XlDirection.xlToRight)
-            xlsSheet.Columns(2).Delete(Excel.XlDirection.xlToRight)
-
-            ' create column headers
-            For Each c In ColumnHeadings
-                xlsSheet.Cells(1, cCol).Value = c
-                cCol += 1
-            Next
-            cCol = 1
-
-            ' create rows
-            For Each row In Data
-                For Each cell In row
-                    xlsSheet.Cells(cRow, cCol).Value = cell
-                    cCol += 1
-                Next
-                cCol = 1
-                cRow += 1
-
-                ' insert new row
-                xlsSheet.Range(cRow + 1 & ":" & cRow + 1).Insert(Excel.XlInsertShiftDirection.xlShiftDown)
-            Next
-
-        End With
-
-        ' Delete last rows
-        xlsSheet.Range(cRow & ":" & cRow).Delete(Excel.XlDeleteShiftDirection.xlShiftUp)
-        xlsSheet.Range(cRow & ":" & cRow).Delete(Excel.XlDeleteShiftDirection.xlShiftUp)
-
-        ' autofit contents
-        xlsSheet.Cells.EntireColumn.AutoFit()
-
-        xlsSheet.Cells(1, 1).Select()
-
-        xlsApp.Application.ScreenUpdating = True
-        xlsApp.Visible = True
-        xlsApp.DisplayAlerts = 1
 
     End Sub
 

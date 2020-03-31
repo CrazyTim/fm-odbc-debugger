@@ -1107,7 +1107,7 @@ _jobid BETWEEN 10 AND 50 BATCH 10
             Data.Add(Row)
         Next
 
-        ExportToExcel2(Data)
+        ExportToExcel(Data)
 
     End Sub
 
