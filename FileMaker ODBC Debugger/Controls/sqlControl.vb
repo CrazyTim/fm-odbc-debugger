@@ -1126,7 +1126,7 @@ Public Class sqlControl
     End Sub
 
     Private Sub textBox_TextChanged(ByVal sender As Object, ByVal e As TextChangedEventArgs) Handles txtSQL.TextChanged
-        HandleTextBoxChanged(txtSQL)
+        SetRangeStyle(txtSQL.Range)
     End Sub
 
     Private Sub txtFind_KeyDown(sender As Object, e As KeyEventArgs) Handles txtFind.KeyDown
