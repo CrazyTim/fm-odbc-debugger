@@ -1107,24 +1107,6 @@ Public Class sqlControl
         End If
     End Sub
 
-    Private Sub btnGetMetaData_MouseUp(sender As Object, e As MouseEventArgs) Handles btnGetMetaData.MouseUp
-        Dim p As New System.Drawing.Point(e.X, e.Y)
-        ContextMenuStrip3.Show(btnGetMetaData.PointToScreen(p))
-    End Sub
-
-    Private Sub GetTableNamesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GetTableNamesToolStripMenuItem.Click
-        'Dim r = GetTableNames()
-        'If TypeOf (r) Is String Then
-        '    MsgBox(r)
-        'Else
-        '    Dim s As String = ""
-        '    For Each t In r
-        '        s &= vbNewLine & txtSQL
-        '    Next
-        '    txtSQL.Text &= s
-        'End If
-    End Sub
-
     Private Sub textBox_TextChanged(ByVal sender As Object, ByVal e As TextChangedEventArgs) Handles txtSQL.TextChanged
         SetRangeStyle(txtSQL.Range)
     End Sub

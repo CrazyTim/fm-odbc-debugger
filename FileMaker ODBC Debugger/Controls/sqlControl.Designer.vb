@@ -104,7 +104,6 @@ Partial Class sqlControl
         Me.txtUsername = New System.Windows.Forms.TextBox()
         Me.txtServerIP = New System.Windows.Forms.TextBox()
         Me.txtDatabaseName = New System.Windows.Forms.TextBox()
-        Me.btnGetMetaData = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -136,8 +135,6 @@ Partial Class sqlControl
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExportToExcel = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ContextMenuStrip3 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.GetTableNamesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -152,7 +149,6 @@ Partial Class sqlControl
         Me.Panel_Search.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip2.SuspendLayout()
-        Me.ContextMenuStrip3.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtPassword
@@ -747,7 +743,6 @@ Partial Class sqlControl
         Me.Panel_Driver_FileMaker.Controls.Add(Me.Label3)
         Me.Panel_Driver_FileMaker.Controls.Add(Me.txtServerIP)
         Me.Panel_Driver_FileMaker.Controls.Add(Me.txtDatabaseName)
-        Me.Panel_Driver_FileMaker.Controls.Add(Me.btnGetMetaData)
         Me.Panel_Driver_FileMaker.Controls.Add(Me.Label1)
         Me.Panel_Driver_FileMaker.Controls.Add(Me.Label2)
         Me.Panel_Driver_FileMaker.Dock = System.Windows.Forms.DockStyle.Top
@@ -785,18 +780,6 @@ Partial Class sqlControl
         Me.txtDatabaseName.TabIndex = 1
         Me.txtDatabaseName.Text = "test"
         Me.ToolTip1.SetToolTip(Me.txtDatabaseName, "Database Name")
-        '
-        'btnGetMetaData
-        '
-        Me.btnGetMetaData.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGetMetaData.Location = New System.Drawing.Point(345, 1)
-        Me.btnGetMetaData.Name = "btnGetMetaData"
-        Me.btnGetMetaData.Size = New System.Drawing.Size(19, 24)
-        Me.btnGetMetaData.TabIndex = 21
-        Me.btnGetMetaData.TabStop = False
-        Me.btnGetMetaData.Text = ">"
-        Me.btnGetMetaData.UseVisualStyleBackColor = True
-        Me.btnGetMetaData.Visible = False
         '
         'Label1
         '
@@ -891,7 +874,7 @@ Partial Class sqlControl
         Me.lblLoading.Image = Global.FmOdbcDebugger.My.Resources.Resources.loading_32x32
         Me.lblLoading.Location = New System.Drawing.Point(345, 25)
         Me.lblLoading.Name = "lblLoading"
-        Me.lblLoading.Size = New System.Drawing.Size(76, 111)
+        Me.lblLoading.Size = New System.Drawing.Size(76, 109)
         Me.lblLoading.TabIndex = 234
         Me.lblLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblLoading.Visible = False
@@ -1085,7 +1068,7 @@ Partial Class sqlControl
         Me.DataGridView1.RowHeadersWidth = 25
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridView1.Size = New System.Drawing.Size(773, 149)
+        Me.DataGridView1.Size = New System.Drawing.Size(773, 147)
         Me.DataGridView1.TabIndex = 1
         '
         'ContextMenuStrip2
@@ -1138,18 +1121,6 @@ Partial Class sqlControl
         Me.ToolTip1.InitialDelay = 100
         Me.ToolTip1.ReshowDelay = 100
         '
-        'ContextMenuStrip3
-        '
-        Me.ContextMenuStrip3.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GetTableNamesToolStripMenuItem})
-        Me.ContextMenuStrip3.Name = "ContextMenuStrip3"
-        Me.ContextMenuStrip3.Size = New System.Drawing.Size(163, 26)
-        '
-        'GetTableNamesToolStripMenuItem
-        '
-        Me.GetTableNamesToolStripMenuItem.Name = "GetTableNamesToolStripMenuItem"
-        Me.GetTableNamesToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
-        Me.GetTableNamesToolStripMenuItem.Text = "Get Table Names"
-        '
         'sqlControl
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -1178,7 +1149,6 @@ Partial Class sqlControl
         Me.Panel_Search.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip2.ResumeLayout(False)
-        Me.ContextMenuStrip3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1237,9 +1207,6 @@ Partial Class sqlControl
     Private WithEvents Label10 As Label
     Private WithEvents txtDriverName As TextBox
     Private WithEvents Label9 As Label
-    Friend WithEvents ContextMenuStrip3 As ContextMenuStrip
-    Friend WithEvents GetTableNamesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents btnGetMetaData As Button
     Private WithEvents txtFind As TextBox
     Friend WithEvents Panel_Status As Panel
     Private WithEvents Label11 As Label
