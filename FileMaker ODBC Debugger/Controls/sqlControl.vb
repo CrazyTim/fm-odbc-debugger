@@ -865,6 +865,50 @@ Public Class sqlControl
         txtSQL.Paste("SUBSTR('string', 2, 3)")
     End Sub
 
+    Private Sub CEILToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CEILToolStripMenuItem.Click
+        txtSQL.InsertText("CEIL()")
+    End Sub
+
+    Private Sub FLOORToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FLOORToolStripMenuItem.Click
+        txtSQL.InsertText("FLOOR()")
+    End Sub
+
+    Private Sub NUMVALstringToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NUMVALstringToolStripMenuItem.Click
+        txtSQL.InsertText("NUMVAL()")
+    End Sub
+
+    Private Sub MIN6689ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MIN6689ToolStripMenuItem.Click
+        txtSQL.InsertText("MIN()")
+    End Sub
+
+    Private Sub MAX6689ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MAX6689ToolStripMenuItem.Click
+        txtSQL.InsertText("MAX()")
+    End Sub
+
+    Private Sub INT64321Returns6ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles INT64321Returns6ToolStripMenuItem.Click
+        txtSQL.InsertText("INT()")
+    End Sub
+
+    Private Sub RTRIMToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RTRIMToolStripMenuItem.Click
+        txtSQL.InsertText("RTRIM()")
+    End Sub
+
+    Private Sub TRIMToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TRIMToolStripMenuItem.Click
+        txtSQL.InsertText("TRIM()")
+    End Sub
+
+    Private Sub LEFTstring4ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LEFTstring4ToolStripMenuItem.Click
+        txtSQL.InsertText("LEFT()")
+    End Sub
+
+    Private Sub RIGHTstring4ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RIGHTstring4ToolStripMenuItem.Click
+        txtSQL.InsertText("RIGHT()")
+    End Sub
+
+    Private Sub STRVALToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles STRVALToolStripMenuItem.Click
+        txtSQL.InsertText("STRVAL()")
+    End Sub
+
 #End Region
 
     Private Sub ContextMenuStrip2_Opening(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip2.Opening
