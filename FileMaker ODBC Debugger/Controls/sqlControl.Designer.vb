@@ -23,11 +23,12 @@ Partial Class sqlControl
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sqlControl))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.txtSQL = New System.Windows.Forms.TextBox()
+        Me.txtSQL = New FastColoredTextBoxNS.FastColoredTextBox()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuCopy1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCut1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -141,6 +142,7 @@ Partial Class sqlControl
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
+        CType(Me.txtSQL, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel_Driver_Custom.SuspendLayout()
@@ -206,19 +208,29 @@ Partial Class sqlControl
         '
         'txtSQL
         '
-        Me.txtSQL.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtSQL.AutoCompleteBracketsList = New Char() {Global.Microsoft.VisualBasic.ChrW(40), Global.Microsoft.VisualBasic.ChrW(41), Global.Microsoft.VisualBasic.ChrW(123), Global.Microsoft.VisualBasic.ChrW(125), Global.Microsoft.VisualBasic.ChrW(91), Global.Microsoft.VisualBasic.ChrW(93), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(39), Global.Microsoft.VisualBasic.ChrW(39)}
+        Me.txtSQL.AutoScrollMinSize = New System.Drawing.Size(0, 14)
+        Me.txtSQL.BackBrush = Nothing
+        Me.txtSQL.CharHeight = 14
+        Me.txtSQL.CharWidth = 7
         Me.txtSQL.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
         Me.txtSQL.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtSQL.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSQL.Font = New System.Drawing.Font("Consolas", 9.0!)
+        Me.txtSQL.HighlightingRangeType = FastColoredTextBoxNS.HighlightingRangeType.AllTextRange
+        Me.txtSQL.IsReplaceMode = False
         Me.txtSQL.Location = New System.Drawing.Point(0, 93)
-        Me.txtSQL.MaxLength = 32769
-        Me.txtSQL.Multiline = True
         Me.txtSQL.Name = "txtSQL"
-        Me.txtSQL.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtSQL.Paddings = New System.Windows.Forms.Padding(0)
+        Me.txtSQL.SelectionColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtSQL.ServiceColors = CType(resources.GetObject("txtSQL.ServiceColors"), FastColoredTextBoxNS.ServiceColors)
         Me.txtSQL.Size = New System.Drawing.Size(772, 187)
-        Me.txtSQL.TabIndex = 1
+        Me.txtSQL.TabIndex = 235
         Me.txtSQL.TabStop = False
-        Me.txtSQL.Text = "SELECT * FROM Contacts"
+        Me.txtSQL.Text = "SELECT * FROM test"
+        Me.txtSQL.WordWrap = True
+        Me.txtSQL.Zoom = 100
         '
         'ContextMenuStrip1
         '
@@ -879,7 +891,7 @@ Partial Class sqlControl
         Me.lblLoading.Image = Global.FmOdbcDebugger.My.Resources.Resources.loading_32x32
         Me.lblLoading.Location = New System.Drawing.Point(345, 25)
         Me.lblLoading.Name = "lblLoading"
-        Me.lblLoading.Size = New System.Drawing.Size(76, 120)
+        Me.lblLoading.Size = New System.Drawing.Size(76, 111)
         Me.lblLoading.TabIndex = 234
         Me.lblLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblLoading.Visible = False
@@ -1073,7 +1085,7 @@ Partial Class sqlControl
         Me.DataGridView1.RowHeadersWidth = 25
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridView1.Size = New System.Drawing.Size(773, 158)
+        Me.DataGridView1.Size = New System.Drawing.Size(773, 149)
         Me.DataGridView1.TabIndex = 1
         '
         'ContextMenuStrip2
@@ -1151,6 +1163,7 @@ Partial Class sqlControl
         Me.SplitContainer1.Panel2.PerformLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
+        CType(Me.txtSQL, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel_Driver_Custom.ResumeLayout(False)
@@ -1196,7 +1209,6 @@ Partial Class sqlControl
     Friend WithEvents mnuCut1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mnuSelectAll As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents txtSQL As System.Windows.Forms.TextBox
     Public WithEvents txtErrorText As System.Windows.Forms.TextBox
     Friend WithEvents DateToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TimeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -1282,4 +1294,5 @@ Partial Class sqlControl
     Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
+    Friend WithEvents txtSQL As FastColoredTextBoxNS.FastColoredTextBox
 End Class
