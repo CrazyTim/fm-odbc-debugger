@@ -3,31 +3,6 @@ Imports System.Text.RegularExpressions
 <DebuggerStepThrough()>
 Module Sql
 
-    Public ReadOnly FM_RESERVED_KEYWORDS As New List(Of String) From {"ABSOLUTE", "ACTION", "ADD", "ALL", "ALLOCATE", "ALTER", "AND", "ANY", "ARE", "AS", "ASC", "ASSERTION", "AT",
-                                            "AUTHORIZATION", "AVG", "BEGIN", "BETWEEN", "BINARY", "BIT", "BIT_LENGTH", "BLOB", "BOOLEAN", "BOTH", "BY",
-                                            "CASCADE", "CASCADED", "CASE", "CAST", "CATALOG", "CHAR", "CHARACTER", "CHARACTER_LENGTH", "CHAR_LENGTH",
-                                            "CHECK", "CHR", "CLOSE", "COALESCE", "COLLATE", "COLLATION", "COLUMN COMMIT", "CONNECT", "CONNECTION", "CONSTRAINT",
-                                            "CONSTRAINTS", "CONTINUE", "CONVERT", "CORRESPONDING", "COUNT", "CREATE", "CROSS", "CURDATE", "CURRENT", "CURRENT_DATE",
-                                            "CURRENT_TIME", "CURRENT_TIMESTAMP", "CURRENT_USER", "CURSOR", "CURTIME", "CURTIMESTAMP", "DATE", "DATEVAL", "DAY",
-                                            "DAYNAME", "DAYOFWEEK", "DEALLOCATE", "DEC", "DECIMAL", "DECLARE", "DEFAULT", "DEFERRABLE", "DEFERRED", "DELETE",
-                                            "DESC", "DESCRIBE", "DESCRIPTOR", "DIAGNOSTICS", "DISCONNECT", "DISTINCT", "DOMAIN", "DOUBLE", "DROP", "ELSE",
-                                            "END", "END_EXEC", "ESCAPE", "EVERY", "EXCEPT", "EXCEPTION", "EXEC", "EXECUTE", "EXISTS", "EXTERNAL", "EXTRACT",
-                                            "FALSE", "FETCH", "FIRST", "FLOAT", "FOR", "FOREIGN", "FOUND", "FROM", "FULL", "GET", "GLOBAL", "GO", "GOTO",
-                                            "GRANT", "GROUP", "HAVING", "HOUR", "IDENTITY", "IMMEDIATE", "IN", "INDEX", "INDICATOR", "INITIALLY", "INNER",
-                                            "INPUT", "INSENSITIVE", "NSERT", "INT", "INTEGER", "INTERSECT", "INTERVAL", "INTO", "IS", "ISOLATION", "JOIN",
-                                            "KEY", "LANGUAGE", "LAST", "LEADING", "LEFT", "LENGTH", "LEVEL", "LIKE", "LOCAL", "LONGVARBINARY", "LOWER", "LTRIM",
-                                            "MATCH", "MAX", "MIN", "MINUTE", "MODULE", "MONTH", "MONTHNAME", "NAMES", "NATIONAL", "NATURAL", "NCHAR", "NEXT",
-                                            "NO", "NOT", "NULL", "NULLIF", "NUMERIC", "NUMVAL", "OCTET_LENGTH", "OF", "ON", "ONLY", "OPEN", "OPTION", "OR",
-                                            "ORDER", "OUTER", "OUTPUT", "OVERLAPS", "PAD", "PART", "PARTIAL", "POSITION", "PRECISION", "PREPARE", "PRESERVE",
-                                            "PRIMARY", "PRIOR", "PRIVILEGES", "PROCEDURE", "PUBLIC", "READ", "REAL", "REFERENCES", "RELATIVE", "RESTRICT",
-                                            "REVOKE", "RIGHT", "ROLLBACK", "ROUND", "ROWID", "ROWS", "RTRIM", "SCHEMA", "SCROLL", "SECOND", "SECTION", "SELECT",
-                                            "SESSION", "SESSION_USER", "SET", "SIZE", "SMALLINT", "SOME", "SPACE", "SQL", "SQLCODE", "SQLERROR", "SQLSTATE", "STRVAL",
-                                            "SUBSTRING", "SUM", "SYSTEM_USER", "TABLE", "TEMPORARY", "THEN", "TIME", "TIMESTAMP", "TIMESTAMPVAL", "TIMEVAL",
-                                            "TIMEZONE_HOUR", "TIMEZONE_MINUTE", "TO", "TODAY", "TRAILING", "TRANSACTION", "TRANSLATE", "TRANSLATION", "TRIM",
-                                            "TRUE", "UNION", "UNIQUE", "UNKNOWN", "UPDATE", "UPPER", "USAGE", "USER", "USERNAME", "USING", "USAGE", "USER", "USERNAME",
-                                            "USING", "VALUE", "VALUES", "VARBINARY", "VARCHAR", "VARYING", "VIEW", "WHEN", "WHENEVER", "WHERE", "WITH", "WORK",
-                                            "WRITE", "YEAR", "ZONE"}
-
     ''' <summary> Execute a SELECT SQL query against an ODBC connection </summary>
     Public Function SQL_SELECT(ByVal Query As String, ByRef ExeTime As TimeSpan, ByRef StreamTime As TimeSpan, ByVal cn As Odbc.OdbcConnection) As Collection
 
@@ -300,37 +275,6 @@ Module Sql
         Loop
         a.Add(sql)
         Return a
-    End Function
-
-    ''' <summary> Uppercase reserved keywords. </summary>
-    Public Function BeautifySQL(ByVal Query As String) As String
-        Dim i As Integer
-        Dim r As String = ""
-        Dim a As New ArrayList
-
-
-        ' 1) SPLIT
-        a = SplitSQL(Query)
-
-
-        ' 2) UPPERCASE RESERVED SQL KEYWORDS
-        i = 0
-        Do While i < a.Count
-
-            ' nb: \b matches a word boundary (the position between a word and a space).
-            For Each w As String In FM_RESERVED_KEYWORDS
-                a(i) = Regex.Replace(a(i), "\b(" & w & ")\b", w, RegexOptions.IgnoreCase)
-            Next
-
-            i += 2
-        Loop
-
-
-        ' 3) JOIN BACK INTO ONE STRING
-        r = JoinSQL(a)
-
-        Return r
-
     End Function
 
     ''' <summary> Prep query for filemaker ODBC driver to execute. </summary>

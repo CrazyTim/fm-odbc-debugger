@@ -69,7 +69,7 @@ Partial Class frmAbout
         Me.Label1.Padding = New System.Windows.Forms.Padding(0, 0, 0, 5)
         Me.Label1.Size = New System.Drawing.Size(109, 20)
         Me.Label1.TabIndex = 164
-        Me.Label1.Text = "Version: 2020-03-31"
+        Me.Label1.Text = "Version: 2020-04-03"
         '
         'lblAppTitle
         '

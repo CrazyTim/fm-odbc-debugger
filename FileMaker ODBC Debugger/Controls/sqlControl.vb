@@ -1,14 +1,7 @@
 Imports System.ComponentModel
+Imports FastColoredTextBoxNS
 
 Public Class sqlControl
-
-    Const EM_SETTABSTOPS As Integer = &HCB
-    Declare Function SendMessageA Lib "user32" (ByVal TBHandle As IntPtr, _
-                                               ByVal EM_SETTABSTOPS As Integer, _
-                                               ByVal wParam As Integer, _
-                                               ByRef lParam As Integer) As Boolean
-
-    Private TabStopIndent As Integer = 16 ' tab x 4
 
     Public Event DatabaseNameChanged(ByVal e As TextChangedArgs)
     Public Event BeginSQLExecute()
@@ -33,6 +26,24 @@ Public Class sqlControl
     Private _bw_DriverName As String = ""
     Private _bw_RowsToReturn As Long
     Private _bw_ConnectionString As String = ""
+
+    Private Sub Me_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+
+        txtErrorText.Dock = DockStyle.Fill
+        txtErrorText.Text = ""
+        lblStatus.Text = ""
+        lblDurationConnect.Visible = False
+        lblDurationExecute.Visible = False
+        lblSyntaxWarning.Visible = False
+        txtSQL.Select()
+
+        InitaliseTextBoxSettings(txtSQL)
+
+        DisableSearchBox()
+
+        InitaliseBackgroundWorker()
+
+    End Sub
 
     Public Sub InitaliseBackgroundWorker()
 
@@ -697,25 +708,6 @@ Public Class sqlControl
         End Set
     End Property
 
-    Private Sub Me_Load(sender As Object, e As System.EventArgs) Handles Me.Load
-
-        SendMessageA(txtSQL.Handle, EM_SETTABSTOPS, 1, TabStopIndent) ' set tab width
-
-        ' reset
-        txtErrorText.Dock = DockStyle.Fill
-        txtErrorText.Text = ""
-        lblStatus.Text = ""
-        lblDurationConnect.Visible = False
-        lblDurationExecute.Visible = False
-        lblSyntaxWarning.Visible = False
-        txtSQL.Select()
-
-        DisableSearchBox()
-
-        InitaliseBackgroundWorker()
-
-    End Sub
-
     Private Sub DataGridView1_CurrentCellChanged(sender As Object, e As EventArgs) Handles DataGridView1.CurrentCellChanged
         RefreshRowCount()
     End Sub
@@ -740,7 +732,7 @@ Public Class sqlControl
         ExecuteSQL()
     End Sub
 
-    Private Sub TextBox1_PreviewKeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.PreviewKeyDownEventArgs) Handles txtSQL.PreviewKeyDown
+    Private Sub TextBox1_PreviewKeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.PreviewKeyDownEventArgs)
         If e.KeyData = Keys.Tab Then ' allow tabbing inside the text box
             e.IsInputKey = True
         End If
@@ -770,99 +762,99 @@ Public Class sqlControl
 #Region "Macros"
 
     Private Sub SECONDToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SECONDToolStripMenuItem.Click
-        txtSQL.Paste("SECOND()")
+        txtSQL.InsertText("SECOND()")
     End Sub
 
     Private Sub MINUTEToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MINUTEToolStripMenuItem.Click
-        txtSQL.Paste("MINUTE()")
+        txtSQL.InsertText("MINUTE()")
     End Sub
 
     Private Sub HOURToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HOURToolStripMenuItem.Click
-        txtSQL.Paste("HOUR()")
+        txtSQL.InsertText("HOUR()")
     End Sub
 
     Private Sub DAYToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DAYToolStripMenuItem.Click
-        txtSQL.Paste("DAY()")
+        txtSQL.InsertText("DAY()")
     End Sub
 
     Private Sub MONTHToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MONTHToolStripMenuItem.Click
-        txtSQL.Paste("MONTH()")
+        txtSQL.InsertText("MONTH()")
     End Sub
 
     Private Sub YEARToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles YEARToolStripMenuItem.Click
-        txtSQL.Paste("YEAR()")
+        txtSQL.InsertText("YEAR()")
     End Sub
 
     Private Sub CURRENTDATEToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles CURRENTDATEToolStripMenuItem1.Click
-        txtSQL.Paste("CURRENT_DATE")
+        txtSQL.InsertText("CURRENT_DATE")
     End Sub
 
     Private Sub CURRENTTIMEToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles CURRENTTIMEToolStripMenuItem1.Click
-        txtSQL.Paste("CURRENT_TIME")
+        txtSQL.InsertText("CURRENT_TIME")
     End Sub
 
     Private Sub CURRENTTIMESTAMPToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles CURRENTTIMESTAMPToolStripMenuItem1.Click
-        txtSQL.Paste("CURRENT_TIMESTAMP")
+        txtSQL.InsertText("CURRENT_TIMESTAMP")
     End Sub
 
     Private Sub TODAYToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
-        txtSQL.Paste("TODAY")
+        txtSQL.InsertText("TODAY")
     End Sub
 
     Private Sub DATEVAL01302011ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DATEVAL01302011ToolStripMenuItem.Click
-        txtSQL.Paste("DATEVAL()")
+        txtSQL.InsertText("DATEVAL()")
     End Sub
 
     Private Sub DateToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DateToolStripMenuItem.Click
-        txtSQL.Paste("{d '" & Now.ToString("yyyy-MM-dd") & "'}")
+        txtSQL.InsertText("{d '" & Now.ToString("yyyy-MM-dd") & "'}")
     End Sub
 
     Private Sub TimeToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles TimeToolStripMenuItem.Click
-        txtSQL.Paste("{t '" & Now.ToString("hh:mm:ss") & "'}")
+        txtSQL.InsertText("{t '" & Now.ToString("hh:mm:ss") & "'}")
     End Sub
 
     Private Sub TimestampToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles TimestampToolStripMenuItem.Click
-        txtSQL.Paste("{ts '" & Now.ToString("yyyy-MM-dd hh:mm:ss") & "'}")
+        txtSQL.InsertText("{ts '" & Now.ToString("yyyy-MM-dd hh:mm:ss") & "'}")
     End Sub
 
     Private Sub DAYOFWEEKToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DAYOFWEEKToolStripMenuItem.Click
-        txtSQL.Paste("DAYOFWEEK(")
+        txtSQL.InsertText("DAYOFWEEK(")
     End Sub
 
     Private Sub CHR67ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CHR67ToolStripMenuItem.Click
-        txtSQL.Paste("CHR()")
+        txtSQL.InsertText("CHR()")
     End Sub
 
     Private Sub UPPERToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles UPPERToolStripMenuItem.Click
-        txtSQL.Paste("UPPPER()")
+        txtSQL.InsertText("UPPPER()")
     End Sub
 
     Private Sub LOWERToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles LOWERToolStripMenuItem.Click
-        txtSQL.Paste("LOWER()")
+        txtSQL.InsertText("LOWER()")
     End Sub
 
     Private Sub ROUND1234560ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ROUND1234560ToolStripMenuItem.Click
-        txtSQL.Paste("ROUND()")
+        txtSQL.InsertText("ROUND()")
     End Sub
 
     Private Sub LENstringToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles LENstringToolStripMenuItem.Click
-        txtSQL.Paste("LEN()")
+        txtSQL.InsertText("LEN()")
     End Sub
 
     Private Sub MONTHNAMEToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles MONTHNAMEToolStripMenuItem.Click
-        txtSQL.Paste("MONTHNAME()")
+        txtSQL.InsertText("MONTHNAME()")
     End Sub
 
     Private Sub USERNAMEToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles USERNAMEToolStripMenuItem.Click
-        txtSQL.Paste("CURRENT_USER")
+        txtSQL.InsertText("CURRENT_USER")
     End Sub
 
     Private Sub DAYNAMEdateToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DAYNAMEdateToolStripMenuItem.Click
-        txtSQL.Paste("DAYNAME()")
+        txtSQL.InsertText("DAYNAME()")
     End Sub
 
     Private Sub SUBSTRINGstring23ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SUBSTRINGstring23ToolStripMenuItem.Click
-        txtSQL.Paste("SUBSTR('string', 2, 3)")
+        txtSQL.InsertText("SUBSTR('string', 2, 3)")
     End Sub
 
     Private Sub CEILToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CEILToolStripMenuItem.Click
@@ -988,6 +980,8 @@ Public Class sqlControl
 
     Private Sub mnuPaste_Click(sender As System.Object, e As System.EventArgs) Handles mnuPaste.Click
 
+        ' todo: is this nessecary now that text box suports it natively?
+
         txtSQL.SelectedText = ""
 
         Dim s As String = System.Windows.Forms.Clipboard.GetText
@@ -997,7 +991,7 @@ Public Class sqlControl
         s = s.Replace(vbLf, vbCr)
         s = s.Replace(vbCr, Environment.NewLine)
 
-        txtSQL.Paste(s)
+        txtSQL.InsertText(s)
 
     End Sub
 
@@ -1040,7 +1034,7 @@ Public Class sqlControl
     End Sub
 
     Private Sub mnuSelectAll_Click(sender As System.Object, e As System.EventArgs) Handles mnuSelectAll.Click
-        DirectCast(txtSQL, TextBox).SelectAll()
+        txtSQL.SelectAll()
     End Sub
 
     Private Sub mnuAbout_Click(sender As Object, e As EventArgs) Handles mnuAbout.Click
@@ -1113,22 +1107,8 @@ Public Class sqlControl
         End If
     End Sub
 
-    Private Sub btnGetMetaData_MouseUp(sender As Object, e As MouseEventArgs) Handles btnGetMetaData.MouseUp
-        Dim p As New System.Drawing.Point(e.X, e.Y)
-        ContextMenuStrip3.Show(btnGetMetaData.PointToScreen(p))
-    End Sub
-
-    Private Sub GetTableNamesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GetTableNamesToolStripMenuItem.Click
-        Dim r = GetTableNames()
-        If TypeOf (r) Is String Then
-            MsgBox(r)
-        Else
-            Dim s As String = ""
-            For Each t In r
-                s &= vbNewLine & t
-            Next
-            txtSQL.Text &= s
-        End If
+    Private Sub textBox_TextChanged(ByVal sender As Object, ByVal e As TextChangedEventArgs) Handles txtSQL.TextChanged
+        SetRangeStyle(txtSQL.Range)
     End Sub
 
     Private Sub txtFind_KeyDown(sender As Object, e As KeyEventArgs) Handles txtFind.KeyDown

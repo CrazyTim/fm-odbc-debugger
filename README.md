@@ -26,6 +26,7 @@ This program is provided "as is" and comes without a warranty of any kind. Use a
 
 - Show how long the query took to execute (separate durations for connect, process, and stream).
 - Support for T-SQL style comments (single `--` and multi-line `/*`).
+- Text editor supports syntax highlighting for all of the documented keywords. Colours are the same as Microsoft SQL Server Management Studio.
 - Execute multiple queries as a transaction (separate queries using a semi-colon `;`).
 - Convert line breaks to carriage returns (FileMaker natively uses `CR` for line breaks).
 - Field names starting with an underscore will be automatically escaped with double quotes.
@@ -46,3 +47,4 @@ This program is provided "as is" and comes without a warranty of any kind. Use a
 - Tab control code adapted from [MDI tab control](https://www.codeproject.com/Articles/16436/A-highly-configurable-MDI-tab-control-from-scratch) by Eduardo Oliveira, The Code Project Open License (CPOL). 
 - [CsvHelper](joshclose.github.io/CsvHelper), Apache License, Version 2.0.
 - [Json.NET](https://www.newtonsoft.com/json), MIT license.
+- [FastColoredTextBox](https://github.com/PavelTorgashov/FastColoredTextBox), GNU Lesser General Public License (LGPLv3).
