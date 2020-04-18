@@ -1,5 +1,5 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form1
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class frmMain
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,10 +22,10 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.ColumnHeader38 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.TabControl1 = New FMDebugger.TabControl()
+        Me.TabControl1 = New FmOdbcDebugger.TabControl()
         Me.SuspendLayout()
         '
         'ColumnHeader38
@@ -53,7 +53,7 @@ Partial Class Form1
         Me.TabControl1.TabBackHighColor = System.Drawing.SystemColors.Control
         Me.TabControl1.TabBackHighColorDisabled = System.Drawing.Color.LightGray
         Me.TabControl1.TabBackLowColorDisabled = System.Drawing.Color.LightGray
-        Me.TabControl1.TabBorderEnhanceWeight = FMDebugger.TabControl.Weight.Soft
+        Me.TabControl1.TabBorderEnhanceWeight = FmOdbcDebugger.TabControl.Weight.Soft
         Me.TabControl1.TabCloseButtonBackHighColorDisabled = System.Drawing.SystemColors.ControlLightLight
         Me.TabControl1.TabCloseButtonBackLowColorDisabled = System.Drawing.SystemColors.ControlLightLight
         Me.TabControl1.TabCloseButtonImage = Nothing
@@ -81,6 +81,6 @@ Partial Class Form1
     End Sub
     Friend WithEvents ColumnHeader38 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents TabControl1 As FMDebugger.TabControl
+    Friend WithEvents TabControl1 As FmOdbcDebugger.TabControl
 
 End Class

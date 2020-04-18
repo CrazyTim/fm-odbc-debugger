@@ -1,54 +1,48 @@
-﻿Imports System.Runtime.CompilerServices
 Imports System.Text.RegularExpressions
-Imports System.Xml.Serialization
-Imports System.IO
 
-Module Module1
+<DebuggerStepThrough()>
+Module Sql
 
-    Public AppDataDir As String = My.Application.GetEnvironmentVariable("APPDATA") & "\FileMaker ODBC Debugger"
-    Public FMODBCDriverVersion As String = ""
-
-    Public ReadOnly FM_ReservedKeyWords As New List(Of String) From {"ABSOLUTE", "ACTION", "ADD", "ALL", "ALLOCATE", "ALTER", "AND", "ANY", "ARE", "AS", "ASC", "ASSERTION", "AT",
-                                                          "AUTHORIZATION", "AVG", "BEGIN", "BETWEEN", "BINARY", "BIT", "BIT_LENGTH", "BLOB", "BOOLEAN", "BOTH", "BY",
-                                                          "CASCADE", "CASCADED", "CASE", "CAST", "CATALOG", "CHAR", "CHARACTER", "CHARACTER_LENGTH", "CHAR_LENGTH",
-                                                          "CHECK", "CHR", "CLOSE", "COALESCE", "COLLATE", "COLLATION", "COLUMN COMMIT", "CONNECT", "CONNECTION", "CONSTRAINT",
-                                                          "CONSTRAINTS", "CONTINUE", "CONVERT", "CORRESPONDING", "COUNT", "CREATE", "CROSS", "CURDATE", "CURRENT", "CURRENT_DATE",
-                                                          "CURRENT_TIME", "CURRENT_TIMESTAMP", "CURRENT_USER", "CURSOR", "CURTIME", "CURTIMESTAMP", "DATE", "DATEVAL", "DAY",
-                                                          "DAYNAME", "DAYOFWEEK", "DEALLOCATE", "DEC", "DECIMAL", "DECLARE", "DEFAULT", "DEFERRABLE", "DEFERRED", "DELETE",
-                                                          "DESC", "DESCRIBE", "DESCRIPTOR", "DIAGNOSTICS", "DISCONNECT", "DISTINCT", "DOMAIN", "DOUBLE", "DROP", "ELSE",
-                                                          "END", "END_EXEC", "ESCAPE", "EVERY", "EXCEPT", "EXCEPTION", "EXEC", "EXECUTE", "EXISTS", "EXTERNAL", "EXTRACT",
-                                                          "FALSE", "FETCH", "FIRST", "FLOAT", "FOR", "FOREIGN", "FOUND", "FROM", "FULL", "GET", "GLOBAL", "GO", "GOTO",
-                                                          "GRANT", "GROUP", "HAVING", "HOUR", "IDENTITY", "IMMEDIATE", "IN", "INDEX", "INDICATOR", "INITIALLY", "INNER",
-                                                          "INPUT", "INSENSITIVE", "NSERT", "INT", "INTEGER", "INTERSECT", "INTERVAL", "INTO", "IS", "ISOLATION", "JOIN",
-                                                          "KEY", "LANGUAGE", "LAST", "LEADING", "LEFT", "LENGTH", "LEVEL", "LIKE", "LOCAL", "LONGVARBINARY", "LOWER", "LTRIM",
-                                                          "MATCH", "MAX", "MIN", "MINUTE", "MODULE", "MONTH", "MONTHNAME", "NAMES", "NATIONAL", "NATURAL", "NCHAR", "NEXT",
-                                                          "NO", "NOT", "NULL", "NULLIF", "NUMERIC", "NUMVAL", "OCTET_LENGTH", "OF", "ON", "ONLY", "OPEN", "OPTION", "OR",
-                                                          "ORDER", "OUTER", "OUTPUT", "OVERLAPS", "PAD", "PART", "PARTIAL", "POSITION", "PRECISION", "PREPARE", "PRESERVE",
-                                                          "PRIMARY", "PRIOR", "PRIVILEGES", "PROCEDURE", "PUBLIC", "READ", "REAL", "REFERENCES", "RELATIVE", "RESTRICT",
-                                                          "REVOKE", "RIGHT", "ROLLBACK", "ROUND", "ROWID", "ROWS", "RTRIM", "SCHEMA", "SCROLL", "SECOND", "SECTION", "SELECT",
-                                                          "SESSION", "SESSION_USER", "SET", "SIZE", "SMALLINT", "SOME", "SPACE", "SQL", "SQLCODE", "SQLERROR", "SQLSTATE", "STRVAL",
-                                                          "SUBSTRING", "SUM", "SYSTEM_USER", "TABLE", "TEMPORARY", "THEN", "TIME", "TIMESTAMP", "TIMESTAMPVAL", "TIMEVAL",
-                                                          "TIMEZONE_HOUR", "TIMEZONE_MINUTE", "TO", "TODAY", "TRAILING", "TRANSACTION", "TRANSLATE", "TRANSLATION", "TRIM",
-                                                          "TRUE", "UNION", "UNIQUE", "UNKNOWN", "UPDATE", "UPPER", "USAGE", "USER", "USERNAME", "USING", "USAGE", "USER", "USERNAME",
-                                                          "USING", "VALUE", "VALUES", "VARBINARY", "VARCHAR", "VARYING", "VIEW", "WHEN", "WHENEVER", "WHERE", "WITH", "WORK",
-                                                          "WRITE", "YEAR", "ZONE"}
-
+    Public ReadOnly FM_RESERVED_KEYWORDS As New List(Of String) From {"ABSOLUTE", "ACTION", "ADD", "ALL", "ALLOCATE", "ALTER", "AND", "ANY", "ARE", "AS", "ASC", "ASSERTION", "AT",
+                                            "AUTHORIZATION", "AVG", "BEGIN", "BETWEEN", "BINARY", "BIT", "BIT_LENGTH", "BLOB", "BOOLEAN", "BOTH", "BY",
+                                            "CASCADE", "CASCADED", "CASE", "CAST", "CATALOG", "CHAR", "CHARACTER", "CHARACTER_LENGTH", "CHAR_LENGTH",
+                                            "CHECK", "CHR", "CLOSE", "COALESCE", "COLLATE", "COLLATION", "COLUMN COMMIT", "CONNECT", "CONNECTION", "CONSTRAINT",
+                                            "CONSTRAINTS", "CONTINUE", "CONVERT", "CORRESPONDING", "COUNT", "CREATE", "CROSS", "CURDATE", "CURRENT", "CURRENT_DATE",
+                                            "CURRENT_TIME", "CURRENT_TIMESTAMP", "CURRENT_USER", "CURSOR", "CURTIME", "CURTIMESTAMP", "DATE", "DATEVAL", "DAY",
+                                            "DAYNAME", "DAYOFWEEK", "DEALLOCATE", "DEC", "DECIMAL", "DECLARE", "DEFAULT", "DEFERRABLE", "DEFERRED", "DELETE",
+                                            "DESC", "DESCRIBE", "DESCRIPTOR", "DIAGNOSTICS", "DISCONNECT", "DISTINCT", "DOMAIN", "DOUBLE", "DROP", "ELSE",
+                                            "END", "END_EXEC", "ESCAPE", "EVERY", "EXCEPT", "EXCEPTION", "EXEC", "EXECUTE", "EXISTS", "EXTERNAL", "EXTRACT",
+                                            "FALSE", "FETCH", "FIRST", "FLOAT", "FOR", "FOREIGN", "FOUND", "FROM", "FULL", "GET", "GLOBAL", "GO", "GOTO",
+                                            "GRANT", "GROUP", "HAVING", "HOUR", "IDENTITY", "IMMEDIATE", "IN", "INDEX", "INDICATOR", "INITIALLY", "INNER",
+                                            "INPUT", "INSENSITIVE", "NSERT", "INT", "INTEGER", "INTERSECT", "INTERVAL", "INTO", "IS", "ISOLATION", "JOIN",
+                                            "KEY", "LANGUAGE", "LAST", "LEADING", "LEFT", "LENGTH", "LEVEL", "LIKE", "LOCAL", "LONGVARBINARY", "LOWER", "LTRIM",
+                                            "MATCH", "MAX", "MIN", "MINUTE", "MODULE", "MONTH", "MONTHNAME", "NAMES", "NATIONAL", "NATURAL", "NCHAR", "NEXT",
+                                            "NO", "NOT", "NULL", "NULLIF", "NUMERIC", "NUMVAL", "OCTET_LENGTH", "OF", "ON", "ONLY", "OPEN", "OPTION", "OR",
+                                            "ORDER", "OUTER", "OUTPUT", "OVERLAPS", "PAD", "PART", "PARTIAL", "POSITION", "PRECISION", "PREPARE", "PRESERVE",
+                                            "PRIMARY", "PRIOR", "PRIVILEGES", "PROCEDURE", "PUBLIC", "READ", "REAL", "REFERENCES", "RELATIVE", "RESTRICT",
+                                            "REVOKE", "RIGHT", "ROLLBACK", "ROUND", "ROWID", "ROWS", "RTRIM", "SCHEMA", "SCROLL", "SECOND", "SECTION", "SELECT",
+                                            "SESSION", "SESSION_USER", "SET", "SIZE", "SMALLINT", "SOME", "SPACE", "SQL", "SQLCODE", "SQLERROR", "SQLSTATE", "STRVAL",
+                                            "SUBSTRING", "SUM", "SYSTEM_USER", "TABLE", "TEMPORARY", "THEN", "TIME", "TIMESTAMP", "TIMESTAMPVAL", "TIMEVAL",
+                                            "TIMEZONE_HOUR", "TIMEZONE_MINUTE", "TO", "TODAY", "TRAILING", "TRANSACTION", "TRANSLATE", "TRANSLATION", "TRIM",
+                                            "TRUE", "UNION", "UNIQUE", "UNKNOWN", "UPDATE", "UPPER", "USAGE", "USER", "USERNAME", "USING", "USAGE", "USER", "USERNAME",
+                                            "USING", "VALUE", "VALUES", "VARBINARY", "VARCHAR", "VARYING", "VIEW", "WHEN", "WHENEVER", "WHERE", "WITH", "WORK",
+                                            "WRITE", "YEAR", "ZONE"}
 
     ''' <summary> Execute a SELECT SQL query against an ODBC connection </summary>
-    Public Function SQL_SELECT(ByVal QueryString As String, ByRef ExeTime As TimeSpan, ByRef StreamTime As TimeSpan, ByRef cn As Odbc.OdbcConnection) As Collection
+    Public Function SQL_SELECT(ByVal Query As String, ByRef ExeTime As TimeSpan, ByRef StreamTime As TimeSpan, ByVal cn As Odbc.OdbcConnection) As Collection
 
         ' - handle dropouts and deadlocks by repeating query up to 3 times.
         ' - Handle NULL connections and existing connections (open existing connections if they are closed).
         ' - If sucessfull, return a Collection of ArrayLists (one for each record), otherwise return NOTHING.
 
         ' validate
-        If QueryString.Count = 0 Then Return New Collection
+        If Query.Count = 0 Then Return New Collection
 
         Dim Col As New Collection
         Dim first As Boolean = False
 
 
-        Using cmd As New Odbc.OdbcCommand(QueryString, cn)
+        Using cmd As New Odbc.OdbcCommand(Query, cn)
 
             Dim sw As New System.Diagnostics.Stopwatch
             sw.Restart()
@@ -149,16 +143,14 @@ Module Module1
 
     End Function
 
-
-    ''' <summary> Execute a series of SQL transactions against an ODBC connection. If any of them fail, the transaction is rolled back. If no connection is provided, a default connection is used. </summary>
-    Public Sub SQL_TRANS(ByVal Queries As Collection, ByVal cn As Odbc.OdbcConnection)
+    ''' <summary> Execute each query. If any of them fail, the transaction is rolled back. </summary>
+    Public Sub SQL_TRANS(ByVal Queries As List(Of String), ByVal cn As Odbc.OdbcConnection)
 
         ' validate
-        If Queries.Count = 0 Then Exit Sub
+        If Queries.Count = 0 Then Return
 
         Dim CurrentQryString As String = ""
 
-        ' execute transaction 
         Try
             Using cmd As New Odbc.OdbcCommand()
                 cmd.Connection = cn                     ' Set the Connection to the new OdbcConnection.
@@ -166,7 +158,7 @@ Module Module1
                 Using t As Odbc.OdbcTransaction = cn.BeginTransaction() ' Start a local transaction.
                     cmd.Transaction = t           ' Assign transaction object for a pending local transaction.
 
-                    For Each QueryString As String In Queries
+                    For Each QueryString In Queries
                         CurrentQryString = QueryString
                         If QueryString <> "" Then        ' skip if empty string
                             cmd.CommandText = QueryString
@@ -176,8 +168,6 @@ Module Module1
 
                     Try
                         t.Commit()
-                        Dim f = ""
-                        'Catch odbcex As Odbc.OdbcException
                     Catch ex As Exception
                         t.Rollback()
                         MsgBox(ex.Message)
@@ -190,11 +180,9 @@ Module Module1
             MsgBox(ex.Message)
         End Try
 
-
     End Sub
 
-
-    ''' <summary> Insert double-quotes around words starting with "_" (which is illegal in odbc). </summary>
+    ''' <summary> Insert double-quotes around words starting with "_" (which is illegal in odbc, but not for FileMaker). </summary>
     Public Function FM_EscUnderscoreIdentifiyers(ByVal sql As String) As String
 
         If String.IsNullOrEmpty(sql) Then Return ("")
@@ -245,8 +233,7 @@ Module Module1
         Return sql
     End Function
 
-
-    '' split into an array of strings based on ";"
+    ''' <summary> Split into an array of strings based on ";". </summary>
     Public Function SplitSQLTRANS(ByVal str As String) As String()
 
         ' --------------------------------------------------------
@@ -264,7 +251,7 @@ Module Module1
                 End If
             ElseIf s = ";" Then
                 If quoteCounter = 0 Then
-                    str = replaceChar(str, i, Chr(159))
+                    str = ReplaceChar(str, i, Chr(159))
                 End If
             End If
             charCount += 1
@@ -278,50 +265,6 @@ Module Module1
 
         Return sp
 
-    End Function
-
-    <Extension()>
-    Public Function IsEven(i As Integer) As Boolean
-        If i Mod 2 = 0 Then
-            Return True
-        Else
-            Return False
-        End If
-    End Function
-
-    <Extension()>
-    Public Function IsOdd(i As Integer) As Boolean
-        If Not i Mod 2 = 0 Then
-            Return True
-        Else
-            Return False
-        End If
-    End Function
-
-    Public Function replaceChar(str As String, charindex As Integer, ByVal NewChar As String)
-        Return str.Remove(charindex, 1).Insert(charindex, NewChar)
-    End Function
-
-    ''' <summary> Return a string with n characters removed from the start of it. </summary>
-    <Extension()> <DebuggerStepThrough()>
-    Public Function TrimStart(ByVal s As String, ByVal n As Integer) As String
-        If String.IsNullOrEmpty(s) Then Return ""
-        If s.Length = 0 Then Return "" Else Return Microsoft.VisualBasic.Right(s, s.Length - n)
-    End Function
-
-    ''' <summary> Return a string with n characters removed from the end of it. </summary>
-    <Extension()> <DebuggerStepThrough()>
-    Public Function TrimEnd(ByVal s As String, ByVal n As Integer) As String
-        If String.IsNullOrEmpty(s) Then Return ""
-        If s.Length = 0 Then Return "" Else Return (s.Substring(0, s.Length - n))
-    End Function
-
-    ''' <summary> Cut off a portion of string form the beginning upto a certain index, and return the removed portion. </summary>
-    <Extension()> <DebuggerStepThrough()>
-    Public Function CutStartOffAtIndex(ByRef s As String, ByVal index As Integer) As String
-        Dim v = s.Substring(0, index)
-        s = s.Substring(index)
-        Return v
     End Function
 
     Private Function JoinSQL(ByVal a As ArrayList)
@@ -359,15 +302,15 @@ Module Module1
         Return a
     End Function
 
-    ''' <summary> Change reserved keywords in a SQL query to Uppercase. </summary>
-    Public Function BeautifySQL(ByVal SQL As String) As String
+    ''' <summary> Uppercase reserved keywords. </summary>
+    Public Function BeautifySQL(ByVal Query As String) As String
         Dim i As Integer
         Dim r As String = ""
         Dim a As New ArrayList
 
 
         ' 1) SPLIT
-        a = SplitSQL(SQL)
+        a = SplitSQL(Query)
 
 
         ' 2) UPPERCASE RESERVED SQL KEYWORDS
@@ -375,7 +318,7 @@ Module Module1
         Do While i < a.Count
 
             ' nb: \b matches a word boundary (the position between a word and a space).
-            For Each w As String In FM_ReservedKeyWords
+            For Each w As String In FM_RESERVED_KEYWORDS
                 a(i) = Regex.Replace(a(i), "\b(" & w & ")\b", w, RegexOptions.IgnoreCase)
             Next
 
@@ -390,7 +333,7 @@ Module Module1
 
     End Function
 
-    ''' <summary> Prep SQL ready for filemaker ODBC driver to execute. </summary>
+    ''' <summary> Prep query for filemaker ODBC driver to execute. </summary>
     Public Function FM_PrepSQL(ByVal SQL As String) As String
 
         Dim i As Integer
@@ -461,7 +404,6 @@ Module Module1
 
     End Function
 
-
     ''' <summary> Check for misc errors not reproted by filemakers odbc driver </summary>
     Public Function FM_CheckErrors(ByVal SQL As String) As ArrayList
         Dim a As New ArrayList
@@ -530,140 +472,5 @@ Module Module1
         Return Errors
 
     End Function
-
-    ''' <summary> Write text to a file. </summary>
-    Public Sub WriteToFile(ByVal strData As String, ByVal FullPath As String, ByVal Append As Boolean)
-        Dim objReader As StreamWriter
-        objReader = New StreamWriter(FullPath, Append)
-        objReader.Write(strData)
-        objReader.Close()
-        objReader.Dispose()
-    End Sub
-
-    Public Function SaveSerialXML(ByVal FileName As String, ByVal DataToSerialize As Object, ByVal objType As Type) As Boolean
-
-        If FileName = "" Or FileName = Nothing Then Return False
-
-        'set up a blank namespace to eliminate unnecessary junk from the xml
-        Dim nsBlank As New XmlSerializerNamespaces
-        nsBlank.Add("", "")
-
-        'create an object for the xml settings to control how the xml is written and appears
-        Dim xSettings As New System.Xml.XmlWriterSettings
-        With xSettings
-            .Encoding = System.Text.Encoding.UTF8
-            .Indent = True
-            .NewLineHandling = Xml.NewLineHandling.Entitize
-            .NewLineOnAttributes = False
-            .ConformanceLevel = Xml.ConformanceLevel.Document
-        End With
-
-        Try
-            'create the xmlwriter object that will write the file out
-            Dim xw As System.Xml.XmlWriter = Xml.XmlWriter.Create(FileName, xSettings)
-
-            'create the xmlserializer that will serialize the object to XML
-            Dim writer As New XmlSerializer(objType)
-
-            'now write it out
-            writer.Serialize(xw, DataToSerialize, nsBlank)
-
-            'be sure to close it or it will remain open
-            xw.Close()
-
-            Return True
-
-        Catch ex As Exception
-            Return False
-        End Try
-    End Function
-
-    Public Function ReadSerialXML(ByVal sFileName As String, ByVal objType As Type) As Object
-        Dim fs As FileStream = Nothing
-        Dim xs As XmlSerializer = Nothing
-        Dim obj As Object = Nothing
-
-        If My.Computer.FileSystem.FileExists(sFileName) Then
-            Try
-                fs = New FileStream(sFileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
-                xs = New XmlSerializer(objType)
-                obj = CType(xs.Deserialize(fs), Object)
-                fs.Close()
-                Return obj
-
-            Catch ex As InvalidOperationException
-                Return Nothing
-            End Try
-        Else
-            Return Nothing
-        End If
-    End Function
-
-    Public Function CreateDir(ByVal Dir As String) As Boolean
-        ' CREATE PROGRAM FILES DIR
-        If Not DoesDirExist(Dir) Then
-            ' create buildsafe temp folder
-            Try
-                Directory.CreateDirectory(Dir)
-                If Not DoesDirExist(Dir) Then
-                    MsgBox("There was a problem creating the folder '" & Dir & "', or the environment variable could not be read.")
-                    Return False
-                End If
-            Catch
-            End Try
-        End If
-        Return True
-    End Function
-
-    Public Function DoesDirExist(ByVal Path As String) As Boolean
-        On Error Resume Next
-        Dim f As String = Dir(Path, FileAttribute.Directory)
-
-        If f = "" Then
-            Return False
-        Else
-            Return True
-        End If
-
-    End Function
-
-    Public Sub ExportToExcel(ByVal Data As List(Of List(Of String)))
-
-        ' generate a temp file to save the csv data to
-        Dim TempFolder As String = System.IO.Path.GetTempPath & "fm-odbc-debugger"
-        IO.Directory.CreateDirectory(TempFolder)
-
-        Static FileNumber As Long = 0
-        Dim TempFile As String
-
-        Do
-
-            TempFile = $"{TempFolder}\export-{FileNumber}.csv"
-            FileNumber += 1
-        Loop While System.IO.File.Exists(TempFile)
-
-        ' write the csv data to file
-        Using stream = File.OpenWrite(TempFile)
-            Using writer = New StreamWriter(stream, Text.Encoding.UTF8)
-
-                Using csv = New CsvHelper.CsvWriter(writer, Globalization.CultureInfo.InvariantCulture)
-
-                    For Each row In Data
-
-                        For Each i In row
-                            csv.WriteField(i)
-                        Next
-
-                        csv.NextRecord()
-                    Next
-
-                End Using
-
-            End Using
-        End Using
-
-        Process.Start(TempFile)
-
-    End Sub
 
 End Module

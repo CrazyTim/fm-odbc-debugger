@@ -1,4 +1,4 @@
-﻿Public Class About
+﻿Public Class frmAbout
 
     Private Sub About_Load(sender As Object, e As EventArgs) Handles MyBase.Load
      

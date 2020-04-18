@@ -1,4 +1,3 @@
-﻿Imports System.Text.RegularExpressions
 Imports System.ComponentModel
 
 Public Class sqlControl
@@ -9,47 +8,72 @@ Public Class sqlControl
                                                ByVal wParam As Integer, _
                                                ByRef lParam As Integer) As Boolean
 
-    Private TabStopIndent As Integer = 16 'Tab times 4
+    Private TabStopIndent As Integer = 16 ' tab x 4
 
-    Friend Event DatabaseNameChanged(ByVal e As textChangedArgs)
-    Friend Event BeginSQLExecute()
+    Public Event DatabaseNameChanged(ByVal e As TextChangedArgs)
+    Public Event BeginSQLExecute()
+
     Private LastQryCount As Integer = 0
     Private LastQrySQL As String = ""
 
-    ' parameters for the background worker Printer:
     Private _bw As New BackgroundWorker()
-    Private _bw_SQL As String = "" ' the query we are going to run
-    Private _bw_SQL_Formatted As String = "" ' the SQL after it has been formatted
+
+    Private _bw_SQL As String = ""              '    the query we are going to run
+    Private _bw_SQL_Formatted As String = ""        ' the query after it has been formatted
     Private _bw_Error As String = ""
-    Private _bw_RservedKeywords As String = ""
-    Private _bw_ServerIP As String = ""
-    Private _bw_Database As String = ""
+    Private _bw_Server As String = ""               ' server name/address
+    Private _bw_Database As String = ""             ' db name
     Private _bw_Username As String = ""
     Private _bw_Password As String = ""
-    Private _bw_Data As New Collection       ' stores results
+    Private _bw_Data As New Collection              ' result
     Private _bw_RecordsAffected As Integer = -1
-    Private _bw_Time_Conn As New TimeSpan
-    Private _bw_Time_Exe As New TimeSpan
-    Private _bw_Time_Stream As New TimeSpan
+    Private _bw_Time_Conn As New TimeSpan           ' connection time
+    Private _bw_Time_Exe As New TimeSpan            ' execution time   
+    Private _bw_Time_Stream As New TimeSpan         ' stream time
     Private _bw_DriverName As String = ""
     Private _bw_RowsToReturn As Long
     Private _bw_ConnectionString As String = ""
 
-    Public Delegate Sub bwPrinterDelegate(ByVal e As RunWorkerCompletedEventArgs)
-
-
     Public Sub InitaliseBackgroundWorker()
+
         _bw.WorkerSupportsCancellation = True
         _bw.WorkerReportsProgress = True
 
         AddHandler _bw.DoWork, AddressOf bw_DoWork
         AddHandler _bw.ProgressChanged, AddressOf bw_ProgressChanged
         AddHandler _bw.RunWorkerCompleted, AddressOf bw_RunWorkerCompleted
+
     End Sub
 
+    Public Class Settings
+        Public Query As String = ""
+        Public ServerAddress As String = "localhost"
+        Public DatabaseName As String = ""
+        Public Username As String = ""
+        Public Password As String = ""
+        Public SelectedDriver As Integer = 1
+        Public RowsToReturn As Integer = 1000
+        Public DriverName As String = ""
+        Public ConnectionString As String = ""
+    End Class
+
+    Public Function GetSettings() As Settings
+
+        Return New Settings With {
+            .Query = txtSQL.Text,
+            .ServerAddress = ServerIP,
+            .DatabaseName = DatabaseName,
+            .Username = UserName,
+            .Password = Password,
+            .SelectedDriver = SelectedDriver,
+            .RowsToReturn = RowsToReturn,
+            .DriverName = DriverName,
+            .ConnectionString = ConnectionString
+        }
+
+    End Function
+
     Private Sub bw_ProgressChanged(ByVal sender As Object, ByVal e As ProgressChangedEventArgs)
-        ' nb: In the ProgressChanged event handler, add code to indicate the progress, such as updating the user interface
-        ' nb: To determine what percentage of the operation is completed, check the ProgressPercentage property of the ProgressChangedEventArgs object that was passed to the event handler.
 
         Select Case e.ProgressPercentage
             Case 100 ' connecting
@@ -104,12 +128,11 @@ Public Class sqlControl
 
             lblLoading.Visible = True
 
-            SetGlobals()
+            SetVars()
 
             _bw_Data.Clear()
             _bw_Error = ""
             _bw_RecordsAffected = 0
-            _bw_RservedKeywords = ""
             _bw_Time_Conn = New TimeSpan
             _bw_Time_Exe = New TimeSpan
             _bw_Time_Stream = New TimeSpan
@@ -123,7 +146,7 @@ Public Class sqlControl
 
 
             If SelectedDriver = 1 Then
-                If String.IsNullOrWhiteSpace(_bw_ServerIP) Then
+                If String.IsNullOrWhiteSpace(_bw_Server) Then
                     _bw_Error = "ERROR: null server."
                     bw_RunWorkerCompleted(Me, New RunWorkerCompletedEventArgs(Nothing, Nothing, Nothing))
                     Return
@@ -202,9 +225,9 @@ Public Class sqlControl
             txtSQL.SelectionLength = l
 
 
-            ' debugging:
+            ' debugging
             Try
-                WriteToFile(_bw_SQL, AppDataDir & "\Debugging\lastQuery.sql", False)
+                WriteToFile(_bw_SQL, AppDataDir & "\lastQuery.sql", False)
             Catch ex As Exception
             End Try
 
@@ -231,10 +254,9 @@ Public Class sqlControl
 
     End Sub
 
-    Private Sub SetGlobals()
-        ' set globals
+    Private Sub SetVars()
 
-        _bw_ServerIP = txtServerIP.Text
+        _bw_Server = txtServerIP.Text
         _bw_Database = txtDatabaseName.Text
         _bw_Username = txtUsername.Text
         _bw_Password = txtPassword.Text
@@ -249,13 +271,14 @@ Public Class sqlControl
             _bw_ConnectionString = "DRIVER={" & _bw_DriverName & "};" & txtConnectionString.Text
         Else
             _bw_DriverName = "FileMaker ODBC"
-            _bw_ConnectionString = "DRIVER={" & _bw_DriverName & "};SERVER=" & _bw_ServerIP & ";UID=" & _bw_Username & ";PWD=" & _bw_Password & ";DATABASE=" & _bw_Database & ";"
+            _bw_ConnectionString = "DRIVER={" & _bw_DriverName & "};SERVER=" & _bw_Server & ";UID=" & _bw_Username & ";PWD=" & _bw_Password & ";DATABASE=" & _bw_Database & ";"
         End If
 
     End Sub
 
     Private Function GetTableNames() As Object
-        SetGlobals()
+
+        SetVars()
 
         Try
 
@@ -295,29 +318,30 @@ Public Class sqlControl
 
     End Function
 
-
     Private Sub bw_DoWork(ByVal sender As Object, ByVal e As DoWorkEventArgs)
+
         If _bw.CancellationPending = True Then
             e.Cancel = True
 
-        Else ' Perform a time consuming operation and report progress.
-
+        Else ' Perform a time consuming operation and report progress
 
             Dim sw As New System.Diagnostics.Stopwatch
 
             LastQrySQL = _bw_SQL
 
-            ' --------------------------------------------------------------------------------------
-            ' 3) check to see if contains multiple transactions:
-            ' --------------------------------------------------------------------------------------
+
+            ' are we executing multiple transactions?
             If _bw_SQL.EndsWith(";") Then _bw_SQL = TrimEnd(_bw_SQL, 1)
-            Dim queries = SplitSQLTRANS(_bw_SQL)
+
+            Dim Queries = SplitSQLTRANS(_bw_SQL)
 
 
             Try
 
-                If queries.Count > 1 Then
-                    ' perform a transaction
+                If Queries.Count > 1 Then
+
+                    ' execute transaction
+
                     Using cn As New Odbc.OdbcConnection(_bw_ConnectionString)
 
                         sw.Restart()
@@ -331,11 +355,7 @@ Public Class sqlControl
 
                         _bw.ReportProgress(200) ' executing
 
-                        Dim c As New Collection
-                        For Each s As String In queries
-                            c.Add(s)
-                        Next
-                        SQL_TRANS(c, cn)
+                        SQL_TRANS(Queries.ToList, cn)
 
                         _bw_Time_Exe = sw.Elapsed
 
@@ -345,7 +365,8 @@ Public Class sqlControl
 
                 Else
 
-                    ' perform a single query
+                    ' execute single query
+
                     Using cn As New Odbc.OdbcConnection(_bw_ConnectionString)
 
                         _bw.ReportProgress(100) ' connecting
@@ -444,7 +465,7 @@ Public Class sqlControl
                 End If
 
             Catch ex1 As ArgumentOutOfRangeException
-                If ex1.Message = "Year, Month, and Day parameters describe an un-representable DateTime." Then ' filemaker can sometimes allow importing of incorrect data into fields, so need to catch these errors!
+                If ex1.Message = "Year, Month, and Day parameters describe an un-representable DateTime." Then ' filemaker allows importing incorrect data into fields, so we need to catch these errors!
                     _bw_Error = "ERROR: One of the date fields in your query contains an incorrectly formatted value."
                 Else
                     _bw_Error = ex1.Message
@@ -458,7 +479,6 @@ Public Class sqlControl
                 Return
 
             End Try
-
 
         End If
     End Sub
@@ -524,7 +544,7 @@ Public Class sqlControl
                         DataGridView1.Rows(0).Cells(0).Selected = True
                     End If
 
-                    Refreshrowcount()
+                    RefreshRowCount()
                 Else
                     lblStatus.Text = "Row 0 of 0"
                 End If
@@ -556,23 +576,18 @@ Public Class sqlControl
         lblLoading.Visible = False
         btnGo.Text = "Execute (F5)"
 
-        ' show reserved keywords:
-        Dim a As Array = GetSQLReservedKeyWords(_bw_SQL)
-        'lblReservedWords.Text = a(0)
-        'lblKeywords.Visible = True
-
         ' show elapsed time
         Dim ElapsedTime As TimeSpan = _bw_Time_Conn.Add(_bw_Time_Exe.Add(_bw_Time_Stream))
         lblDurationConnect.Visible = True
         lblDurationExecute.Visible = True
         'lblDuration2.Text = ElapsedTime.Minutes.ToString("00") & ":" & ElapsedTime.Seconds.ToString("00") & "." & (ElapsedTime.Milliseconds / 10).ToString("00")
-        lblDurationConnect.Text = "Connect: " & formattime(_bw_Time_Conn)
+        lblDurationConnect.Text = "Connect: " & FormatTime(_bw_Time_Conn)
 
         Dim runtime = _bw_Time_Exe + _bw_Time_Stream
-        lblDurationExecute.Text = "Execute: " & formattime(runtime)
+        lblDurationExecute.Text = "Execute: " & FormatTime(runtime)
 
-        Dim ttt As String = "Process: " & formattime(_bw_Time_Exe) &
-                            ", Stream: " & formattime(_bw_Time_Stream)
+        Dim ttt As String = "Process: " & FormatTime(_bw_Time_Exe) &
+                            ", Stream: " & FormatTime(_bw_Time_Stream)
         ToolTip1.SetToolTip(lblDurationExecute, ttt)
 
         ' show/hide status
@@ -581,18 +596,11 @@ Public Class sqlControl
         Else
             lblStatus.Visible = True
         End If
+
     End Sub
 
-    Private Function formattime(ByVal t As TimeSpan) As String
-        If t.Minutes = 0 Then
-            Return t.Seconds.ToString("#0") & "." & (t.Milliseconds / 10).ToString("00")
-        Else
-            Return t.Minutes.ToString("#0") & ":" & t.Seconds.ToString("#0") & "." & (t.Milliseconds / 10).ToString("00")
-        End If
-    End Function
-
     Private Sub dataGridView1_DataBindingComplete(ByVal sender As Object, ByVal e As DataGridViewBindingCompleteEventArgs) Handles DataGridView1.DataBindingComplete
-        ' re-index the search results after new data is loaded:
+        ' re-index the search results after new data is loaded
         Search(0)
     End Sub
 
@@ -689,7 +697,8 @@ Public Class sqlControl
         End Set
     End Property
 
-    Private Sub UserControl1_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+    Private Sub Me_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+
         SendMessageA(txtSQL.Handle, EM_SETTABSTOPS, 1, TabStopIndent) ' set tab width
 
         ' reset
@@ -700,20 +709,18 @@ Public Class sqlControl
         lblDurationExecute.Visible = False
         lblSyntaxWarning.Visible = False
         txtSQL.Select()
-        'lblReservedWords.Text = ""
+
         DisableSearchBox()
 
-        'lblKeywords.Visible = False
-
         InitaliseBackgroundWorker()
+
     End Sub
 
     Private Sub DataGridView1_CurrentCellChanged(sender As Object, e As EventArgs) Handles DataGridView1.CurrentCellChanged
-        Refreshrowcount()
+        RefreshRowCount()
     End Sub
 
-    ' update status bar
-    Private Sub Refreshrowcount()
+    Private Sub RefreshRowCount()
 
         Dim TotalRows As String = LastQryCount
         If LastQryCount = _bw_RowsToReturn Then ' show "max" label to remind us the rows have been limited
@@ -725,102 +732,29 @@ Public Class sqlControl
         Else
             lblStatus.Text = "Row " & DataGridView1.SelectedCells(0).RowIndex + 1 & " of " & TotalRows
         End If
+
     End Sub
 
-    Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles btnGo.Click
+    Private Sub btnGo_Click(sender As System.Object, e As System.EventArgs) Handles btnGo.Click
         RaiseEvent BeginSQLExecute()
         ExecuteSQL()
     End Sub
 
-    Public Function GetSQLReservedKeyWords(ByVal sql As String) As String()
-
-        Dim sc As String = ""
-        Dim counter As Integer = 0
-
-
-        ' check for keywords
-        For Each k In FM_ReservedKeyWords
-            If sql.ToUpper.Contains(k) Then
-
-                ' determine if it is a complete word by looking at the chars before and after it:
-
-                If k = "POSITION" Then
-                    Dim f = ""
-                End If
-
-                ' get char after and before the keyword
-                Dim w As Integer = sql.ToUpper.IndexOf(k)
-                Dim charbefore As String = ""
-                Dim charAfter As String = ""
-
-                If w = -1 Then Continue For
-
-                If w <> 0 Then
-                    charbefore = sql(w - 1)
-                End If
-                If w + k.Length <> sql.Length Then
-                    charAfter = sql(w + k.Length)
-                End If
-
-                ' check if they are quotes
-                If charbefore = """" And charAfter = """" Then
-                    Continue For
-                End If
-
-                Dim CharBefore_NewWordFlag As Boolean = False
-                Dim CharAfter_NewWordFlag As String = False
-
-                ' check start of word for new word characters
-                If charbefore = "" Or charbefore = " " Or charbefore = "(" Or charbefore = "." Or charbefore = vbLf Then
-                    CharBefore_NewWordFlag = True
-                End If
-
-                ' check end of word for new word characters
-                If charAfter = "" Or charAfter = " " Or charAfter = ")" Or charAfter = "(" Or charAfter = "." Or charAfter = "," Or charAfter = vbCr Then
-                    CharAfter_NewWordFlag = True
-                End If
-
-
-                If CharBefore_NewWordFlag And CharAfter_NewWordFlag Then
-                    ' this word is a keyword:
-                    sc &= k & ", "
-                    counter += 1
-                End If
-
-            End If
-
-        Next
-
-        sc = TrimEnd(sc, 2) ' trim last comma from the end
-
-        Return New String() {sc, counter}
-    End Function
-
-
-
     Private Sub TextBox1_PreviewKeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.PreviewKeyDownEventArgs) Handles txtSQL.PreviewKeyDown
-        If e.KeyData = Keys.Tab Then ' captures tab press and allows tabbing inside the text box
+        If e.KeyData = Keys.Tab Then ' allow tabbing inside the text box
             e.IsInputKey = True
         End If
     End Sub
 
-
-    'Private Sub txtSQL_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtSQL.KeyPress
-    '    If e.KeyChar = Convert.ToChar(1) Then
-    '        DirectCast(sender, TextBox).SelectAll()
-    '        e.Handled = True
-    '    End If
-    'End Sub
-
     Private Sub txtDatabaseName_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtDatabaseName.TextChanged
         If SelectedDriver = 1 Then
-            RaiseEvent DatabaseNameChanged(New textChangedArgs(txtDatabaseName.Text))
+            RaiseEvent DatabaseNameChanged(New TextChangedArgs(txtDatabaseName.Text))
         End If
     End Sub
 
     Private Sub txtDriverName_TextChanged(sender As Object, e As EventArgs) Handles txtDriverName.TextChanged
         If SelectedDriver = 0 Then
-            RaiseEvent DatabaseNameChanged(New textChangedArgs(txtDriverName.Text))
+            RaiseEvent DatabaseNameChanged(New TextChangedArgs(txtDriverName.Text))
         End If
     End Sub
 
@@ -831,6 +765,32 @@ Public Class sqlControl
         Else
             t.BackColor = SystemColors.Window
         End If
+    End Sub
+
+#Region "Macros"
+
+    Private Sub SECONDToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SECONDToolStripMenuItem.Click
+        txtSQL.Paste("SECOND()")
+    End Sub
+
+    Private Sub MINUTEToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MINUTEToolStripMenuItem.Click
+        txtSQL.Paste("MINUTE()")
+    End Sub
+
+    Private Sub HOURToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HOURToolStripMenuItem.Click
+        txtSQL.Paste("HOUR()")
+    End Sub
+
+    Private Sub DAYToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DAYToolStripMenuItem.Click
+        txtSQL.Paste("DAY()")
+    End Sub
+
+    Private Sub MONTHToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MONTHToolStripMenuItem.Click
+        txtSQL.Paste("MONTH()")
+    End Sub
+
+    Private Sub YEARToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles YEARToolStripMenuItem.Click
+        txtSQL.Paste("YEAR()")
     End Sub
 
     Private Sub CURRENTDATEToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles CURRENTDATEToolStripMenuItem1.Click
@@ -901,6 +861,11 @@ Public Class sqlControl
         txtSQL.Paste("DAYNAME()")
     End Sub
 
+    Private Sub SUBSTRINGstring23ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SUBSTRINGstring23ToolStripMenuItem.Click
+        txtSQL.Paste("SUBSTR('string', 2, 3)")
+    End Sub
+
+#End Region
 
     Private Sub ContextMenuStrip2_Opening(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip2.Opening
         mnuCopy.Enabled = False
@@ -931,17 +896,6 @@ Public Class sqlControl
     Private _ColumnRightClicked As Integer = -1
     Private _RowRightClicked As Integer = -1
 
-    Private Sub DataGridView1_MouseClick(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles DataGridView1.MouseClick
-        'Dim s As DataGridView = sender
-        '_ColumnRightClicked = s.HitTest(e.Location.X, e.Location.Y).ColumnIndex
-        '_RowRightClicked = s.HitTest(e.Location.X, e.Location.Y).RowIndex
-
-        'If e.Button = Windows.Forms.MouseButtons.Right Then
-        '    'If _ColumnRightCLicked <> -1 Then s.Columns(_ColumnRightCLicked).Selected = True
-        '    ContextMenuStrip2.Show(s.PointToScreen(e.Location))
-        'End If
-    End Sub
-
     Private Sub mnuCopyAsCSV_Click(sender As System.Object, e As System.EventArgs) Handles mnuCopyAsCSV.Click
         Try
             Dim s = ""
@@ -960,11 +914,9 @@ Public Class sqlControl
     Private ClipboardCopy As Boolean = False
     Private Sub CopyCellToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles mnuCopy.Click
         Try
-            'Dim f = DataGridView1.GetClipboardContent
             ClipboardCopy = True
             System.Windows.Forms.Clipboard.SetDataObject(DataGridView1.GetClipboardContent)
             ClipboardCopy = False
-            'Console.WriteLine(Clipboard.GetText())
         Catch ex As Exception
         End Try
     End Sub
@@ -988,31 +940,21 @@ Public Class sqlControl
         _ColumnRightClicked = s.HitTest(e.Location.X, e.Location.Y).ColumnIndex
         _RowRightClicked = s.HitTest(e.Location.X, e.Location.Y).RowIndex
 
-        'If e.Button = Windows.Forms.MouseButtons.Right Then
-        '    ContextMenuStrip2.Show(s.PointToScreen(e.Location))
-
-        '    If DataGridView1.SelectedCells.Count <= 1 Then
-        '        If _ColumnRightClicked <> -1 And _RowRightClicked <> -1 Then
-        '            DataGridView1.ClearSelection()
-        '            DataGridView1.Rows(_RowRightClicked).Cells(_ColumnRightClicked).Selected = True
-        '        End If
-        '    End If
-
-        'End If
-
     End Sub
 
     Private Sub mnuPaste_Click(sender As System.Object, e As System.EventArgs) Handles mnuPaste.Click
+
         txtSQL.SelectedText = ""
 
         Dim s As String = System.Windows.Forms.Clipboard.GetText
 
-        ' replace dodgy newlines (otherwise can stuff up querie as driver can only recognise CRLF 
+        ' replace clean up newlines characters
         s = s.Replace(Environment.NewLine, vbCr)
         s = s.Replace(vbLf, vbCr)
         s = s.Replace(vbCr, Environment.NewLine)
 
         txtSQL.Paste(s)
+
     End Sub
 
     Private Sub mnuCopy1_Click(sender As System.Object, e As System.EventArgs) Handles mnuCopy1.Click
@@ -1053,40 +995,12 @@ Public Class sqlControl
 
     End Sub
 
-    Private Sub ToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles mnuSelectAll.Click
+    Private Sub mnuSelectAll_Click(sender As System.Object, e As System.EventArgs) Handles mnuSelectAll.Click
         DirectCast(txtSQL, TextBox).SelectAll()
     End Sub
 
-    Private Sub DataGridView1_CellContentClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-
-    End Sub
-
-    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
-        Dim f As String = <![CDATA[
-   select -- this is a comment
-
--- this is another comment
-'', 'chin
-', 'fred''s', f FROM s 
-
--- this is another comment
-
-where s = 'ssds
-
-d''sdsd'
-
-_jobid BETWEEN 10 AND 50 BATCH 10
-            ]]>.Value
-        Dim g = ""
-        'FormatForFileMaker2(f, 1, g)
-    End Sub
-
-    Private Sub SUBSTRINGstring23ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SUBSTRINGstring23ToolStripMenuItem.Click
-        txtSQL.Paste("SUBSTR('string', 2, 3)")
-    End Sub
-
-    Private Sub AboutFMODBCDebuggerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutFMODBCDebuggerToolStripMenuItem.Click
-        About.ShowDialog(Me)
+    Private Sub mnuAbout_Click(sender As Object, e As EventArgs) Handles mnuAbout.Click
+        frmAbout.ShowDialog(Me)
     End Sub
 
     Private Sub mnuExportToExcel_Click(sender As Object, e As EventArgs) Handles mnuExportToExcel.Click
@@ -1143,21 +1057,21 @@ _jobid BETWEEN 10 AND 50 BATCH 10
         Process.Start("https://fmhelp.filemaker.com/docs/16/en/fm16_odbc_jdbc_guide.pdf")
     End Sub
 
-    Private Sub cmbDriverName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDriver.SelectedIndexChanged
+    Private Sub cmbDriver_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDriver.SelectedIndexChanged
         If SelectedDriver = 0 Then ' other
             Panel_Driver_Custom.Visible = True
             Panel_Driver_FileMaker.Visible = False
-            RaiseEvent DatabaseNameChanged(New textChangedArgs(txtDriverName.Text))
+            RaiseEvent DatabaseNameChanged(New TextChangedArgs(txtDriverName.Text))
         Else
             Panel_Driver_Custom.Visible = False
             Panel_Driver_FileMaker.Visible = True
-            RaiseEvent DatabaseNameChanged(New textChangedArgs(txtDatabaseName.Text))
+            RaiseEvent DatabaseNameChanged(New TextChangedArgs(txtDatabaseName.Text))
         End If
     End Sub
 
-    Private Sub Button2_MouseUp(sender As Object, e As MouseEventArgs) Handles btnGetMetaData1.MouseUp
+    Private Sub btnGetMetaData_MouseUp(sender As Object, e As MouseEventArgs) Handles btnGetMetaData.MouseUp
         Dim p As New System.Drawing.Point(e.X, e.Y)
-        ContextMenuStrip3.Show(btnGetMetaData1.PointToScreen(p))
+        ContextMenuStrip3.Show(btnGetMetaData.PointToScreen(p))
     End Sub
 
     Private Sub GetTableNamesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GetTableNamesToolStripMenuItem.Click
@@ -1279,23 +1193,15 @@ _jobid BETWEEN 10 AND 50 BATCH 10
         End If
     End Sub
 
-    Private Sub txtFind_TextChanged(sender As Object, e As EventArgs) Handles txtFind.TextChanged
-
-    End Sub
-
-    Public Sub focusfind()
+    Public Sub FocusFindTextbox()
         txtFind.Focus()
-    End Sub
-
-    Private Sub SplitContainer1_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer1.SplitterMoved
-
     End Sub
 
     Private Sub SplitContainer1_MouseUp(sender As Object, e As MouseEventArgs) Handles SplitContainer1.MouseUp
         lblDurationConnect.Focus()
     End Sub
 
-    Private Sub dataGridView1_CellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridView1.CellFormatting
+    Private Sub DataGridView1_CellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridView1.CellFormatting
 
         ' this is called when the clipboard retrieves data from the cell as well
 
@@ -1314,8 +1220,6 @@ _jobid BETWEEN 10 AND 50 BATCH 10
 
                 e.Value = s(0)
             End If
-        Else
-            Dim f = ""
         End If
 
         ' todo, format dates here as required
@@ -1331,37 +1235,19 @@ _jobid BETWEEN 10 AND 50 BATCH 10
     End Sub
 
     Private Sub Label11_Click(sender As Object, e As EventArgs) Handles Label11.Click, Panel_Search.Click
-        txtFind.Focus()
+        FocusFindTextbox()
     End Sub
 
-    Private Sub SECONDToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SECONDToolStripMenuItem.Click
-        txtSQL.Paste("SECOND()")
-    End Sub
-
-    Private Sub MINUTEToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MINUTEToolStripMenuItem.Click
-        txtSQL.Paste("MINUTE()")
-    End Sub
-
-    Private Sub HOURToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HOURToolStripMenuItem.Click
-        txtSQL.Paste("HOUR()")
-    End Sub
-
-    Private Sub DAYToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DAYToolStripMenuItem.Click
-        txtSQL.Paste("DAY()")
-    End Sub
-
-    Private Sub MONTHToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MONTHToolStripMenuItem.Click
-        txtSQL.Paste("MONTH()")
-    End Sub
-
-    Private Sub YEARToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles YEARToolStripMenuItem.Click
-        txtSQL.Paste("YEAR()")
-    End Sub
 End Class
 
-Public Class textChangedArgs
+Public Class TextChangedArgs
+
     Public _NewTextValue As String = ""
+
     Public Sub New(ByVal NewTextValue As String)
         _NewTextValue = NewTextValue
     End Sub
+
 End Class
+
+

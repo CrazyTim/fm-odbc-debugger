@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sqlControl
     Inherits System.Windows.Forms.UserControl
 
@@ -90,7 +90,7 @@ Partial Class sqlControl
         Me.url_odbc_v14 = New System.Windows.Forms.ToolStripMenuItem()
         Me.url_odbc_v13 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.AboutFMODBCDebuggerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuAbout = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -103,7 +103,7 @@ Partial Class sqlControl
         Me.txtUsername = New System.Windows.Forms.TextBox()
         Me.txtServerIP = New System.Windows.Forms.TextBox()
         Me.txtDatabaseName = New System.Windows.Forms.TextBox()
-        Me.btnGetMetaData1 = New System.Windows.Forms.Button()
+        Me.btnGetMetaData = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -114,7 +114,6 @@ Partial Class sqlControl
         Me.Label6 = New System.Windows.Forms.Label()
         Me.lblLoading = New System.Windows.Forms.Label()
         Me.txtErrorText = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel_Status = New System.Windows.Forms.Panel()
         Me.lblSyntaxWarning = New System.Windows.Forms.Label()
         Me.lblDurationExecute = New System.Windows.Forms.Label()
@@ -195,7 +194,6 @@ Partial Class sqlControl
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.lblLoading)
         Me.SplitContainer1.Panel2.Controls.Add(Me.txtErrorText)
-        Me.SplitContainer1.Panel2.Controls.Add(Me.Button1)
         Me.SplitContainer1.Panel2.Controls.Add(Me.Panel_Status)
         Me.SplitContainer1.Panel2.Controls.Add(Me.Label5)
         Me.SplitContainer1.Panel2.Controls.Add(Me.DataGridView1)
@@ -224,7 +222,7 @@ Partial Class sqlControl
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCopy1, Me.mnuCut1, Me.mnuPaste, Me.ToolStripSeparator4, Me.mnuSelectAll, Me.ToolStripSeparator3, Me.InsertFileMakerToolStripMenuItem, Me.ConstantsToolStripMenuItem, Me.ToolStripSeparator1, Me.FunctionsToolStripMenuItem, Me.V13ODBCGuideToolStripMenuItem, Me.ToolStripSeparator5, Me.AboutFMODBCDebuggerToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCopy1, Me.mnuCut1, Me.mnuPaste, Me.ToolStripSeparator4, Me.mnuSelectAll, Me.ToolStripSeparator3, Me.InsertFileMakerToolStripMenuItem, Me.ConstantsToolStripMenuItem, Me.ToolStripSeparator1, Me.FunctionsToolStripMenuItem, Me.V13ODBCGuideToolStripMenuItem, Me.ToolStripSeparator5, Me.mnuAbout})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.Size = New System.Drawing.Size(208, 258)
         '
@@ -640,11 +638,11 @@ Partial Class sqlControl
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
         Me.ToolStripSeparator5.Size = New System.Drawing.Size(204, 14)
         '
-        'AboutFMODBCDebuggerToolStripMenuItem
+        'mnuAbout
         '
-        Me.AboutFMODBCDebuggerToolStripMenuItem.Name = "AboutFMODBCDebuggerToolStripMenuItem"
-        Me.AboutFMODBCDebuggerToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
-        Me.AboutFMODBCDebuggerToolStripMenuItem.Text = "About..."
+        Me.mnuAbout.Name = "mnuAbout"
+        Me.mnuAbout.Size = New System.Drawing.Size(207, 22)
+        Me.mnuAbout.Text = "About..."
         '
         'Label7
         '
@@ -709,7 +707,7 @@ Partial Class sqlControl
         Me.txtConnectionString.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtConnectionString.Location = New System.Drawing.Point(312, 2)
         Me.txtConnectionString.Name = "txtConnectionString"
-        Me.txtConnectionString.Size = New System.Drawing.Size(322, 22)
+        Me.txtConnectionString.Size = New System.Drawing.Size(452, 22)
         Me.txtConnectionString.TabIndex = 1
         '
         'Label10
@@ -737,7 +735,7 @@ Partial Class sqlControl
         Me.Panel_Driver_FileMaker.Controls.Add(Me.Label3)
         Me.Panel_Driver_FileMaker.Controls.Add(Me.txtServerIP)
         Me.Panel_Driver_FileMaker.Controls.Add(Me.txtDatabaseName)
-        Me.Panel_Driver_FileMaker.Controls.Add(Me.btnGetMetaData1)
+        Me.Panel_Driver_FileMaker.Controls.Add(Me.btnGetMetaData)
         Me.Panel_Driver_FileMaker.Controls.Add(Me.Label1)
         Me.Panel_Driver_FileMaker.Controls.Add(Me.Label2)
         Me.Panel_Driver_FileMaker.Dock = System.Windows.Forms.DockStyle.Top
@@ -776,17 +774,17 @@ Partial Class sqlControl
         Me.txtDatabaseName.Text = "test"
         Me.ToolTip1.SetToolTip(Me.txtDatabaseName, "Database Name")
         '
-        'btnGetMetaData1
+        'btnGetMetaData
         '
-        Me.btnGetMetaData1.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGetMetaData1.Location = New System.Drawing.Point(345, 1)
-        Me.btnGetMetaData1.Name = "btnGetMetaData1"
-        Me.btnGetMetaData1.Size = New System.Drawing.Size(19, 24)
-        Me.btnGetMetaData1.TabIndex = 21
-        Me.btnGetMetaData1.TabStop = False
-        Me.btnGetMetaData1.Text = ">"
-        Me.btnGetMetaData1.UseVisualStyleBackColor = True
-        Me.btnGetMetaData1.Visible = False
+        Me.btnGetMetaData.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGetMetaData.Location = New System.Drawing.Point(345, 1)
+        Me.btnGetMetaData.Name = "btnGetMetaData"
+        Me.btnGetMetaData.Size = New System.Drawing.Size(19, 24)
+        Me.btnGetMetaData.TabIndex = 21
+        Me.btnGetMetaData.TabStop = False
+        Me.btnGetMetaData.Text = ">"
+        Me.btnGetMetaData.UseVisualStyleBackColor = True
+        Me.btnGetMetaData.Visible = False
         '
         'Label1
         '
@@ -878,10 +876,10 @@ Partial Class sqlControl
         Me.lblLoading.BackColor = System.Drawing.SystemColors.Control
         Me.lblLoading.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Italic)
         Me.lblLoading.ForeColor = System.Drawing.Color.Black
-        Me.lblLoading.Image = Global.FMDebugger.My.Resources.Resources.loading_2_32
+        Me.lblLoading.Image = Global.FmOdbcDebugger.My.Resources.Resources.loading_32x32
         Me.lblLoading.Location = New System.Drawing.Point(345, 25)
         Me.lblLoading.Name = "lblLoading"
-        Me.lblLoading.Size = New System.Drawing.Size(76, 124)
+        Me.lblLoading.Size = New System.Drawing.Size(76, 120)
         Me.lblLoading.TabIndex = 234
         Me.lblLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblLoading.Visible = False
@@ -902,17 +900,6 @@ Partial Class sqlControl
         Me.txtErrorText.Text = "[error-text]"
         Me.txtErrorText.Visible = False
         '
-        'Button1
-        '
-        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(648, 70)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(79, 25)
-        Me.Button1.TabIndex = 11
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        Me.Button1.Visible = False
-        '
         'Panel_Status
         '
         Me.Panel_Status.Controls.Add(Me.lblSyntaxWarning)
@@ -931,7 +918,7 @@ Partial Class sqlControl
         '
         Me.lblSyntaxWarning.AutoSize = True
         Me.lblSyntaxWarning.Dock = System.Windows.Forms.DockStyle.Left
-        Me.lblSyntaxWarning.Image = Global.FMDebugger.My.Resources.Resources.alert_16x16
+        Me.lblSyntaxWarning.Image = Global.FmOdbcDebugger.My.Resources.Resources.alert_16x16
         Me.lblSyntaxWarning.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lblSyntaxWarning.Location = New System.Drawing.Point(339, 0)
         Me.lblSyntaxWarning.Name = "lblSyntaxWarning"
@@ -1025,7 +1012,7 @@ Partial Class sqlControl
         'Label11
         '
         Me.Label11.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.Label11.Image = Global.FMDebugger.My.Resources.Resources.search_16x16
+        Me.Label11.Image = Global.FmOdbcDebugger.My.Resources.Resources.search_16x16
         Me.Label11.Location = New System.Drawing.Point(6, 2)
         Me.Label11.Name = "Label11"
         Me.Label11.Padding = New System.Windows.Forms.Padding(0, 1, 7, 2)
@@ -1086,14 +1073,14 @@ Partial Class sqlControl
         Me.DataGridView1.RowHeadersWidth = 25
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridView1.Size = New System.Drawing.Size(773, 162)
+        Me.DataGridView1.Size = New System.Drawing.Size(773, 158)
         Me.DataGridView1.TabIndex = 1
         '
         'ContextMenuStrip2
         '
         Me.ContextMenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCopy, Me.mnuCopyWithHeaders, Me.ToolStripSeparator2, Me.mnuCopyAsCSV, Me.ToolStripSeparator7, Me.mnuExportToExcel})
         Me.ContextMenuStrip2.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip2.Size = New System.Drawing.Size(252, 142)
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(252, 120)
         '
         'mnuCopy
         '
@@ -1209,7 +1196,6 @@ Partial Class sqlControl
     Friend WithEvents mnuCut1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mnuSelectAll As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Button1 As System.Windows.Forms.Button
     Public WithEvents txtSQL As System.Windows.Forms.TextBox
     Public WithEvents txtErrorText As System.Windows.Forms.TextBox
     Friend WithEvents DateToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -1217,7 +1203,7 @@ Partial Class sqlControl
     Friend WithEvents TimestampToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents V13ODBCGuideToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents AboutFMODBCDebuggerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuAbout As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuCopyWithHeaders As ToolStripMenuItem
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
@@ -1241,7 +1227,7 @@ Partial Class sqlControl
     Private WithEvents Label9 As Label
     Friend WithEvents ContextMenuStrip3 As ContextMenuStrip
     Friend WithEvents GetTableNamesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents btnGetMetaData1 As Button
+    Friend WithEvents btnGetMetaData As Button
     Private WithEvents txtFind As TextBox
     Friend WithEvents Panel_Status As Panel
     Private WithEvents Label11 As Label

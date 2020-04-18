@@ -8,8 +8,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CC05756B-BC75-4300-B46F-8F5B4E50DC26}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>FMDebugger.My.MyApplication</StartupObject>
-    <RootNamespace>FMDebugger</RootNamespace>
+    <StartupObject>FmOdbcDebugger.My.MyApplication</StartupObject>
+    <RootNamespace>FmOdbcDebugger</RootNamespace>
     <AssemblyName>FileMaker ODBC Debugger</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
@@ -99,6 +99,9 @@
     <Reference Include="CsvHelper, Version=15.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
       <HintPath>..\packages\CsvHelper.15.0.1\lib\net45\CsvHelper.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -131,31 +134,33 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="About.Designer.vb">
-      <DependentUpon>About.vb</DependentUpon>
+    <Compile Include="Forms\frmAbout.Designer.vb">
+      <DependentUpon>frmAbout.vb</DependentUpon>
     </Compile>
-    <Compile Include="About.vb">
+    <Compile Include="Forms\frmAbout.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Class1.vb" />
-    <Compile Include="ControlButton.Designer.vb">
+    <Compile Include="Controls\ControlButton.Designer.vb">
       <DependentUpon>ControlButton.vb</DependentUpon>
     </Compile>
-    <Compile Include="ControlButton.vb">
+    <Compile Include="Controls\ControlButton.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Form1.vb">
+    <Compile Include="Forms\frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="Forms\frmMain.Designer.vb">
+      <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Module1.vb" />
+    <Compile Include="GlobalSuppressions.vb" />
+    <Compile Include="Modules\Json.vb" />
+    <Compile Include="Modules\Util.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -167,31 +172,32 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="TabControl.Designer.vb">
+    <Compile Include="Controls\TabControl.Designer.vb">
       <DependentUpon>TabControl.vb</DependentUpon>
     </Compile>
-    <Compile Include="TabControl.vb">
+    <Compile Include="Controls\TabControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TabPage.Designer.vb">
+    <Compile Include="Controls\TabPage.Designer.vb">
       <DependentUpon>TabPage.vb</DependentUpon>
     </Compile>
-    <Compile Include="TabPage.vb">
+    <Compile Include="Controls\TabPage.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="sqlControl.Designer.vb">
+    <Compile Include="Controls\sqlControl.Designer.vb">
       <DependentUpon>sqlControl.vb</DependentUpon>
     </Compile>
-    <Compile Include="sqlControl.vb">
+    <Compile Include="Controls\sqlControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Modules\Sql.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="About.resx">
-      <DependentUpon>About.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\frmAbout.resx">
+      <DependentUpon>frmAbout.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\frmMain.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -199,18 +205,16 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabControl.resx">
+    <EmbeddedResource Include="Controls\TabControl.resx">
       <DependentUpon>TabControl.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sqlControl.resx">
+    <EmbeddedResource Include="Controls\sqlControl.resx">
       <DependentUpon>sqlControl.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Resources\loading_2_32.gif" />
-    <None Include="Resources\IC632969.png" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -248,16 +252,7 @@
     <None Include="Resources\bug.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Close.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\btn_close.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\loading.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\loading2.gif" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\alert_16x16.png" />
