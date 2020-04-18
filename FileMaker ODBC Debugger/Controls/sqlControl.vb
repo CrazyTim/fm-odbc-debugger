@@ -1262,6 +1262,12 @@ Public Class sqlControl
         FocusFindTextbox()
     End Sub
 
+    Private Sub txtSQL_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSQL.KeyDown
+        If e.Control And ((e.Shift And e.KeyCode = Keys.Z) Or (e.KeyCode = Keys.Y)) Then
+            txtSQL.Redo()
+        End If
+    End Sub
+
 End Class
 
 Public Class TextChangedArgs
