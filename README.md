@@ -13,8 +13,13 @@ To dig deeper with optimising FileMaker queries, refer to this [article about th
 
 ## Getting Started
 
-- Install 64bit FileMaker ODBC Driver (not provided).
-- Build the solution in Visual Studio.
+- Build the solution in Visual Studio, or just [download the binaries of the latest release](https://github.com/CrazyTim/fm-odbc-debugger/releases).
+- Get familiar with the [documentation here](https://fmhelp.filemaker.com/docs/16/en/fm16_odbc_jdbc_guide.pdf) and follow [these instructions](https://fmhelp.filemaker.com/help/16/fmp/en/#page/FMP_Help%2Fsharing-via-odbc-jdbc.html%23) for sharing your FileMaker database via ODBC.
+- Install the 64bit FileMaker ODBC driver that comes bundled with FileMaker.
+- Launch FileMaker ODBC Debugger and ensure the correct `Driver` version has been detected. Type the following details and then execute your query:
+  - `Server` (name or ip address), 
+  - `Database` name
+  - `Credentials` (username/password).
 
 ## Technical Notes
 
