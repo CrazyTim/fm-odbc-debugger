@@ -8,8 +8,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CC05756B-BC75-4300-B46F-8F5B4E50DC26}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>FmOdbcDebugger.My.MyApplication</StartupObject>
-    <RootNamespace>FmOdbcDebugger</RootNamespace>
+    <StartupObject>FileMakerOdbcDebugger.My.MyApplication</StartupObject>
+    <RootNamespace>FileMakerOdbcDebugger</RootNamespace>
     <AssemblyName>FileMaker ODBC Debugger</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>

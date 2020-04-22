@@ -871,7 +871,7 @@ Partial Class sqlControl
         Me.lblLoading.BackColor = System.Drawing.SystemColors.Control
         Me.lblLoading.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Italic)
         Me.lblLoading.ForeColor = System.Drawing.Color.Black
-        Me.lblLoading.Image = Global.FmOdbcDebugger.My.Resources.Resources.loading_32x32
+        Me.lblLoading.Image = Global.FileMakerOdbcDebugger.My.Resources.Resources.loading_32x32
         Me.lblLoading.Location = New System.Drawing.Point(345, 25)
         Me.lblLoading.Name = "lblLoading"
         Me.lblLoading.Size = New System.Drawing.Size(76, 109)
@@ -913,7 +913,7 @@ Partial Class sqlControl
         '
         Me.lblSyntaxWarning.AutoSize = True
         Me.lblSyntaxWarning.Dock = System.Windows.Forms.DockStyle.Left
-        Me.lblSyntaxWarning.Image = Global.FmOdbcDebugger.My.Resources.Resources.alert_16x16
+        Me.lblSyntaxWarning.Image = Global.FileMakerOdbcDebugger.My.Resources.Resources.alert_16x16
         Me.lblSyntaxWarning.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lblSyntaxWarning.Location = New System.Drawing.Point(339, 0)
         Me.lblSyntaxWarning.Name = "lblSyntaxWarning"
@@ -1007,7 +1007,7 @@ Partial Class sqlControl
         'Label11
         '
         Me.Label11.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.Label11.Image = Global.FmOdbcDebugger.My.Resources.Resources.search_16x16
+        Me.Label11.Image = Global.FileMakerOdbcDebugger.My.Resources.Resources.search_16x16
         Me.Label11.Location = New System.Drawing.Point(6, 2)
         Me.Label11.Name = "Label11"
         Me.Label11.Padding = New System.Windows.Forms.Padding(0, 1, 7, 2)

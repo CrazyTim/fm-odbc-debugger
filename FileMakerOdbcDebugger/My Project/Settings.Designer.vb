@@ -64,9 +64,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.FmOdbcDebugger.My.MySettings
+        Friend ReadOnly Property Settings() As Global.FileMakerOdbcDebugger.My.MySettings
             Get
-                Return Global.FmOdbcDebugger.My.MySettings.Default
+                Return Global.FileMakerOdbcDebugger.My.MySettings.Default
             End Get
         End Property
     End Module

@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.FmOdbcDebugger.frmMain
+            Me.MainForm = Global.FileMakerOdbcDebugger.frmMain
         End Sub
     End Class
 End Namespace
