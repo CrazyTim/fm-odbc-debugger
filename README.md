@@ -5,17 +5,22 @@
 
 # FileMaker ODBC Debugger
 
-FileMaker's ODBC driver has its own flavour of SQL syntax, as well as some lesser-known quirks. This lightweight tool helps you write and test SQL queries to a FileMaker database while handling some of these quirks. It also warns you about things to avoid, and supports syntax highlighting for all of FileMakers' reserved keywords (see [full feature list below](#features)).
+Write and test SQL queries for a FileMaker database.
+
+## Motivation
+
+FileMaker's ODBC driver has its own flavour of SQL syntax, as well as some lesser-known quirks. This tool helps you write and test SQL queries to a FileMaker database while handling some of these quirks. It also warns you about things to avoid, and supports syntax highlighting for all of FileMakers' reserved keywords (see [full feature list below](#features)).
 
 In addition, FileMaker ODBC performance can be very slow, which can often be solved by optimising the query. So to help with performance testing it shows the total execution time split into 3 different times; 'connect', 'execute', and 'stream'. This can sometimes give insight into where the bottleneck is (calculation fields are usually the culprit).
 
 To dig deeper with optimising FileMaker queries, refer to this [article about the `ExecuteSQL` function](https://www.soliantconsulting.com/blog/executesql-filemaker-performance/).
 
-## Getting Started
+## Installing
 
-- Build the solution in Visual Studio, or just [download the binaries of the latest release](https://github.com/CrazyTim/fm-odbc-debugger/releases).
-- Get familiar with the [documentation here](https://fmhelp.filemaker.com/docs/16/en/fm16_odbc_jdbc_guide.pdf) and follow [these instructions](https://fmhelp.filemaker.com/help/16/fmp/en/#page/FMP_Help%2Fsharing-via-odbc-jdbc.html%23) for sharing your FileMaker database via ODBC.
+First get familiar with the [FileMaker ODBC Guide](https://fmhelp.filemaker.com/docs/16/en/fm16_odbc_jdbc_guide.pdf) and follow [these instructions](https://fmhelp.filemaker.com/help/16/fmp/en/#page/FMP_Help%2Fsharing-via-odbc-jdbc.html%23) for sharing your FileMaker database via ODBC.
+
 - Install the 64bit FileMaker ODBC driver that comes bundled with FileMaker.
+- Download the latest release of [FileMaker ODBC Debugger](https://github.com/CrazyTim/fm-odbc-debugger/releases).
 - Launch FileMaker ODBC Debugger and ensure the correct `Driver` version has been detected. Type the following details and then execute your query:
   - `Server` (name or ip address), 
   - `Database` name
