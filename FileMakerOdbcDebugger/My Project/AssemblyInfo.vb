@@ -8,11 +8,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("FileMaker ODBC Debugger")> 
-<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyTitle("FileMaker ODBC Debugger")>
+<Assembly: AssemblyDescription("Write and test SQL queries for a FileMaker database")>
 <Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("FileMaker ODBC Debugger")> 
-<Assembly: AssemblyCopyright("Copyright © 2013")> 
+<Assembly: AssemblyProduct("FileMaker ODBC Debugger")>
+<Assembly: AssemblyCopyright("Copyright © 2020 CrazyTim")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
