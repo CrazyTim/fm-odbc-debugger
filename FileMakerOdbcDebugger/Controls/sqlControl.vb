@@ -1,7 +1,7 @@
 Imports System.ComponentModel
 Imports FastColoredTextBoxNS
 
-Public Class sqlControl
+Public Class SqlControl
 
     Public Event DatabaseNameChanged(ByVal e As TextChangedArgs)
     Public Event BeginSQLExecute()

@@ -187,10 +187,10 @@
     <Compile Include="Controls\TabPage.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\sqlControl.Designer.vb">
-      <DependentUpon>sqlControl.vb</DependentUpon>
+    <Compile Include="Controls\SqlControl.Designer.vb">
+      <DependentUpon>SqlControl.vb</DependentUpon>
     </Compile>
-    <Compile Include="Controls\sqlControl.vb">
+    <Compile Include="Controls\SqlControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\Sql.vb" />
@@ -211,8 +211,8 @@
     <EmbeddedResource Include="Controls\TabControl.resx">
       <DependentUpon>TabControl.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\sqlControl.resx">
-      <DependentUpon>sqlControl.vb</DependentUpon>
+    <EmbeddedResource Include="Controls\SqlControl.resx">
+      <DependentUpon>SqlControl.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
