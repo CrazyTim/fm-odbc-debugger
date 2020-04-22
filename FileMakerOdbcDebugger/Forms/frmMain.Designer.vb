@@ -25,7 +25,7 @@ Partial Class frmMain
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.ColumnHeader38 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.TabControl1 = New FmOdbcDebugger.TabControl()
+        Me.TabControl1 = New FileMakerOdbcDebugger.TabControl()
         Me.SuspendLayout()
         '
         'ColumnHeader38
@@ -53,7 +53,7 @@ Partial Class frmMain
         Me.TabControl1.TabBackHighColor = System.Drawing.SystemColors.Control
         Me.TabControl1.TabBackHighColorDisabled = System.Drawing.Color.LightGray
         Me.TabControl1.TabBackLowColorDisabled = System.Drawing.Color.LightGray
-        Me.TabControl1.TabBorderEnhanceWeight = FmOdbcDebugger.TabControl.Weight.Soft
+        Me.TabControl1.TabBorderEnhanceWeight = FileMakerOdbcDebugger.TabControl.Weight.Soft
         Me.TabControl1.TabCloseButtonBackHighColorDisabled = System.Drawing.SystemColors.ControlLightLight
         Me.TabControl1.TabCloseButtonBackLowColorDisabled = System.Drawing.SystemColors.ControlLightLight
         Me.TabControl1.TabCloseButtonImage = Nothing
@@ -81,6 +81,6 @@ Partial Class frmMain
     End Sub
     Friend WithEvents ColumnHeader38 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents TabControl1 As FmOdbcDebugger.TabControl
+    Friend WithEvents TabControl1 As FileMakerOdbcDebugger.TabControl
 
 End Class

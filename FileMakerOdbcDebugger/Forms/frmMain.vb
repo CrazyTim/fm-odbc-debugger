@@ -10,10 +10,10 @@ Public Class frmMain
     ''' <summary> Save tab settings to a json file </summary>
     Public Sub SaveSettings()
 
-        Dim Settings As New List(Of sqlControl.Settings)
+        Dim Settings As New List(Of SqlControl.Settings)
 
         For Each t As TabPage In TabControl1.TabPages
-            Dim sqlc As sqlControl = t.Form.Controls(0)
+            Dim sqlc As SqlControl = t.Form.Controls(0)
             Settings.Add(sqlc.GetSettings)
         Next
 
@@ -25,15 +25,15 @@ Public Class frmMain
 
     End Sub
 
-    Public Function LoadSettings() As List(Of sqlControl.Settings)
+    Public Function LoadSettings() As List(Of SqlControl.Settings)
         Dim FileData As String = ReadFromFile(AppDataDir & "\settings.json")
-        Return FileData.From_JSON(GetType(List(Of sqlControl.Settings)))
+        Return FileData.From_JSON(GetType(List(Of SqlControl.Settings)))
     End Function
 
     Private Sub frmMain_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.F5 Then
             Dim f1 As Form = TabControl1.SelectedForm
-            Dim u As sqlControl = f1.Controls(0)
+            Dim u As SqlControl = f1.Controls(0)
             u.ExecuteSQL()
         End If
     End Sub
@@ -41,7 +41,7 @@ Public Class frmMain
     Private Sub sqlControl_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.Control And e.KeyCode = Keys.F Then
             Dim f1 As Form = TabControl1.SelectedForm
-            Dim u As sqlControl = f1.Controls(0)
+            Dim u As SqlControl = f1.Controls(0)
             u.FocusFindTextbox()
         End If
     End Sub
@@ -66,7 +66,7 @@ Public Class frmMain
         Try
 
             ' load saved file
-            Dim Settings As List(Of sqlControl.Settings) = LoadSettings()
+            Dim Settings As List(Of SqlControl.Settings) = LoadSettings()
 
             If Settings.Count = 0 Then
                 CreateNewTab(Nothing, False) ' create default tab
@@ -91,17 +91,17 @@ Public Class frmMain
         CreateNewTab(Nothing, True)
     End Sub
 
-    Private Sub CreateNewTab(ByVal Settings As sqlControl.Settings, ByVal Copy As Boolean)
+    Private Sub CreateNewTab(ByVal Settings As SqlControl.Settings, ByVal Copy As Boolean)
 
         If TabControl1.TabPages.Count = MAX_TABS Then Return ' limit max tabs (gui will bug out)
 
-        If Settings Is Nothing Then Settings = New sqlControl.Settings
+        If Settings Is Nothing Then Settings = New SqlControl.Settings
 
         If Copy Then
             ' copy values from selected tab (if any)
             Dim f1 As Form = TabControl1.SelectedForm
             If f1 IsNot Nothing Then
-                Dim sqlc As sqlControl = f1.Controls(0)
+                Dim sqlc As SqlControl = f1.Controls(0)
                 Settings.ServerAddress = sqlc.ServerIP
                 Settings.DatabaseName = sqlc.DatabaseName
                 Settings.Username = sqlc.UserName
@@ -113,7 +113,7 @@ Public Class frmMain
             End If
         End If
 
-        Dim c As New sqlControl With {
+        Dim c As New SqlControl With {
             .Dock = DockStyle.Fill,
             .ServerIP = Settings.ServerAddress,
             .DatabaseName = Settings.DatabaseName,
