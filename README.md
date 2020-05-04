@@ -55,7 +55,7 @@ First get familiar with the [FileMaker ODBC Guide](https://fmhelp.filemaker.com/
 - Show what version of the FileMaker ODBC driver is installed.
 - Option to manually specify a driver name and connection string (you can use any installed 64bit ODBC driver).
 
-## Acknowledgements:
+## Acknowledgements
 - Icon by [David Vignoni](www.iconfinder.com/icons/1230/animal_bug_insect_ladybird_icon), GNU Lesser General Public License (LGPL).
 - Tab control code adapted from [MDI tab control](https://www.codeproject.com/Articles/16436/A-highly-configurable-MDI-tab-control-from-scratch) by Eduardo Oliveira, The Code Project Open License (CPOL). 
 - [CsvHelper](joshclose.github.io/CsvHelper), Apache License, Version 2.0.
