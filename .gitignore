@@ -5,3 +5,6 @@ packages/
 *.app.config.bak
 */bin/
 */obj/
+
+# ignore log files made by FileMaker
+Test Database/*.log
