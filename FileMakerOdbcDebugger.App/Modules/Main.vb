@@ -86,7 +86,7 @@ Module Main
 
         Dim Settings As New List(Of Settings)
 
-        If PathExists(Path_Settings) Then
+        If Util.IO.PathExists(Path_Settings) Then
 
             Dim s As String = IO.File.ReadAllText(Path_Settings).Derypt()
             Settings = s.FromJson(GetType(List(Of Settings)))
@@ -156,24 +156,6 @@ Module Main
         Else
             Return t.Minutes.ToString("#0") & ":" & t.Seconds.ToString("#0") & "." & (t.Milliseconds / 10).ToString("00")
         End If
-    End Function
-
-    ''' <summary> Return True if a file or folder exists. FAST - will not hang if the path or network location doesn't exist. Also it shouldn't raise an exception if the syntax isn't legal. </summary>
-    Public Function PathExists(ByVal Path As String) As Boolean
-        'source: http://stackoverflow.com/questions/2225415/why-is-file-exists-much-slower-when-the-file-does-not-exist
-        ' nb: a StringBuilder is required for interops calls that use strings
-
-        If String.IsNullOrWhiteSpace(Path) Then Return False
-
-        Dim builder As New StringBuilder()
-        builder.Append(Path)
-
-        Return PathFileExists(builder)
-
-    End Function
-
-    <DllImport("Shlwapi.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
-    Private Function PathFileExists(path As StringBuilder) As Boolean
     End Function
 
     Public Sub ExportToExcel(ByVal Data As List(Of List(Of String)))

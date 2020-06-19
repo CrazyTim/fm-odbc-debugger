@@ -29,7 +29,7 @@ Public Class frmMain
     Private Sub frmMain_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
 
         ' Create app data folder:
-        If Not PathExists(Path_AppData) Then
+        If Not Util.IO.PathExists(Path_AppData) Then
 
             Try
                 IO.Directory.CreateDirectory(Path_AppData)
