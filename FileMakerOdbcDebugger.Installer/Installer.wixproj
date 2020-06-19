@@ -32,8 +32,8 @@
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FileMakerOdbcDebugger\FileMakerOdbcDebugger.vbproj">
-      <Name>FileMakerOdbcDebugger</Name>
+    <ProjectReference Include="..\FileMakerOdbcDebugger.App\App.vbproj">
+      <Name>App</Name>
       <Project>{cc05756b-bc75-4300-b46f-8f5b4e50dc26}</Project>
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>

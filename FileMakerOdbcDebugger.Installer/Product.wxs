@@ -14,7 +14,7 @@
 
         <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
-        <Icon Id="ProductIcon" SourceFile="$(var.FileMakerOdbcDebugger.ProjectDir)Resources\bug.ico"/>
+        <Icon Id="ProductIcon" SourceFile="$(var.App.ProjectDir)Resources\bug.ico"/>
 
         <!-- For list of all properties refer: https://docs.microsoft.com/en-au/windows/win32/msi/property-reference -->
         <Property Id="ARPPRODUCTICON" Value="ProductIcon"/>
@@ -61,7 +61,7 @@
                   Id="ApplicationShortcutFile1"
                   Name="$(var.Custom.AppName)"
                   Description="$(var.Custom.AppDescription)" 
-                  Target="[INSTALLFOLDER]$(var.FileMakerOdbcDebugger.TargetFileName)"
+                  Target="[INSTALLFOLDER]$(var.App.TargetFileName)"
                   WorkingDirectory="INSTALLDIR"/>
                 
                 <RegistryValue
@@ -85,7 +85,7 @@
                   Id="DesktopShortcutFile1"
                   Name="$(var.Custom.AppName)"
                   Description="$(var.Custom.AppDescription)"
-                  Target="[INSTALLFOLDER]$(var.FileMakerOdbcDebugger.TargetFileName)"
+                  Target="[INSTALLFOLDER]$(var.App.TargetFileName)"
                   WorkingDirectory="INSTALLDIR"/>
                 <RegistryValue
                   Root="HKCU"
@@ -103,19 +103,19 @@
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
 
             <Component Id="FilemakerOdbcDebugger_exe" Guid="{6b036d43-b5f8-40ff-88c8-9bd2336e529a}"> 
-                <File Id="EXE" Source="$(var.FileMakerOdbcDebugger.TargetPath)" />
+                <File Id="EXE" Source="$(var.App.TargetPath)" />
             </Component>
 
             <Component Id="Newtonsoft_dll" Guid="{1a2be155-0984-4a71-b58d-696dca819a61}">
-                <File Source="$(var.FileMakerOdbcDebugger.TargetDir)\Newtonsoft.Json.dll" />
+                <File Source="$(var.App.TargetDir)\Newtonsoft.Json.dll" />
             </Component>
 
             <Component Id="CsvHelper_dll" Guid="{c242900e-434e-4018-9ce8-2668fe2895d3}">
-                <File Source="$(var.FileMakerOdbcDebugger.TargetDir)\CsvHelper.dll" />
+                <File Source="$(var.App.TargetDir)\CsvHelper.dll" />
             </Component>
 
             <Component Id="FastColoredTextBox_dll" Guid="{62a4538a-b0f5-4ab3-906e-7dd776648017}">
-                <File Source="$(var.FileMakerOdbcDebugger.TargetDir)\FastColoredTextBox.dll" />
+                <File Source="$(var.App.TargetDir)\FastColoredTextBox.dll" />
             </Component>
             
 		</ComponentGroup>

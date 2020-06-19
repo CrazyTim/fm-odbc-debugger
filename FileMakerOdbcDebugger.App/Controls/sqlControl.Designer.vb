@@ -115,7 +115,8 @@ Partial Class SqlControl
         Me.lblLoading = New System.Windows.Forms.Label()
         Me.txtErrorText = New System.Windows.Forms.TextBox()
         Me.Panel_Status = New System.Windows.Forms.Panel()
-        Me.lblSyntaxWarning = New System.Windows.Forms.Label()
+        Me.lblWarning = New System.Windows.Forms.Label()
+        Me.lblDurationStream = New System.Windows.Forms.Label()
         Me.lblDurationExecute = New System.Windows.Forms.Label()
         Me.lblDurationConnect = New System.Windows.Forms.Label()
         Me.lblStatus = New System.Windows.Forms.Label()
@@ -126,7 +127,7 @@ Partial Class SqlControl
         Me.Label11 = New System.Windows.Forms.Label()
         Me.lblFindCount = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.dgvResults = New System.Windows.Forms.DataGridView()
         Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCopyWithHeaders = New System.Windows.Forms.ToolStripMenuItem()
@@ -147,7 +148,7 @@ Partial Class SqlControl
         Me.Panel4.SuspendLayout()
         Me.Panel_Status.SuspendLayout()
         Me.Panel_Search.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvResults, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -194,7 +195,7 @@ Partial Class SqlControl
         Me.SplitContainer1.Panel2.Controls.Add(Me.txtErrorText)
         Me.SplitContainer1.Panel2.Controls.Add(Me.Panel_Status)
         Me.SplitContainer1.Panel2.Controls.Add(Me.Label5)
-        Me.SplitContainer1.Panel2.Controls.Add(Me.DataGridView1)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.dgvResults)
         Me.SplitContainer1.Panel2MinSize = 100
         Me.SplitContainer1.Size = New System.Drawing.Size(772, 471)
         Me.SplitContainer1.SplitterDistance = 281
@@ -232,54 +233,54 @@ Partial Class SqlControl
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCopy1, Me.mnuCut1, Me.mnuPaste, Me.ToolStripSeparator4, Me.mnuSelectAll, Me.ToolStripSeparator3, Me.InsertFileMakerToolStripMenuItem, Me.ConstantsToolStripMenuItem, Me.ToolStripSeparator1, Me.FunctionsToolStripMenuItem, Me.V13ODBCGuideToolStripMenuItem, Me.ToolStripSeparator5, Me.mnuAbout})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(208, 258)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(243, 258)
         '
         'mnuCopy1
         '
         Me.mnuCopy1.Name = "mnuCopy1"
         Me.mnuCopy1.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.mnuCopy1.Size = New System.Drawing.Size(207, 22)
+        Me.mnuCopy1.Size = New System.Drawing.Size(242, 22)
         Me.mnuCopy1.Text = "Copy"
         '
         'mnuCut1
         '
         Me.mnuCut1.Name = "mnuCut1"
         Me.mnuCut1.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
-        Me.mnuCut1.Size = New System.Drawing.Size(207, 22)
+        Me.mnuCut1.Size = New System.Drawing.Size(242, 22)
         Me.mnuCut1.Text = "Cut"
         '
         'mnuPaste
         '
         Me.mnuPaste.Name = "mnuPaste"
         Me.mnuPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
-        Me.mnuPaste.Size = New System.Drawing.Size(207, 22)
+        Me.mnuPaste.Size = New System.Drawing.Size(242, 22)
         Me.mnuPaste.Text = "Paste"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.AutoSize = False
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(204, 14)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(239, 14)
         '
         'mnuSelectAll
         '
         Me.mnuSelectAll.Name = "mnuSelectAll"
         Me.mnuSelectAll.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
-        Me.mnuSelectAll.Size = New System.Drawing.Size(207, 22)
+        Me.mnuSelectAll.Size = New System.Drawing.Size(242, 22)
         Me.mnuSelectAll.Text = "Select All"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.AutoSize = False
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(204, 14)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(239, 14)
         '
         'InsertFileMakerToolStripMenuItem
         '
         Me.InsertFileMakerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StringsToolStripMenuItem, Me.NumbersToolStripMenuItem1, Me.DateToolStripMenuItem1})
         Me.InsertFileMakerToolStripMenuItem.Name = "InsertFileMakerToolStripMenuItem"
-        Me.InsertFileMakerToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
-        Me.InsertFileMakerToolStripMenuItem.Text = "Insert FileMaker Function"
+        Me.InsertFileMakerToolStripMenuItem.Size = New System.Drawing.Size(242, 22)
+        Me.InsertFileMakerToolStripMenuItem.Text = "Insert FileMaker ODBC Function"
         '
         'StringsToolStripMenuItem
         '
@@ -548,7 +549,7 @@ Partial Class SqlControl
         '
         Me.ConstantsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DateToolStripMenuItem, Me.TimeToolStripMenuItem, Me.TimestampToolStripMenuItem})
         Me.ConstantsToolStripMenuItem.Name = "ConstantsToolStripMenuItem"
-        Me.ConstantsToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.ConstantsToolStripMenuItem.Size = New System.Drawing.Size(242, 22)
         Me.ConstantsToolStripMenuItem.Text = "Insert ODBC Date Literal"
         '
         'DateToolStripMenuItem
@@ -576,13 +577,13 @@ Partial Class SqlControl
         '
         Me.ToolStripSeparator1.AutoSize = False
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(204, 14)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(239, 14)
         '
         'FunctionsToolStripMenuItem
         '
         Me.FunctionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.url_sql_v16, Me.url_sql_v15, Me.url_sql_v14, Me.url_sql_v13})
         Me.FunctionsToolStripMenuItem.Name = "FunctionsToolStripMenuItem"
-        Me.FunctionsToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.FunctionsToolStripMenuItem.Size = New System.Drawing.Size(242, 22)
         Me.FunctionsToolStripMenuItem.Text = "FileMaker SQL Reference"
         '
         'url_sql_v16
@@ -613,7 +614,7 @@ Partial Class SqlControl
         '
         Me.V13ODBCGuideToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.url_odbc_v16, Me.url_odbc_v15, Me.url_odbc_v14, Me.url_odbc_v13})
         Me.V13ODBCGuideToolStripMenuItem.Name = "V13ODBCGuideToolStripMenuItem"
-        Me.V13ODBCGuideToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.V13ODBCGuideToolStripMenuItem.Size = New System.Drawing.Size(242, 22)
         Me.V13ODBCGuideToolStripMenuItem.Text = "FileMaker ODBC Guide"
         '
         'url_odbc_v16
@@ -644,12 +645,12 @@ Partial Class SqlControl
         '
         Me.ToolStripSeparator5.AutoSize = False
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(204, 14)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(239, 14)
         '
         'mnuAbout
         '
         Me.mnuAbout.Name = "mnuAbout"
-        Me.mnuAbout.Size = New System.Drawing.Size(207, 22)
+        Me.mnuAbout.Size = New System.Drawing.Size(242, 22)
         Me.mnuAbout.Text = "About..."
         '
         'Label7
@@ -840,7 +841,7 @@ Partial Class SqlControl
         Me.cmbDriver.Items.AddRange(New Object() {"FileMaker ODBC", "Other"})
         Me.cmbDriver.Location = New System.Drawing.Point(51, 5)
         Me.cmbDriver.Name = "cmbDriver"
-        Me.cmbDriver.Size = New System.Drawing.Size(211, 23)
+        Me.cmbDriver.Size = New System.Drawing.Size(246, 23)
         Me.cmbDriver.TabIndex = 0
         '
         'btnGo
@@ -871,10 +872,10 @@ Partial Class SqlControl
         Me.lblLoading.BackColor = System.Drawing.SystemColors.Control
         Me.lblLoading.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Italic)
         Me.lblLoading.ForeColor = System.Drawing.Color.Black
-        Me.lblLoading.Image = Global.FileMakerOdbcDebugger.My.Resources.Resources.loading_32x32
+        Me.lblLoading.Image = Global.FileMakerOdbcDebugger.App.My.Resources.Resources.loading_32x32
         Me.lblLoading.Location = New System.Drawing.Point(345, 25)
         Me.lblLoading.Name = "lblLoading"
-        Me.lblLoading.Size = New System.Drawing.Size(76, 109)
+        Me.lblLoading.Size = New System.Drawing.Size(76, 95)
         Me.lblLoading.TabIndex = 234
         Me.lblLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblLoading.Visible = False
@@ -892,12 +893,13 @@ Partial Class SqlControl
         Me.txtErrorText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtErrorText.Size = New System.Drawing.Size(163, 76)
         Me.txtErrorText.TabIndex = 10
-        Me.txtErrorText.Text = "[error-text]"
+        Me.txtErrorText.Text = "{error-text}"
         Me.txtErrorText.Visible = False
         '
         'Panel_Status
         '
-        Me.Panel_Status.Controls.Add(Me.lblSyntaxWarning)
+        Me.Panel_Status.Controls.Add(Me.lblWarning)
+        Me.Panel_Status.Controls.Add(Me.lblDurationStream)
         Me.Panel_Status.Controls.Add(Me.lblDurationExecute)
         Me.Panel_Status.Controls.Add(Me.lblDurationConnect)
         Me.Panel_Status.Controls.Add(Me.lblStatus)
@@ -909,40 +911,51 @@ Partial Class SqlControl
         Me.Panel_Status.Size = New System.Drawing.Size(772, 24)
         Me.Panel_Status.TabIndex = 23
         '
-        'lblSyntaxWarning
+        'lblWarning
         '
-        Me.lblSyntaxWarning.AutoSize = True
-        Me.lblSyntaxWarning.Dock = System.Windows.Forms.DockStyle.Left
-        Me.lblSyntaxWarning.Image = Global.FileMakerOdbcDebugger.My.Resources.Resources.alert_16x16
-        Me.lblSyntaxWarning.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblSyntaxWarning.Location = New System.Drawing.Point(339, 0)
-        Me.lblSyntaxWarning.Name = "lblSyntaxWarning"
-        Me.lblSyntaxWarning.Padding = New System.Windows.Forms.Padding(0, 4, 25, 2)
-        Me.lblSyntaxWarning.Size = New System.Drawing.Size(98, 21)
-        Me.lblSyntaxWarning.TabIndex = 26
-        Me.lblSyntaxWarning.Text = "       Warning"
+        Me.lblWarning.AutoSize = True
+        Me.lblWarning.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lblWarning.Image = Global.FileMakerOdbcDebugger.App.My.Resources.Resources.alert_16x16
+        Me.lblWarning.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblWarning.Location = New System.Drawing.Point(445, 0)
+        Me.lblWarning.Name = "lblWarning"
+        Me.lblWarning.Padding = New System.Windows.Forms.Padding(0, 4, 20, 2)
+        Me.lblWarning.Size = New System.Drawing.Size(93, 21)
+        Me.lblWarning.TabIndex = 26
+        Me.lblWarning.Text = "       Warning"
+        '
+        'lblDurationStream
+        '
+        Me.lblDurationStream.AutoSize = True
+        Me.lblDurationStream.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lblDurationStream.Location = New System.Drawing.Point(324, 0)
+        Me.lblDurationStream.Name = "lblDurationStream"
+        Me.lblDurationStream.Padding = New System.Windows.Forms.Padding(0, 4, 20, 2)
+        Me.lblDurationStream.Size = New System.Drawing.Size(121, 21)
+        Me.lblDurationStream.TabIndex = 31
+        Me.lblDurationStream.Text = "{duration-stream}"
         '
         'lblDurationExecute
         '
         Me.lblDurationExecute.AutoSize = True
         Me.lblDurationExecute.Dock = System.Windows.Forms.DockStyle.Left
-        Me.lblDurationExecute.Location = New System.Drawing.Point(208, 0)
+        Me.lblDurationExecute.Location = New System.Drawing.Point(198, 0)
         Me.lblDurationExecute.Name = "lblDurationExecute"
-        Me.lblDurationExecute.Padding = New System.Windows.Forms.Padding(0, 4, 25, 2)
-        Me.lblDurationExecute.Size = New System.Drawing.Size(131, 21)
+        Me.lblDurationExecute.Padding = New System.Windows.Forms.Padding(0, 4, 20, 2)
+        Me.lblDurationExecute.Size = New System.Drawing.Size(126, 21)
         Me.lblDurationExecute.TabIndex = 30
-        Me.lblDurationExecute.Text = "[duration-execute]"
+        Me.lblDurationExecute.Text = "{duration-execute}"
         '
         'lblDurationConnect
         '
         Me.lblDurationConnect.AutoSize = True
         Me.lblDurationConnect.Dock = System.Windows.Forms.DockStyle.Left
-        Me.lblDurationConnect.Location = New System.Drawing.Point(75, 0)
+        Me.lblDurationConnect.Location = New System.Drawing.Point(70, 0)
         Me.lblDurationConnect.Name = "lblDurationConnect"
-        Me.lblDurationConnect.Padding = New System.Windows.Forms.Padding(0, 4, 25, 2)
-        Me.lblDurationConnect.Size = New System.Drawing.Size(133, 21)
+        Me.lblDurationConnect.Padding = New System.Windows.Forms.Padding(0, 4, 20, 2)
+        Me.lblDurationConnect.Size = New System.Drawing.Size(128, 21)
         Me.lblDurationConnect.TabIndex = 25
-        Me.lblDurationConnect.Text = "[duration-connect]"
+        Me.lblDurationConnect.Text = "{duration-connect}"
         '
         'lblStatus
         '
@@ -950,10 +963,10 @@ Partial Class SqlControl
         Me.lblStatus.Dock = System.Windows.Forms.DockStyle.Left
         Me.lblStatus.Location = New System.Drawing.Point(0, 0)
         Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Padding = New System.Windows.Forms.Padding(4, 4, 25, 2)
-        Me.lblStatus.Size = New System.Drawing.Size(75, 21)
+        Me.lblStatus.Padding = New System.Windows.Forms.Padding(4, 4, 20, 2)
+        Me.lblStatus.Size = New System.Drawing.Size(70, 21)
         Me.lblStatus.TabIndex = 24
-        Me.lblStatus.Text = "[status]"
+        Me.lblStatus.Text = "{status}"
         '
         'Label12
         '
@@ -1007,7 +1020,7 @@ Partial Class SqlControl
         'Label11
         '
         Me.Label11.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.Label11.Image = Global.FileMakerOdbcDebugger.My.Resources.Resources.search_16x16
+        Me.Label11.Image = Global.FileMakerOdbcDebugger.App.My.Resources.Resources.search_16x16
         Me.Label11.Location = New System.Drawing.Point(6, 2)
         Me.Label11.Name = "Label11"
         Me.Label11.Padding = New System.Windows.Forms.Padding(0, 1, 7, 2)
@@ -1040,19 +1053,19 @@ Partial Class SqlControl
         Me.Label5.TabIndex = 29
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'DataGridView1
+        'dgvResults
         '
-        Me.DataGridView1.AllowUserToAddRows = False
-        Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.AllowUserToOrderColumns = True
-        Me.DataGridView1.AllowUserToResizeRows = False
-        Me.DataGridView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.dgvResults.AllowUserToAddRows = False
+        Me.dgvResults.AllowUserToDeleteRows = False
+        Me.dgvResults.AllowUserToOrderColumns = True
+        Me.dgvResults.AllowUserToResizeRows = False
+        Me.dgvResults.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.Control
-        Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.ContextMenuStrip = Me.ContextMenuStrip2
+        Me.dgvResults.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.dgvResults.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvResults.ContextMenuStrip = Me.ContextMenuStrip2
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1061,15 +1074,14 @@ Partial Class SqlControl
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle1
-        Me.DataGridView1.Location = New System.Drawing.Point(-1, 24)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.RowHeadersWidth = 25
-        Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.DataGridView1.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridView1.Size = New System.Drawing.Size(773, 147)
-        Me.DataGridView1.TabIndex = 1
+        Me.dgvResults.DefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvResults.Location = New System.Drawing.Point(-1, 24)
+        Me.dgvResults.Name = "dgvResults"
+        Me.dgvResults.ReadOnly = True
+        Me.dgvResults.RowHeadersWidth = 25
+        Me.dgvResults.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dgvResults.Size = New System.Drawing.Size(773, 155)
+        Me.dgvResults.TabIndex = 1
         '
         'ContextMenuStrip2
         '
@@ -1121,12 +1133,12 @@ Partial Class SqlControl
         Me.ToolTip1.InitialDelay = 100
         Me.ToolTip1.ReshowDelay = 100
         '
-        'sqlControl
+        'SqlControl
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.Controls.Add(Me.SplitContainer1)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Name = "sqlControl"
+        Me.Name = "SqlControl"
         Me.Size = New System.Drawing.Size(772, 471)
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel1.PerformLayout()
@@ -1147,7 +1159,7 @@ Partial Class SqlControl
         Me.Panel_Status.PerformLayout()
         Me.Panel_Search.ResumeLayout(False)
         Me.Panel_Search.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvResults, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -1163,7 +1175,7 @@ Partial Class SqlControl
     Private WithEvents Label1 As System.Windows.Forms.Label
     Private WithEvents txtDatabaseName As System.Windows.Forms.TextBox
     Private WithEvents btnGo As System.Windows.Forms.Button
-    Private WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Private WithEvents dgvResults As System.Windows.Forms.DataGridView
     Private WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents ConstantsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -1211,7 +1223,7 @@ Partial Class SqlControl
     Friend WithEvents Panel_Status As Panel
     Private WithEvents Label11 As Label
     Friend WithEvents Panel_Search As Panel
-    Private WithEvents lblSyntaxWarning As Label
+    Private WithEvents lblWarning As Label
     Private WithEvents lblDurationConnect As Label
     Private WithEvents lblStatus As Label
     Private WithEvents Label12 As Label
@@ -1262,4 +1274,5 @@ Partial Class SqlControl
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
     Friend WithEvents txtSQL As FastColoredTextBoxNS.FastColoredTextBox
+    Private WithEvents lblDurationStream As Label
 End Class
