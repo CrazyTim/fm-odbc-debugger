@@ -21,10 +21,8 @@ First get familiar with the [FileMaker ODBC Guide](https://fmhelp.filemaker.com/
 
 - Install the 64bit FileMaker ODBC driver that comes bundled with FileMaker.
 - Download the latest release of [FileMaker ODBC Debugger](https://github.com/CrazyTim/fm-odbc-debugger/releases).
-- Launch FileMaker ODBC Debugger and ensure the correct `Driver` version has been detected. Type the following details and then execute your query:
-  - `Server` (name or ip address), 
-  - `Database` name
-  - `Credentials` (username/password).
+- Launch FileMaker ODBC Debugger and ensure the correct `Driver` version has been detected. 
+- Enter values for `Server` (name or ip address), `Database` (name), and `Credentials` (username/password). Type your query and then execute it!
 
 ## Technical Notes
 
@@ -34,12 +32,12 @@ First get familiar with the [FileMaker ODBC Guide](https://fmhelp.filemaker.com/
 
 ## Features
 
-- Show how long the query took to execute (separate durations for connect, process, and stream).
-- Support for T-SQL style comments (single `--` and multi-line `/*`).
-- Text editor supports syntax highlighting for all of the supported FileMaker SQL keywords (There are reserved keywords that can clash with your field and table names). Colours are similar to Microsoft SQL Server Management Studio.
-- Execute multiple queries as a transaction, separated by a semi-colon `;`.
+- Allow comments, single-line `--` and multi-line `/*`.
+- Execute multiple statements as a transaction, separated by a semi-colon `;`.
 - Convert all line breaks to carriage returns (FileMaker uses `CR` for line breaks).
 - Field names starting with an underscore will be automatically escaped with double quotes.
+- Show how long the query took to execute (separate durations for connect, process, and stream).
+- Text editor supports syntax highlighting for all of the supported FileMaker SQL keywords (There are reserved keywords that can clash with your field and table names). Colours are similar to Microsoft SQL Server Management Studio.
 - Multiple tabs. Each tab has its own connection details. Tabs are remembered when opening the program again.
 - Execute two or more queries in different tabs at the same time.
 - Show warnings for several FileMaker-specific syntax issues:
@@ -48,12 +46,16 @@ First get familiar with the [FileMaker ODBC Guide](https://fmhelp.filemaker.com/
     - Query contains the keyword `BETWEEN` and FileMaker ODBC is VERY slow when comparing dates this way. Use `>=` and `<=` instead.
 - Provide links to the official FileMaker references/guides (in right-click menu).
 - Right-click menu allows you to paste common FileMaker SQL functions.
-- Right-click on results and `Copy Selected Column(s) As CSV` (handy for executing a follow-up `WHERE IN (x,y,z)` query).
-- Quickly search results for a keyword.
-- Limit results to a maximum number of rows.
-- Highlight NULL values yellow in the results.
+- Right-click on query results and `Copy Selected Column(s) As CSV` (handy for executing a follow-up `WHERE IN (x,y,z)` query).
+- Quickly search query results for a keyword.
+- Limit query results to a maximum number of rows.
+- Highlight NULL values yellow in the query results.
 - Show what version of the FileMaker ODBC driver is installed.
 - Option to manually specify a driver name and connection string (you can use any installed 64bit ODBC driver).
+
+## Compiling
+
+- You will need to install the [Wix Toolset Visual Studio 2019 Extension](https://marketplace.visualstudio.com/items?itemName=WixToolset.WixToolsetVisualStudio2019Extension).
 
 ## Acknowledgements
 - Icon by [David Vignoni](www.iconfinder.com/icons/1230/animal_bug_insect_ladybird_icon), GNU Lesser General Public License (LGPL).
