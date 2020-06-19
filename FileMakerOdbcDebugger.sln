@@ -8,6 +8,8 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Installer", "FileMakerOdbcD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "FileMakerOdbcDebugger.Util\Util.csproj", "{432B0CE0-EE7D-4DFB-B962-7B67A4F15AE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util.Tests", "FileMakerOdbcDebugger.Util.Tests\Util.Tests.csproj", "{A1F07354-73D6-486A-8D4C-3B9F6FD115F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,18 @@ Global
 		{432B0CE0-EE7D-4DFB-B962-7B67A4F15AE2}.Release|x64.Build.0 = Release|Any CPU
 		{432B0CE0-EE7D-4DFB-B962-7B67A4F15AE2}.Release|x86.ActiveCfg = Release|Any CPU
 		{432B0CE0-EE7D-4DFB-B962-7B67A4F15AE2}.Release|x86.Build.0 = Release|Any CPU
+		{A1F07354-73D6-486A-8D4C-3B9F6FD115F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1F07354-73D6-486A-8D4C-3B9F6FD115F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1F07354-73D6-486A-8D4C-3B9F6FD115F3}.Debug|x64.ActiveCfg = Debug|x64
+		{A1F07354-73D6-486A-8D4C-3B9F6FD115F3}.Debug|x64.Build.0 = Debug|x64
+		{A1F07354-73D6-486A-8D4C-3B9F6FD115F3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A1F07354-73D6-486A-8D4C-3B9F6FD115F3}.Debug|x86.Build.0 = Debug|Any CPU
+		{A1F07354-73D6-486A-8D4C-3B9F6FD115F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1F07354-73D6-486A-8D4C-3B9F6FD115F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1F07354-73D6-486A-8D4C-3B9F6FD115F3}.Release|x64.ActiveCfg = Release|x64
+		{A1F07354-73D6-486A-8D4C-3B9F6FD115F3}.Release|x64.Build.0 = Release|x64
+		{A1F07354-73D6-486A-8D4C-3B9F6FD115F3}.Release|x86.ActiveCfg = Release|Any CPU
+		{A1F07354-73D6-486A-8D4C-3B9F6FD115F3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
