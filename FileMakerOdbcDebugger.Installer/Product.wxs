@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+    <?define var.Custom.AppName = "FileMaker ODBC Debugger" ?>
+    <?define var.Custom.AppDescription = "Write and test SQL queries for a FileMaker database" ?>
+        
+	<Product
+          Id="*"
+          Name="$(var.Custom.AppName)"
+          Language="1033"
+          Version="1.0.0"
+          Manufacturer="CrazyTim"
+          UpgradeCode="e01cd376-5dfe-489f-9f81-256db9491548">
+
+        <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+        <Icon Id="ProductIcon" SourceFile="$(var.App.ProjectDir)Resources\bug.ico"/>
+
+        <!-- For list of all properties refer: https://docs.microsoft.com/en-au/windows/win32/msi/property-reference -->
+        <Property Id="ARPPRODUCTICON" Value="ProductIcon"/>
+        <Property Id="ARPURLINFOABOUT" Value="https://github.com/CrazyTim/fm-odbc-debugger"/>
+        <Property Id="ARPNOREPAIR" Value="1"/>
+        <Property Id="ARPNOMODIFY" Value="1"/>
+        <SetProperty Id="ARPINSTALLLOCATION" Value="[INSTALLFOLDER]" After="CostFinalize" />
+        
+        <MajorUpgrade DowngradeErrorMessage="A newer version of this software is already installed." />
+
+        <MediaTemplate EmbedCab="yes" /> <!--https://stackoverflow.com/questions/11284625/wix-single-msi-instead-of-msi-cab-->
+
+        <Feature Id="ProductFeature" Title="WixInstaller" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+            <ComponentGroupRef Id="ApplicationShortcuts"/>
+            <ComponentGroupRef Id="DesktopShortcuts"/>
+		</Feature>
+        
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+
+            <!-- folder to install the app -->
+			<Directory Id="ProgramFiles64Folder">
+				<Directory Id="INSTALLFOLDER" Name="$(var.Custom.AppName)" />
+			</Directory>
+
+            <!-- desktop icon -->
+            <Directory Id="DesktopFolder" Name="Desktop"/>
+
+            <!-- start menu entry -->
+            <Directory Id="ProgramMenuFolder">
+            </Directory>
+            
+		</Directory>
+	</Fragment>
+
+    <Fragment>
+        <ComponentGroup Id="ApplicationShortcuts" Directory="ProgramMenuFolder">
+            <Component Id="ApplicationShortcutFiles" Guid="{e02c6707-6397-409d-ad8d-5a94d75b3555}">
+
+                <Shortcut
+                  Id="ApplicationShortcutFile1"
+                  Name="$(var.Custom.AppName)"
+                  Description="$(var.Custom.AppDescription)" 
+                  Target="[INSTALLFOLDER]$(var.App.TargetFileName)"
+                  WorkingDirectory="INSTALLDIR"/>
+                
+                <RegistryValue
+                  Root="HKCU"
+                  Key="Software\$(var.Custom.AppName)"
+                  Name="installed"
+                  Type="integer"
+                  Value="1"
+                  KeyPath="yes" />
+                
+                <RemoveFolder Id="ProgramMenuFolder"  On="uninstall"/>
+                
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+
+    <Fragment>
+        <ComponentGroup Id="DesktopShortcuts" Directory="DesktopFolder">
+            <Component Id="DesktopShortcutFiles" Guid="{225cd55b-3ba9-47d6-a9d6-a1815e7598c7}">
+                <Shortcut
+                  Id="DesktopShortcutFile1"
+                  Name="$(var.Custom.AppName)"
+                  Description="$(var.Custom.AppDescription)"
+                  Target="[INSTALLFOLDER]$(var.App.TargetFileName)"
+                  WorkingDirectory="INSTALLDIR"/>
+                <RegistryValue
+                  Root="HKCU"
+                  Key="Software\$(var.Custom.AppName)"
+                  Name="installed"
+                  Type="integer"
+                  Value="1"
+                  KeyPath="yes" />
+                <RemoveFolder Id="DesktopFolder"  On="uninstall"/>
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+
+            <Component Id="FilemakerOdbcDebugger_exe" Guid="{6b036d43-b5f8-40ff-88c8-9bd2336e529a}"> 
+                <File Id="EXE" Source="$(var.App.TargetPath)" />
+            </Component>
+
+            <Component Id="Newtonsoft_dll" Guid="{1a2be155-0984-4a71-b58d-696dca819a61}">
+                <File Source="$(var.App.TargetDir)\Newtonsoft.Json.dll" />
+            </Component>
+
+            <Component Id="CsvHelper_dll" Guid="{c242900e-434e-4018-9ce8-2668fe2895d3}">
+                <File Source="$(var.App.TargetDir)\CsvHelper.dll" />
+            </Component>
+
+            <Component Id="FastColoredTextBox_dll" Guid="{62a4538a-b0f5-4ab3-906e-7dd776648017}">
+                <File Source="$(var.App.TargetDir)\FastColoredTextBox.dll" />
+            </Component>
+            
+		</ComponentGroup>
+
+        <!-- Launch app after installing. Refer: https://stackoverflow.com/a/52092644/737393 -->
+        <CustomAction Id="EXECUTE_AFTER_FINALIZE"
+                      Execute="immediate"
+                      Return="asyncNoWait"
+                      FileKey="EXE"
+                      ExeCommand="" />
+        <InstallExecuteSequence>
+            <Custom Action="EXECUTE_AFTER_FINALIZE" After="InstallFinalize">NOT Installed</Custom>
+        </InstallExecuteSequence>
+        
+	</Fragment>
+
+</Wix>
