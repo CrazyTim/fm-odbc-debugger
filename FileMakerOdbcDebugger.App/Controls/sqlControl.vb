@@ -21,6 +21,7 @@ Public Class SqlControl
         lblLoading.BringToFront() ' Just in case it gets lost in the designer
         SplitContainer1.Panel2Collapsed = True
 
+        Me.DoubleBuffered = True
 
     End Sub
 

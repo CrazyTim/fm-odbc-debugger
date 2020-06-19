@@ -21,6 +21,8 @@ Public Class ResultPanel
 
         DisableSearchBox()
 
+        dgvResults.EnableDoubleBuffering
+
         lblDurationStream.Visible = False
 
     End Sub

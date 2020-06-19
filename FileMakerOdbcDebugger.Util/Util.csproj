@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\Extensions - DataGridView.cs" />
     <Compile Include="Extensions\Extensions - List.cs" />
     <Compile Include="Extensions\Extensions - Forms.cs" />
     <Compile Include="Extensions\Extensions - Int.cs" />
