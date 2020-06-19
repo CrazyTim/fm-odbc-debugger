@@ -6,7 +6,6 @@ Imports System.Text
 Imports FastColoredTextBoxNS
 Imports FileMakerOdbcDebugger.Util.Json
 Imports FileMakerOdbcDebugger.Util.Security
-Imports System.ComponentModel
 
 Module Main
 

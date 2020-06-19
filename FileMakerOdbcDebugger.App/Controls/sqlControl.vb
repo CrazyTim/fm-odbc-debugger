@@ -122,7 +122,7 @@ Public Class SqlControl
 
             If SelectedDriver = SelectedDriverIndex.FileMaker Then
 
-                _Query = FM_PrepSQL(_Query)
+                _Query = FileMaker.PrepareQuery(_Query)
 
             End If
 

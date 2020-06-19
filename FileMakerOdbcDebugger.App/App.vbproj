@@ -177,7 +177,6 @@
     <Compile Include="Controls\SqlControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Modules\Sql.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\ResultPanel.resx">
