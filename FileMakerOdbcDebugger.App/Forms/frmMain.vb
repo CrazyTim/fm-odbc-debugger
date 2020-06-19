@@ -17,13 +17,6 @@ Public Class frmMain
 
     Private Async Sub frmMain_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
 
-        ' Focus on the Find textbox:
-        If e.Control And e.KeyCode = Keys.F Then
-            Dim f1 As Form = TabControl1.SelectedForm
-            Dim u As SqlControl = f1.Controls(0)
-            u.UI_FocusFindTextbox()
-        End If
-
         ' Execute query:
         If e.KeyCode = Keys.F5 Then
             Dim tab As Form = TabControl1.SelectedForm

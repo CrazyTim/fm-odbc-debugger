@@ -41,28 +41,6 @@ Module Main
     Public ReadOnly StyleColor_Maroon As Style = New TextStyle(Brushes.Maroon, Nothing, FontStyle.Regular)
     Public ReadOnly StyleColor_Red As Style = New TextStyle(Brushes.Red, Nothing, FontStyle.Regular)
 
-    Public Enum ExecuteError
-
-        <Description("ERROR: An un-representable DateTime value was returned. FileMaker isn't always strict about datatypes, so its likely that a date field contains a non-date value.")>
-        UnrepresentableDateTimeValue
-
-        <Description("ERROR: null server.")>
-        NullServer
-
-        <Description("ERROR: null database name.")>
-        NullDatabaseName
-
-        <Description("ERROR: null username.")>
-        NullUsername
-
-        <Description("ERROR: null driver name.")>
-        NullDriverName
-
-        <Description("ERROR: null connection string.")>
-        NullConnectionString
-
-    End Enum
-
 #Region "Settings"
 
     Public Class Settings
@@ -118,6 +96,15 @@ Module Main
 
         Return Settings
 
+    End Function
+
+    Public Function CreateDivider(Optional Dock As DockStyle = DockStyle.Bottom) As Label
+        Dim l = New Label
+        l.Height = 1
+        l.BackColor = Color.Silver
+        l.Dock = Dock
+        l.BringToFront()
+        Return l
     End Function
 
 #End Region
