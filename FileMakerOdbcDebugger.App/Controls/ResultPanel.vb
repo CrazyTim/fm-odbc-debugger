@@ -77,23 +77,6 @@ Public Class ResultPanel
 
             End If
 
-            Dim MaxColumnWidth = 150
-
-            For Each c In dgvResults.Columns
-
-                ' Turn on AutoSizeMode so we can get the perfect width for a cell, then turn it off again
-                c.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                Dim autowidth As Integer = c.Width
-                c.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-
-                If autowidth > MaxColumnWidth Then
-                    c.Width = MaxColumnWidth
-                Else
-                    c.Width = autowidth
-                End If
-
-            Next
-
         End If
 
         lblDurationStream.Text = "Stream: " & FormatTime(Result.Duration_Stream)
