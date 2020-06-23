@@ -106,6 +106,10 @@
                 <File Id="EXE" Source="$(var.App.TargetPath)" />
             </Component>
 
+            <Component Id="FilemakerOdbcDebugger_Util" Guid="{e0b0dc11-dd0c-40e5-ad9e-0f046e69ad3f}">
+                <File Source="$(var.App.TargetDir)\FilemakerOdbcDebugger.Util.dll" />
+            </Component>
+
             <Component Id="Newtonsoft_dll" Guid="{1a2be155-0984-4a71-b58d-696dca819a61}">
                 <File Source="$(var.App.TargetDir)\Newtonsoft.Json.dll" />
             </Component>
