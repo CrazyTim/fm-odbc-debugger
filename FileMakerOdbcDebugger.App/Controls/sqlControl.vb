@@ -43,6 +43,8 @@ Public Class SqlControl
 
     Public Async Function Execute() As Threading.Tasks.Task
 
+        If String.IsNullOrWhiteSpace(txtSQL.Text) Then Return
+
         ' Set UI
         Panel_Results.Controls.Clear()  ' Remove old results
         SplitContainer1.Panel2Collapsed = False
