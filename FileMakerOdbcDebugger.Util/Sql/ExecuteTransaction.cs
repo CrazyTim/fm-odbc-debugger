@@ -78,9 +78,6 @@ namespace FileMakerOdbcDebugger.Util {
             [Description("ERROR: null username.")]
             NullUsername,
 
-            [Description("ERROR: null driver name.")]
-            NullDriverName,
-
             [Description("ERROR: null connection string.")]
             NullConnectionString
 

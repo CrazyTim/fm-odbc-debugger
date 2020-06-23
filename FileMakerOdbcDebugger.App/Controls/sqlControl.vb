@@ -108,11 +108,6 @@ Public Class SqlControl
 
             If SelectedDriver = SelectedDriverIndex.Other Then
 
-                If String.IsNullOrWhiteSpace(txtDriverName.Text) Then
-                    _Result.Error = Util.Sql.ExecuteError.NullDriverName.Description
-                    Return
-                End If
-
                 If String.IsNullOrWhiteSpace(ConnectionString) Then
                     _Result.Error = Util.Sql.ExecuteError.NullConnectionString.Description
                     Return
@@ -254,7 +249,7 @@ Public Class SqlControl
     Private Function GetConnectionString() As String
 
         If SelectedDriver = SelectedDriverIndex.Other Then
-            Return "DRIVER={" & txtDriverName.Text & "};" & txtConnectionString.Text
+            Return txtConnectionString.Text
         Else
             Return "DRIVER={FileMaker ODBC};SERVER=" & ServerAddress & ";UID=" & Username & ";PWD=" & Password & ";DATABASE=" & DatabaseName & ";"
         End If
@@ -361,22 +356,16 @@ Public Class SqlControl
 
     End Sub
 
-    Private Sub txtDatabaseName_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtDatabaseName.TextChanged
+    Private Sub txtDatabaseName_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtDatabaseName.TextChanged, txtConnectionString.TextChanged
 
-        UI_RenderTitle()
-
-    End Sub
-
-    Private Sub txtDriverName_TextChanged(sender As Object, e As EventArgs) Handles txtDriverName.TextChanged
-
-        UI_RenderTitle()
+        RaiseEvent_TitleChanged()
 
     End Sub
 
-    Private Sub UI_RenderTitle()
+    Private Sub RaiseEvent_TitleChanged()
 
         If SelectedDriver = SelectedDriverIndex.Other Then
-            RaiseEvent TitleChanged(New TitleChangedArgs(txtDriverName.Text))
+            RaiseEvent TitleChanged(New TitleChangedArgs(txtConnectionString.Text))
         Else
             RaiseEvent TitleChanged(New TitleChangedArgs(txtDatabaseName.Text))
         End If
@@ -644,7 +633,7 @@ Public Class SqlControl
             Panel_Driver_FileMaker.Visible = True
         End If
 
-        UI_RenderTitle()
+        RaiseEvent_TitleChanged()
 
     End Sub
 

@@ -95,10 +95,8 @@ Partial Class SqlControl
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel_Driver_Custom = New System.Windows.Forms.Panel()
-        Me.txtDriverName = New System.Windows.Forms.TextBox()
         Me.txtConnectionString = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel_Driver_FileMaker = New System.Windows.Forms.Panel()
         Me.txtUsername = New System.Windows.Forms.TextBox()
         Me.txtServerIP = New System.Windows.Forms.TextBox()
@@ -667,52 +665,32 @@ Partial Class SqlControl
         '
         'Panel_Driver_Custom
         '
-        Me.Panel_Driver_Custom.Controls.Add(Me.txtDriverName)
         Me.Panel_Driver_Custom.Controls.Add(Me.txtConnectionString)
         Me.Panel_Driver_Custom.Controls.Add(Me.Label10)
-        Me.Panel_Driver_Custom.Controls.Add(Me.Label9)
         Me.Panel_Driver_Custom.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel_Driver_Custom.Location = New System.Drawing.Point(0, 62)
         Me.Panel_Driver_Custom.Name = "Panel_Driver_Custom"
         Me.Panel_Driver_Custom.Size = New System.Drawing.Size(772, 30)
         Me.Panel_Driver_Custom.TabIndex = 2
         '
-        'txtDriverName
-        '
-        Me.txtDriverName.AcceptsReturn = True
-        Me.txtDriverName.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDriverName.Location = New System.Drawing.Point(85, 2)
-        Me.txtDriverName.Name = "txtDriverName"
-        Me.txtDriverName.Size = New System.Drawing.Size(114, 22)
-        Me.txtDriverName.TabIndex = 0
-        '
         'txtConnectionString
         '
         Me.txtConnectionString.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtConnectionString.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtConnectionString.Location = New System.Drawing.Point(312, 2)
+        Me.txtConnectionString.Location = New System.Drawing.Point(114, 2)
         Me.txtConnectionString.Name = "txtConnectionString"
-        Me.txtConnectionString.Size = New System.Drawing.Size(452, 22)
+        Me.txtConnectionString.Size = New System.Drawing.Size(650, 22)
         Me.txtConnectionString.TabIndex = 1
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(205, 5)
+        Me.Label10.Location = New System.Drawing.Point(8, 4)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(106, 15)
         Me.Label10.TabIndex = 23
         Me.Label10.Text = "Connection String:"
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(8, 5)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(76, 15)
-        Me.Label9.TabIndex = 22
-        Me.Label9.Text = "Driver Name:"
         '
         'Panel_Driver_FileMaker
         '
@@ -985,8 +963,6 @@ Partial Class SqlControl
     Friend WithEvents Panel_Driver_FileMaker As Panel
     Friend WithEvents Panel4 As Panel
     Private WithEvents Label10 As Label
-    Private WithEvents txtDriverName As TextBox
-    Private WithEvents Label9 As Label
     Friend WithEvents cmbRowLimit As ComboBox
     Private WithEvents Label8 As Label
     Friend WithEvents lblLoading As Label
