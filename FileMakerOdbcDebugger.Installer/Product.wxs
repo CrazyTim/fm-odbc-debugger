@@ -3,12 +3,13 @@
 
     <?define var.Custom.AppName = "FileMaker ODBC Debugger" ?>
     <?define var.Custom.AppDescription = "Write and test SQL queries for a FileMaker database" ?>
-        
+
+    <!-- Note: the version is referenced from the assembly info of the main project (App) - so you only need to change it in one place. -->
 	<Product
           Id="*"
           Name="$(var.Custom.AppName)"
           Language="1033"
-          Version="1.0.0"
+          Version="!(bind.fileVersion.EXE)" 
           Manufacturer="CrazyTim"
           UpgradeCode="e01cd376-5dfe-489f-9f81-256db9491548">
 
