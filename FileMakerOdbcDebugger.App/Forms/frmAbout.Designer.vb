@@ -24,7 +24,7 @@ Partial Class frmAbout
     Private Sub InitializeComponent()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblVersion = New System.Windows.Forms.Label()
         Me.lblAppTitle = New System.Windows.Forms.Label()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.lblDescription = New System.Windows.Forms.Label()
@@ -38,13 +38,13 @@ Partial Class frmAbout
         Me.Panel2.AutoSize = True
         Me.Panel2.BackColor = System.Drawing.Color.White
         Me.Panel2.Controls.Add(Me.Label6)
-        Me.Panel2.Controls.Add(Me.Label1)
+        Me.Panel2.Controls.Add(Me.lblVersion)
         Me.Panel2.Controls.Add(Me.lblAppTitle)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(9, 9, 9, 10)
-        Me.Panel2.Size = New System.Drawing.Size(429, 101)
+        Me.Panel2.Size = New System.Drawing.Size(384, 101)
         Me.Panel2.TabIndex = 167
         '
         'Label6
@@ -59,17 +59,17 @@ Partial Class frmAbout
         Me.Label6.TabIndex = 166
         Me.Label6.Text = "Copyright © 2020 CrazyTim"
         '
-        'Label1
+        'lblVersion
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(9, 51)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Padding = New System.Windows.Forms.Padding(0, 0, 0, 5)
-        Me.Label1.Size = New System.Drawing.Size(109, 20)
-        Me.Label1.TabIndex = 164
-        Me.Label1.Text = "Version: 2020-04-03"
+        Me.lblVersion.AutoSize = True
+        Me.lblVersion.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblVersion.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblVersion.Location = New System.Drawing.Point(9, 51)
+        Me.lblVersion.Name = "lblVersion"
+        Me.lblVersion.Padding = New System.Windows.Forms.Padding(0, 0, 0, 5)
+        Me.lblVersion.Size = New System.Drawing.Size(97, 20)
+        Me.lblVersion.TabIndex = 164
+        Me.lblVersion.Text = "Version: {version}"
         '
         'lblAppTitle
         '
@@ -91,17 +91,18 @@ Partial Class frmAbout
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 101)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(429, 112)
+        Me.FlowLayoutPanel1.Padding = New System.Windows.Forms.Padding(0, 10, 0, 0)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(384, 122)
         Me.FlowLayoutPanel1.TabIndex = 169
         '
         'lblDescription
         '
         Me.lblDescription.AutoSize = True
         Me.lblDescription.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDescription.Location = New System.Drawing.Point(3, 0)
+        Me.lblDescription.Location = New System.Drawing.Point(3, 10)
         Me.lblDescription.Name = "lblDescription"
         Me.lblDescription.Padding = New System.Windows.Forms.Padding(9, 2, 9, 11)
-        Me.lblDescription.Size = New System.Drawing.Size(422, 58)
+        Me.lblDescription.Size = New System.Drawing.Size(371, 58)
         Me.lblDescription.TabIndex = 173
         Me.lblDescription.Text = "DISCLOSURE:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This program is provided ""as is"" and comes without a warranty of any" &
     " kind. Use at your own risk!"
@@ -110,18 +111,18 @@ Partial Class frmAbout
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(3, 58)
+        Me.Label2.Location = New System.Drawing.Point(3, 68)
         Me.Label2.Name = "Label2"
         Me.Label2.Padding = New System.Windows.Forms.Padding(9, 2, 9, 11)
-        Me.Label2.Size = New System.Drawing.Size(387, 28)
+        Me.Label2.Size = New System.Drawing.Size(289, 43)
         Me.Label2.TabIndex = 177
-        Me.Label2.Text = "For more info see: https://github.com/CrazyTim/fm-odbc-debugger"
+        Me.Label2.Text = "For more info and source code: https://github.com/CrazyTim/fm-odbc-debugger"
         '
         'frmAbout
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(429, 213)
+        Me.ClientSize = New System.Drawing.Size(384, 223)
         Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Controls.Add(Me.Panel2)
         Me.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -142,7 +143,7 @@ Partial Class frmAbout
 
     End Sub
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
-    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents lblVersion As System.Windows.Forms.Label
     Friend WithEvents lblAppTitle As System.Windows.Forms.Label
     Friend WithEvents Label6 As Label
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
