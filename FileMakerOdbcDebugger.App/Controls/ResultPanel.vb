@@ -2,6 +2,8 @@ Imports FileMakerOdbcDebugger.Util
 
 Public Class ResultPanel
 
+    Public _DgvBindingSource As New BindingSource
+
     Private _ColumnRightClicked As Integer = -1
     Private _RowRightClicked As Integer = -1
 
@@ -17,7 +19,7 @@ Public Class ResultPanel
 
         dgvResults.RowHeadersWidth = 35
 
-        dgvResults.DataSource = Nothing
+        dgvResults.DataSource = _DgvBindingSource
 
         DisableSearchBox()
 
@@ -31,29 +33,26 @@ Public Class ResultPanel
 
         If Result.Data.Count > 0 Then
 
-            ' Note: its faster if we populate the datagrid view using a DataSet.
-            Dim DS As New DataSet
-            DS.Tables.Add("SELECT")
-            Dim t = DS.Tables("SELECT")
+            Dim Table = New DataTable
 
             ' Add columns
             For i = 0 To Result.Data(0).Count - 1
 
                 Dim cn As String = Result.Data(0)(i)
-                t.Columns.Add(cn)
+                Table.Columns.Add(cn)
 
                 ' Remove any specail zero-width characters (these ensure non-duplicate column names for the DataSet).
                 Dim ZeroWidthSpace = ChrW(&H200B)
                 cn = cn.Replace(ZeroWidthSpace, "")
 
-                t.Columns(t.Columns.Count - 1).Caption = cn
+                Table.Columns(Table.Columns.Count - 1).Caption = cn
             Next
 
             If Result.Data.Count > 1 Then
                 Dim row As System.Data.DataRow
 
                 For i = 1 To Result.Data.Count - 1
-                    row = t.NewRow
+                    row = Table.NewRow
 
                     Dim s(Result.Data(1).Count - 1) As Object  ' initalise object with same number of rows
 
@@ -61,11 +60,11 @@ Public Class ResultPanel
                         row.Item(j) = Result.Data(i)(j)
                     Next
 
-                    t.Rows.Add(row)
+                    Table.Rows.Add(row)
 
                 Next
 
-                dgvResults.DataSource = t
+                _DgvBindingSource.DataSource = Table
 
             End If
 
