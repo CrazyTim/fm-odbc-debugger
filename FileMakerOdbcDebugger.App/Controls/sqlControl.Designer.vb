@@ -112,7 +112,6 @@ Partial Class SqlControl
         Me.lblLoading = New System.Windows.Forms.Label()
         Me.Panel_Results = New System.Windows.Forms.Panel()
         Me.Panel_Status = New System.Windows.Forms.Panel()
-        Me.lblDurationExecute = New System.Windows.Forms.Label()
         Me.lblDurationConnect = New System.Windows.Forms.Label()
         Me.lblStatus = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
@@ -845,7 +844,6 @@ Partial Class SqlControl
         '
         'Panel_Status
         '
-        Me.Panel_Status.Controls.Add(Me.lblDurationExecute)
         Me.Panel_Status.Controls.Add(Me.lblDurationConnect)
         Me.Panel_Status.Controls.Add(Me.lblStatus)
         Me.Panel_Status.Dock = System.Windows.Forms.DockStyle.Top
@@ -853,17 +851,6 @@ Partial Class SqlControl
         Me.Panel_Status.Name = "Panel_Status"
         Me.Panel_Status.Size = New System.Drawing.Size(772, 21)
         Me.Panel_Status.TabIndex = 23
-        '
-        'lblDurationExecute
-        '
-        Me.lblDurationExecute.AutoSize = True
-        Me.lblDurationExecute.Dock = System.Windows.Forms.DockStyle.Left
-        Me.lblDurationExecute.Location = New System.Drawing.Point(192, 0)
-        Me.lblDurationExecute.Name = "lblDurationExecute"
-        Me.lblDurationExecute.Padding = New System.Windows.Forms.Padding(4, 1, 15, 0)
-        Me.lblDurationExecute.Size = New System.Drawing.Size(125, 16)
-        Me.lblDurationExecute.TabIndex = 30
-        Me.lblDurationExecute.Text = "{duration-execute}"
         '
         'lblDurationConnect
         '
@@ -1008,7 +995,6 @@ Partial Class SqlControl
     Friend WithEvents txtSQL As FastColoredTextBoxNS.FastColoredTextBox
     Friend WithEvents Panel_Results As Panel
     Friend WithEvents Panel_Status As Panel
-    Private WithEvents lblDurationExecute As Label
     Private WithEvents lblDurationConnect As Label
     Private WithEvents lblStatus As Label
 End Class

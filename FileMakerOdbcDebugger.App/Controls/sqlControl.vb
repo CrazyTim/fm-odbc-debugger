@@ -43,6 +43,16 @@ Public Class SqlControl
 
     Public Async Function Execute() As Threading.Tasks.Task
 
+        ' Set UI
+        Panel_Results.Controls.Clear()  ' Remove old results
+        SplitContainer1.Panel2Collapsed = False
+        lblDurationConnect.Visible = False
+        lblStatus.Text = ""
+        Panel1.Enabled = False
+        lblLoading.Visible = True
+        RaiseEvent_TitleChanged()
+        Me.Refresh()
+
         Query_Prepare()
 
         Dim ConnString = GetConnectionString()
@@ -56,27 +66,16 @@ Public Class SqlControl
 
         Query_DisplayResults()
 
+        ' Set UI
+        Panel1.Enabled = True
+        lblLoading.Visible = False
+        RaiseEvent_TitleChanged()
+
     End Function
 
     Public Sub Query_Prepare()
 
         Try
-
-            ' Initalise UI
-
-            ' Remove old ResultPanels
-            Panel_Results.Controls.Clear()
-
-            SplitContainer1.Panel2Collapsed = False
-
-            lblDurationConnect.Visible = False
-            lblDurationExecute.Visible = False
-
-            lblStatus.Text = ""
-            Panel1.Enabled = False
-            Me.Refresh()
-
-            lblLoading.Visible = True
 
             _Result = New Util.Sql.ExecuteTransactionResult
 
@@ -142,9 +141,6 @@ Public Class SqlControl
     End Sub
 
     Public Sub Query_DisplayResults()
-
-        Panel1.Enabled = True
-        lblLoading.Visible = False
 
         ' Show duration:
         lblDurationConnect.Visible = True
@@ -364,11 +360,20 @@ Public Class SqlControl
 
     Private Sub RaiseEvent_TitleChanged()
 
-        If SelectedDriver = SelectedDriverIndex.Other Then
-            RaiseEvent TitleChanged(New TitleChangedArgs(txtConnectionString.Text))
-        Else
-            RaiseEvent TitleChanged(New TitleChangedArgs(txtDatabaseName.Text))
+        Dim NewTitle As String = ""
+
+        ' Prepend asterix to title if query is currently executing:
+        If lblLoading.Visible Then
+            NewTitle &= "*"
         End If
+
+        If SelectedDriver = SelectedDriverIndex.Other Then
+            NewTitle &= txtConnectionString.Text
+        Else
+            NewTitle &= txtDatabaseName.Text
+        End If
+
+        RaiseEvent TitleChanged(New TitleChangedArgs(Me, NewTitle))
 
     End Sub
 
@@ -659,8 +664,10 @@ End Class
 Public Class TitleChangedArgs
 
     Public ReadOnly NewValue As String = ""
+    Public ReadOnly SqlControl As SqlControl
 
-    Public Sub New(ByVal NewTextValue As String)
+    Public Sub New(SqlControl As SqlControl, NewTextValue As String)
+        Me.SqlControl = SqlControl
         Me.NewValue = NewTextValue
     End Sub
 

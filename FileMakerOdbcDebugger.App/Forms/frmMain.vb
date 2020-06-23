@@ -147,7 +147,7 @@ Public Class frmMain
 
     Private Sub Tab_OnDatabaseNameChange(ByVal e As TitleChangedArgs)
 
-        TabControl1.TabPages.SelectedTab.Form.Text = e.NewValue
+        e.SqlControl.Parent.Text = e.NewValue
 
     End Sub
 
