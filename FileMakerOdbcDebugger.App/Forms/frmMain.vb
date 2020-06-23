@@ -75,6 +75,8 @@ Public Class frmMain
         TabControl1.TabCloseButtonImageDisabled = My.Resources.btn_close
         TabControl1.TabCloseButtonImageHot = My.Resources.btn_close
         TabControl1.TabCloseButtonSize = New System.Drawing.Point(16, 16)
+        TabControl1.TabMinimumWidth = 80
+        TabControl1.TabMaximumWidth = 150
         TabControl1.FontBoldOnSelect = False
         TabControl1.TabPages(TabControl1.TabPages.Count - 1).Select() ' select first tab
 
@@ -90,7 +92,7 @@ Public Class frmMain
 
     Private Sub UI_CreateTab(ByVal Settings As Settings, ByVal Copy As Boolean)
 
-        If TabControl1.TabPages.Count = MAX_TABS Then Return ' limit max tabs (gui will bug out)
+        If TabControl1.TabPages.Count = MAX_TABS Then Return
 
         If Settings Is Nothing Then Settings = New Settings
 
