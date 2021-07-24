@@ -22,6 +22,7 @@ namespace FileMakerOdbcDebugger.Util
             {
                 // enum doesn't exist
             }
+
             return "";
         }
     }

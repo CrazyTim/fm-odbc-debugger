@@ -5,14 +5,14 @@ Imports System.IO
 Imports System.Threading.Tasks
 
 Public Class SqlControl
-    Implements Util.Sql.IUiForm
+    Implements IUi
 
     Public Event TitleChanged(ByVal e As TitleChangedArgs)
     Public Event BeginExecute()
 
     Private _Query As String = ""                       ' The query to be executed.
     Private _Statements As List(Of String)                 ' The statements to be executed. 
-    Private _Result As Util.Sql.ExecuteTransactionResult      ' The result of the query.
+    Private _Result As Sql.TransactionResult      ' The result of the query.
 
     Private Sub Me_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 
@@ -24,22 +24,6 @@ Public Class SqlControl
         Me.DoubleBuffered = True
 
     End Sub
-
-    Private Enum ExecuteStatus
-
-        <Description("Connecting...")>
-        Connecting
-
-        <Description("Executing Query. Waiting for response...")>
-        Executing
-
-        <Description("Streaming Data...")>
-        Streaming
-
-        <Description("Error")>
-        [Error]
-
-    End Enum
 
     Public Async Function Execute() As Threading.Tasks.Task
 
@@ -57,12 +41,9 @@ Public Class SqlControl
 
         Query_Prepare()
 
-        Dim ConnString = GetConnectionString()
-        Dim RowsToReturn = Me.RowsToReturn
-
         If String.IsNullOrWhiteSpace(_Result.Error) Then ' There may have been errors when preparing the query (see above).
 
-            Await Task.Run(Sub() Query_Execute(ConnString, RowsToReturn))
+            Await Task.Run(Sub() Query_Execute(ConnectionString:=GetConnectionString(), RowsToReturn:=RowsToReturn))
 
         End If
 
@@ -79,7 +60,7 @@ Public Class SqlControl
 
         Try
 
-            _Result = New Util.Sql.ExecuteTransactionResult
+            _Result = New Util.Sql.TransactionResult
 
 
             If txtSQL.SelectionLength > 0 Then
@@ -88,37 +69,31 @@ Public Class SqlControl
                 _Query = txtSQL.Text ' Execute all.
             End If
 
-            If SelectedDriver = SelectedDriverIndex.FileMaker Then
+            If SelectedDriver = SelectedDriverIndex.Other Then
+
+                If String.IsNullOrWhiteSpace(ConnectionString) Then
+                    _Result.Error = Sql.ExecuteError.NullConnectionString.Description
+                    Return
+                End If
+
+            Else
 
                 If String.IsNullOrWhiteSpace(ServerAddress) Then
-                    _Result.Error = Util.Sql.ExecuteError.NullServer.Description
+                    _Result.Error = Sql.ExecuteError.NullServer.Description
                     Return
                 End If
 
                 If String.IsNullOrWhiteSpace(DatabaseName) Then
-                    _Result.Error = Util.Sql.ExecuteError.NullDatabaseName.Description
+                    _Result.Error = Sql.ExecuteError.NullDatabaseName.Description
                     Return
                 End If
 
                 If String.IsNullOrWhiteSpace(Username) Then
-                    _Result.Error = Util.Sql.ExecuteError.NullUsername.Description
+                    _Result.Error = Sql.ExecuteError.NullUsername.Description
                     Return
                 End If
 
-            End If
-
-            If SelectedDriver = SelectedDriverIndex.Other Then
-
-                If String.IsNullOrWhiteSpace(ConnectionString) Then
-                    _Result.Error = Util.Sql.ExecuteError.NullConnectionString.Description
-                    Return
-                End If
-
-            End If
-
-            If SelectedDriver = SelectedDriverIndex.FileMaker Then
-
-                _Query = FileMaker.PrepareQuery(_Query)
+                _Query = Sql.PrepareQuery(_Query, SelectedDriver = SelectedDriverIndex.FileMaker)
 
             End If
 
@@ -136,17 +111,16 @@ Public Class SqlControl
 
         Dim sw As New System.Diagnostics.Stopwatch
 
-        _Statements = Util.Sql.SplitQueryIntoStatements(_Query)
+        _Statements = Sql.SplitQueryIntoStatements(_Query)
 
-        _Result = Util.Sql.ExecuteTransaction(_Statements, Me, RowsToReturn, ConnectionString)
+        _Result = Sql.ExecuteTransaction(_Statements, Me, RowsToReturn, ConnectionString)
 
     End Sub
 
     Public Sub Query_DisplayResults()
 
-        ' Show duration:
         lblDurationConnect.Visible = True
-        lblDurationConnect.Text = "Connect: " & FormatTime(_Result.Duration_Connect)
+        lblDurationConnect.Text = "Connect: " & _Result.Duration_Connect.ToDisplayString
 
         SplitContainer1.Panel2.Refresh()
 
@@ -154,19 +128,20 @@ Public Class SqlControl
 
             Panel_Results.Controls.Add(CreateDivider(DockStyle.Top))
 
-            Dim c = New TextBox
-            c.Dock = DockStyle.Fill
-            c.Font = txtSQL.Font
-            c.Text = _Result.Error
-            c.BorderStyle = BorderStyle.None
-            c.Multiline = True
-            c.ScrollBars = ScrollBars.Vertical
-            c.BackColor = SystemColors.Control
-            c.ReadOnly = True
+            Dim c = New TextBox With {
+                .Dock = DockStyle.Fill,
+                .Font = txtSQL.Font,
+                .Text = _Result.Error,
+                .BorderStyle = BorderStyle.None,
+                .Multiline = True,
+                .ScrollBars = ScrollBars.Vertical,
+                .BackColor = SystemColors.Control,
+                .ReadOnly = True
+            }
 
             Panel_Results.Controls.Add(c)
 
-            lblStatus.Text = Util.Sql.ExecuteStatus.Error.Description
+            lblStatus.Text = Sql.ExecuteStatus.Error.Description
 
             Return
 
@@ -217,7 +192,7 @@ Public Class SqlControl
 
             rp.UI_RenderRowCount(r.Data.Count - 1, r.RowsAffected, RowsToReturn)
 
-            rp.UI_RenderQueryWarnings(FileMaker.CheckQueryForIssues(_Query))
+            rp.UI_RenderQueryWarnings(Sql.CheckQueryForIssues(_Query, SelectedDriver = SelectedDriverIndex.FileMaker))
 
             Me.Refresh()
 
@@ -230,7 +205,7 @@ Public Class SqlControl
     End Sub
 
     Public Delegate Sub UI_SetStatus_Delegate(Status As String)
-    Private Sub UI_SetStatus(Status As String) Implements Util.Sql.IUiForm.SetStatusLabel
+    Private Sub UI_SetStatus(Status As String) Implements IUi.SetStatusLabel
 
         If Me.InvokeRequired Then
             Dim d As New UI_SetStatus_Delegate(AddressOf UI_SetStatus)
@@ -249,7 +224,7 @@ Public Class SqlControl
         If SelectedDriver = SelectedDriverIndex.Other Then
             Return txtConnectionString.Text
         Else
-            Return "DRIVER={FileMaker ODBC};SERVER=" & ServerAddress & ";UID=" & Username & ";PWD=" & Password & ";DATABASE=" & DatabaseName & ";"
+            Return Common.BuildConnectionString(ServerAddress, Username, Password, DatabaseName)
         End If
 
     End Function
@@ -658,9 +633,6 @@ Public Class SqlControl
         End If
     End Sub
 
-    Private Sub SplitContainer1_Panel2_Paint(sender As Object, e As PaintEventArgs) Handles SplitContainer1.Panel2.Paint
-
-    End Sub
 End Class
 
 Public Class TitleChangedArgs

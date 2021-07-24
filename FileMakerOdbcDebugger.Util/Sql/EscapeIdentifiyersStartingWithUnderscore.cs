@@ -1,6 +1,6 @@
 namespace FileMakerOdbcDebugger.Util
 {
-    public static partial class FileMaker
+    public static partial class Sql
     {
         /// <summary>
         /// Insert double-quotes around identifiyers starting with "_" (which is illegal in odbc, but not for FileMaker).

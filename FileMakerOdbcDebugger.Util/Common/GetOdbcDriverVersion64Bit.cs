@@ -2,7 +2,7 @@ using System;
 
 namespace FileMakerOdbcDebugger.Util
 {
-    public static partial class FileMaker
+    public static partial class Common
     {
         /// <summary>
         /// Return the file version of the driver 'fmodbc64.dll' located in the System32 folder.

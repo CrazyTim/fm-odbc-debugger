@@ -1,11 +1,9 @@
-Imports System.Runtime.CompilerServices
 Imports System.Text.RegularExpressions
-Imports System.IO
-Imports System.Runtime.InteropServices
-Imports System.Text
 Imports FastColoredTextBoxNS
 Imports FileMakerOdbcDebugger.Util.Json
 Imports FileMakerOdbcDebugger.Util.Security
+Imports FileMakerOdbcDebugger.Util.Common
+Imports FileMakerOdbcDebugger.Util.Sql
 
 Module Main
 
@@ -13,25 +11,10 @@ Module Main
     Public ReadOnly Path_Settings As String = Path_AppData & "\settings.json"
     Public ReadOnly Path_LastQuery As String = Path_AppData & "\last-query.sql"
 
-    Public ReadOnly FmOdbcDriverVersion As String = Util.FileMaker.GetOdbcDriverVersion64Bit()
+    Public ReadOnly FmOdbcDriverVersion As String = GetOdbcDriverVersion64Bit()
 
-    Public Const MAX_TABS As Integer = 7 ' Todo: there is a bug with the tab controls, and tabs disapear if they extend beyond the form.
+    Public Const MAX_TABS As Integer = 7 ' todo: there is a bug with the tab controls, and tabs disapear if they extend beyond the form.
 
-    ' Style syntaxes:
-    Public ReadOnly StyleSyntax_String As New Regex("""""|''|"".*?[^\\]""|'.*?[^\\]'", RegexOptions.Compiled)
-    Public ReadOnly StyleSyntax_Number As New Regex("\b\d+[\.]?\d*([eE]\-?\d+)?\b", RegexOptions.Compiled)
-    Public ReadOnly StyleSyntax_Comment1 As New Regex("--.*$", RegexOptions.Multiline Or RegexOptions.Compiled)
-    Public ReadOnly StyleSyntax_Comment2 As New Regex("(/\*.*?\*/)|(/\*.*)", RegexOptions.Singleline Or RegexOptions.Compiled)
-    Public ReadOnly StyleSyntax_Comment3 As New Regex("(/\*.*?\*/)|(.*\*/)", RegexOptions.Singleline Or RegexOptions.RightToLeft Or RegexOptions.Compiled)
-    Public ReadOnly StyleSyntax_Keywords As New Regex("\b(ALTER|CATALOG|CREATE|DELETE|DROP|EXEC|EXECUTE|FROM|IN|INSERT|INTO|OPTION|OUTPUT|SELECT|SET|TRUNCATE|WHERE|WITH|ADD|ARE|AS|ASC|AT|BY|CASE|COLUMN|COMMIT|CONNECT|CURRENT|DEFAULT|DESC|DISTINCT|ELSE|END|EXTERNAL|FETCH|FIRST|FOR|GLOBAL|GO|GOTO|GROUP|HAVING|INDEX|KEY|NO|OF|OFFSET|ON|ONLY|OPEN|ORDER|PERCENT|PRIMARY|ROW|ROWS|TABLE|THEN|TIES|TO|UNION|UNIQUE|UPDATE|VALUE|VALUES|WHEN)\b", RegexOptions.IgnoreCase Or RegexOptions.Compiled)
-    Public ReadOnly StyleSyntax_Operators As New Regex("\b(AND|OR|INNER JOIN|LEFT OUTER JOIN|LIKE|NOT|IS|NULL|BETWEEN|IN|EXISTS|ANY|ALL)\b", RegexOptions.IgnoreCase Or RegexOptions.Compiled)
-    Public ReadOnly StyleSyntax_SpecialKeywords As New Regex("\b(FileMaker_Tables|FileMaker_Fields|ROWMODID|ROWID)\b", RegexOptions.IgnoreCase Or RegexOptions.Compiled)
-    Public ReadOnly StyleSyntax_Functions As New Regex("\b(ABS|ATAN|ATAN2|AVE|AVG|CAST|CEIL|CEILING|CHAR|CHR|CHARACTER_LENGTH|CHAR_LENGTH|COALESCE|CONVERT|COUNT|CURDATE|CURRENT_DATE|CURRENT_TIME|CURRENT_TIMESTAMP|CURRENT_USER|CURTIME|CURTIMESTAMP|DATE|DATEVAL|DAY|DAYNAME|DAYOFWEEK|DEG|DEGREES|EXP|FLOOR|GETAS|HOUR|INT|LEFT|LENGTH|LOWER|LN|LOG|LTRIM|MAX|MIN|MINUTE|MOD|MONTH|MONTHNAME|NULLIF|NUMVAL|PI|PAD|RADIANS|RIGHT|ROUND|RTRIM|SECOND|SIGN|SIN|SPACE|SQRT|STRVAL|SUBSTR|SUBSTRING|SUM|TAN|TIMESTAMPVAL|TIMEVAL|TODAY|TRIM|UPPER|USER|USERNAME|YEAR)\b", RegexOptions.IgnoreCase Or RegexOptions.Compiled)
-    Public ReadOnly StyleSyntax_Types As New Regex("\b(NUMERIC|DECIMAL|INT|DATE|TIME|TIMESTAMP|VARCHAR|CHARACTER VARYING|BLOB|VARBINARY|LONGVARBINARY|BINARY VARYING)\b", RegexOptions.IgnoreCase Or RegexOptions.Compiled)
-    ''' <summary> These keywords don't do anything in FileMaker, but they still can't be used as identifiers. </summary>
-    Public ReadOnly StyleSyntax_ReservedKeywords As New Regex("\b(BIT|BIT_LENGTH|BOOLEAN|DEC|FLOAT|INTEGER|NCHAR|REAL|SMALLINT|TIMEZONE_HOUR|TIMEZONE_MINUTE|WHENEVER|WORK|WRITE|ZONE|VIEW|USAGE|USING|UNKNOWN|TRAILING|TRANSACTION|TRANSLATE|TRANSLATION|TRUE|TEMPORARY|SCHEMA|SCROLL|SECTION|SESSION|SESSION_USER|SIZE|SOME|SQL|SQLCODE|SQLERROR|SQLSTATE|SYSTEM_USER|PRIOR|PRIVILEGES|PROCEDURE|PUBLIC|READ|REFERENCES|RELATIVE|RESTRICT|REVOKE|ROLLBACK|POSITION|PRECISION|PREPARE|PRESERVE|OUTER|OVERLAPS|PART|PARTIAL|OCTET_LENGTH|LANGUAGE|LAST|LEADING|LEVEL|LOCAL|MATCH|MODULE|NAMES|NATIONAL|NATURAL|NEXT|INDICATOR|INITIALLY|INPUT|INSENSITIVE|INTERSECT|INTERVAL|ISOLATION|IDENTITY|IMMEDIATE|GRANT|FOREIGN|FOUND|FULL|GET|EXTRACT|FALSE|ESCAPE|EVERY|EXCEPT|EXCEPTION|DOMAIN|DOUBLE|DESCRIBE|DESCRIPTOR|DIAGNOSTICS|DISCONNECT|DEFERRABLE|DEFERRED|DECLARE|DEALLOCATE|CURSOR|CORRESPONDING|CONTINUE|CONSTRAINT|CONSTRAINTS|CONNECTION|COLLATION|COLLATE|CLOSE|CHECK|CASCADED|CASCADE|BOTH|ASSERTION|AUTHORIZATION|ALLOCATE|ABSOLUTE|ACTION|BEGIN|END_EXEC|INNER|EXCEPTION|JOIN|CROSS)\b", RegexOptions.IgnoreCase Or RegexOptions.Compiled)
-
-    ' Style colors:
     Public ReadOnly StyleColor_Blue As Style = New TextStyle(Brushes.Blue, Nothing, FontStyle.Regular)
     Public ReadOnly StyleColor_Gray As Style = New TextStyle(Brushes.Gray, Nothing, FontStyle.Regular)
     Public ReadOnly StyleColor_GrayStrike As Style = New TextStyle(Brushes.Gray, Nothing, FontStyle.Strikeout)
@@ -125,75 +108,20 @@ Module Main
     Public Sub SetRangeStyle(ByVal Range As FastColoredTextBoxNS.Range)
 
         Range.ClearStyle(StyleColor_Green, StyleColor_Red, StyleColor_Magenta, StyleColor_Blue, StyleColor_Maroon, StyleColor_Gray)
-        Range.SetStyle(StyleColor_Green, StyleSyntax_Comment1)
-        Range.SetStyle(StyleColor_Green, StyleSyntax_Comment2)
-        Range.SetStyle(StyleColor_Green, StyleSyntax_Comment3)
-        Range.SetStyle(StyleColor_Red, StyleSyntax_String)
-        Range.SetStyle(StyleColor_Magenta, StyleSyntax_SpecialKeywords)
-        Range.SetStyle(StyleColor_Gray, StyleSyntax_Operators)
-        Range.SetStyle(StyleColor_Blue, StyleSyntax_Keywords)
-        Range.SetStyle(StyleColor_Magenta, StyleSyntax_Functions)
-        Range.SetStyle(StyleColor_Maroon, StyleSyntax_Types)
-        Range.SetStyle(StyleColor_GrayStrike, StyleSyntax_ReservedKeywords) ' Do last, so we don't override partial syntax of something that is actually supported.
+        Range.SetStyle(StyleColor_Green, Syntax.Filemaker.Comment1)
+        Range.SetStyle(StyleColor_Green, Syntax.Filemaker.Comment2)
+        Range.SetStyle(StyleColor_Green, Syntax.Filemaker.Comment3)
+        Range.SetStyle(StyleColor_Red, Syntax.Filemaker.String)
+        Range.SetStyle(StyleColor_Magenta, Syntax.Filemaker.SpecialKeywords)
+        Range.SetStyle(StyleColor_Gray, Syntax.Filemaker.Operators)
+        Range.SetStyle(StyleColor_Blue, Syntax.Filemaker.Keywords)
+        Range.SetStyle(StyleColor_Magenta, Syntax.Filemaker.Functions)
+        Range.SetStyle(StyleColor_Maroon, Syntax.Filemaker.Types)
+        Range.SetStyle(StyleColor_GrayStrike, Syntax.Filemaker.ReservedKeywords) ' Do last, so we don't override partial syntax of something that is actually supported.
 
         Range.ClearFoldingMarkers()
         Range.SetFoldingMarkers("\bBEGIN\b", "\bEND\b", RegexOptions.IgnoreCase)
         Range.SetFoldingMarkers("/\*", "\*/")
-
-    End Sub
-
-    ''' <summary> Cut off a portion of string form the beginning upto a certain index, and return the removed portion. </summary>
-    <Extension()>
-    Public Function CutStartOffAtIndex(ByRef s As String, ByVal index As Integer) As String
-        Dim v = s.Substring(0, index)
-        s = s.Substring(index)
-        Return v
-    End Function
-
-    Public Function FormatTime(ByVal t As TimeSpan) As String
-        If t.Minutes = 0 Then
-            Return t.Seconds.ToString("#0") & "." & (t.Milliseconds / 10).ToString("00")
-        Else
-            Return t.Minutes.ToString("#0") & ":" & t.Seconds.ToString("#0") & "." & (t.Milliseconds / 10).ToString("00")
-        End If
-    End Function
-
-    Public Sub ExportToExcel(ByVal Data As List(Of List(Of String)))
-
-        ' create a temp file
-        Dim TempFolder As String = System.IO.Path.GetTempPath & "fm-odbc-debugger"
-        IO.Directory.CreateDirectory(TempFolder)
-
-        ' ensure the file name is unique
-        Static FileNumber As Long = 0
-        Dim TempFile As String
-
-        Do
-            TempFile = $"{TempFolder}\export-{FileNumber}.csv"
-            FileNumber += 1
-        Loop While System.IO.File.Exists(TempFile)
-
-        ' write csv data to file
-        Using stream = File.OpenWrite(TempFile)
-            Using writer = New StreamWriter(stream, Text.Encoding.UTF8)
-
-                Using csv = New CsvHelper.CsvWriter(writer, Globalization.CultureInfo.InvariantCulture)
-
-                    For Each row In Data
-
-                        For Each i In row
-                            csv.WriteField(i)
-                        Next
-
-                        csv.NextRecord()
-                    Next
-
-                End Using
-
-            End Using
-        End Using
-
-        Process.Start(TempFile)
 
     End Sub
 

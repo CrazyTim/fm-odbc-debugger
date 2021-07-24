@@ -1,4 +1,6 @@
 Imports FileMakerOdbcDebugger.Util
+Imports FileMakerOdbcDebugger.Util.Common
+Imports FileMakerOdbcDebugger.Util.Extensions
 
 Public Class ResultPanel
 
@@ -29,27 +31,41 @@ Public Class ResultPanel
 
     End Sub
 
-    Public Sub UI_DisplayData(Result As Util.Sql.StatementResult)
+    Public Sub UI_DisplayData(Result As Sql.StatementResult)
 
         If Result.Data.Count > 0 Then
 
             Dim Table = New DataTable
 
-            ' Add columns
-            For i = 0 To Result.Data(0).Count - 1
+            ' Prepare unique column names:
+            ' We can't add duplicate columns to a DataSet, so instead we incrementally append
+            ' a special zero-width space on the end of the column name until its unique.
+            Dim ZeroWidthSpace = ChrW(&H200B) '"\u200B"
+            Dim UniqueColumnNames As New List(Of String)
+            For Each d In Result.Data(0)
 
-                Dim cn As String = Result.Data(0)(i)
-                Table.Columns.Add(cn)
+                Dim ColumnName = d
+                While UniqueColumnNames.Contains(ColumnName)
+                    ColumnName &= ZeroWidthSpace
+                End While
 
-                ' Remove any specail zero-width characters (these ensure non-duplicate column names for the DataSet).
-                Dim ZeroWidthSpace = ChrW(&H200B)
-                cn = cn.Replace(ZeroWidthSpace, "")
-
-                Table.Columns(Table.Columns.Count - 1).Caption = cn
             Next
 
+            ' Add columns:
+            For Each ColumnName In UniqueColumnNames
+
+                Dim NewColumn = New DataColumn With {
+                    .ColumnName = ColumnName,
+                    .Caption = ColumnName.Replace(ZeroWidthSpace, "")
+                }
+                Table.Columns.Add(ColumnName)
+
+            Next
+
+            ' Add rows:
             If Result.Data.Count > 1 Then
-                Dim row As System.Data.DataRow
+
+                Dim row As DataRow
 
                 For i = 1 To Result.Data.Count - 1
                     row = Table.NewRow
@@ -78,15 +94,15 @@ Public Class ResultPanel
 
         End If
 
-        lblDurationStream.Text = "Stream: " & FormatTime(Result.Duration_Stream)
+        lblDurationStream.Text = "Stream: " & Result.Duration_Stream.ToDisplayString
         lblDurationStream.Visible = True
 
-        lblDurationExecute.Text = "Execute: " & FormatTime(Result.Duration_Execute)
+        lblDurationExecute.Text = "Execute: " & Result.Duration_Execute.ToDisplayString
         lblDurationExecute.Visible = True
 
     End Sub
 
-    Public Sub UI_RenderQueryWarnings(ByVal Warnings As List(Of FileMaker.QueryIssue))
+    Public Sub UI_RenderQueryWarnings(ByVal Warnings As List(Of Sql.QueryIssue))
 
         If Warnings.Count = 0 Then
             lblWarning.Visible = False
@@ -237,7 +253,7 @@ Public Class ResultPanel
             Data.Add(Row)
         Next
 
-        ExportToExcel(Data)
+        ExportToCsv(Data)
 
     End Sub
 

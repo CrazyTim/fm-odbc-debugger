@@ -31,12 +31,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=15.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.15.0.1\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,15 +58,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\Extensions - DataGridView.cs" />
-    <Compile Include="Extensions\Extensions - Forms.cs" />
-    <Compile Include="Extensions\Extensions - Int.cs" />
-    <Compile Include="Extensions\Extensions - String.cs" />
-    <Compile Include="Extensions\Extensions - Enum.cs" />
-    <Compile Include="FileMaker\CheckQueryForIssues.cs" />
-    <Compile Include="FileMaker\PrepareQuery.cs" />
-    <Compile Include="FileMaker\GetOdbcDriverVersion64Bit.cs" />
-    <Compile Include="FileMaker\EscapeIdentifiyersStartingWithUnderscore.cs" />
+    <Compile Include="Common\BuildConnectionString.cs" />
+    <Compile Include="Common\ExportToCsv.cs" />
+    <Compile Include="Sql\Syntax.cs" />
+    <Compile Include="Extensions\TimeSpan.cs" />
+    <Compile Include="Interfaces\IUi.cs" />
+    <Compile Include="Extensions\DataGridView.cs" />
+    <Compile Include="Extensions\Form.cs" />
+    <Compile Include="Extensions\Int.cs" />
+    <Compile Include="Extensions\String.cs" />
+    <Compile Include="Extensions\Enum.cs" />
+    <Compile Include="Sql\CheckQueryForIssues.cs" />
+    <Compile Include="Sql\ExecuteError.cs" />
+    <Compile Include="Sql\TransactionResult.cs" />
+    <Compile Include="Sql\ExecuteStatus.cs" />
+    <Compile Include="Sql\PrepareQuery.cs" />
+    <Compile Include="Common\GetOdbcDriverVersion64Bit.cs" />
+    <Compile Include="Sql\EscapeIdentifiyersStartingWithUnderscore.cs" />
     <Compile Include="IO\IO.cs" />
     <Compile Include="Json\Json.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +82,7 @@
     <Compile Include="Sql\SplitQuery.cs" />
     <Compile Include="Sql\SplitQueryIntoStatements.cs" />
     <Compile Include="Sql\ExecuteTransaction.cs" />
+    <Compile Include="Sql\StatementResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

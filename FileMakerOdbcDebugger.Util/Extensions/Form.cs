@@ -10,24 +10,24 @@ namespace FileMakerOdbcDebugger.Util
         /// A thread-safe and reliable method to show a MessageBox over a form.
         /// </summary>
         public static void ShowMsg(
-            this Form f,
+            this Form form,
             string message,
             MessageBoxIcon icon = MessageBoxIcon.Information,
             string title = "")
         {
-            if (f.InvokeRequired)
+            if (form.InvokeRequired)
             {
                 var d = new ShowMsg_Delegate(ShowMsg);
-                f.Invoke(d, new object[] { f, message, icon, title });
+                form.Invoke(d, new object[] { form, message, icon, title });
                 return;
             }
             if (string.IsNullOrEmpty(title))
             {
-                title = f.Text;
+                title = form.Text;
             }
-            if (!f.IsDisposed)
+            if (!form.IsDisposed)
             {
-                MessageBox.Show(f, message, title, MessageBoxButtons.OK, icon);
+                MessageBox.Show(form, message, title, MessageBoxButtons.OK, icon);
             }
         }
     }
