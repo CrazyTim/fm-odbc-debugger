@@ -5,7 +5,7 @@
 
 # FileMaker ODBC Debugger
 
-A tool to help you write and test SQL queries for a FileMaker database while handling some of the limitations and quirks of the driver. It warns you about things to avoid, and supports syntax highlighting for all of FileMakers' reserved keywords (see [full feature list below](#features)).
+A tool to help you write and test SQL queries for a FileMaker database while handling some of the limitations and quirks of the driver. It warns you about things to avoid, and supports syntax highlighting for all of FileMakers' reserved keywords. See [the full feature list](#features).
 
 ## Motivation
 
@@ -15,18 +15,23 @@ To dig deeper with optimising FileMaker queries, refer to [this Stack Overflow t
 
 ## Installing
 
-First get familiar with the [FileMaker ODBC Guide](https://fmhelp.filemaker.com/docs/16/en/fm16_odbc_jdbc_guide.pdf) and follow [these instructions](https://fmhelp.filemaker.com/help/16/fmp/en/#page/FMP_Help%2Fsharing-via-odbc-jdbc.html%23) for sharing your FileMaker database via ODBC.
+Get familiar with the [FileMaker ODBC Guide](https://fmhelp.filemaker.com/docs/16/en/fm16_odbc_jdbc_guide.pdf) and follow [these instructions](https://fmhelp.filemaker.com/help/16/fmp/en/#page/FMP_Help%2Fsharing-via-odbc-jdbc.html%23) for sharing your FileMaker database via ODBC.
 
-- Install the 64bit FileMaker ODBC driver that comes bundled with FileMaker.
-- Download the latest release of [FileMaker ODBC Debugger](https://github.com/CrazyTim/fm-odbc-debugger/releases).
-- Launch FileMaker ODBC Debugger and ensure the correct `Driver` version has been detected. 
-- Enter values for `Server` (name or ip address), `Database` (name), and `Credentials` (username/password). Type your query and then execute it!
+1. [Download](https://github.com/CrazyTim/fm-odbc-debugger/releases) and install the latest release.
+2. Install the 64bit FileMaker ODBC driver that comes bundled with FileMaker.
+3. Run FileMaker ODBC Debugger and ensure the correct `Driver` version has been detected. 
+4. Enter values for `Server` (name or ip address), `Database` (name), and `Credentials` (username/password). 
+5. Type your query and then execute it!
 
-## Technical Notes
+## Building
+
+- Install the [Wix Toolset Visual Studio 2019 Extension](https://marketplace.visualstudio.com/items?itemName=WixToolset.WixToolsetVisualStudio2019Extension).
+
+## Limitations 
 
 - Works with 64 bit drivers only.
-- The FileMaker ODBC Driver doesn't allow you to specify a port other than 2399.
-- Generally ODBC is fast, but in the past there have been issues with executing two or more queries in parallel. Please read [this thread](https://community.claris.com/en/s/question/0D50H00006ezLy6/issue-with-concurrent-odbc-connections-in-fms16-and-fms17) which explains the issue in more detail, and may be fixed in version 19.
+- FileMaker doesn't let you specify a port other than 2399.
+- Some versions of FileMaker [don't allow executing ODBC queries in parallel](https://community.claris.com/en/s/question/0D50H00006ezLy6/issue-with-concurrent-odbc-connections-in-fms16-and-fms17). Apparently this has been fixed in version 19.
 
 ## Features
 
@@ -50,10 +55,6 @@ First get familiar with the [FileMaker ODBC Guide](https://fmhelp.filemaker.com/
 - Highlight NULL values yellow in the query results.
 - Show what version of the FileMaker ODBC driver is installed.
 - Option to manually specify a driver name and connection string (you can use any installed 64bit ODBC driver).
-
-## Compiling
-
-- You will need to install the [Wix Toolset Visual Studio 2019 Extension](https://marketplace.visualstudio.com/items?itemName=WixToolset.WixToolsetVisualStudio2019Extension).
 
 ## Acknowledgements
 - Icon by [David Vignoni](www.iconfinder.com/icons/1230/animal_bug_insect_ladybird_icon), GNU Lesser General Public License (LGPL).
