@@ -5,15 +5,13 @@
 
 # FileMaker ODBC Debugger
 
-Write and test SQL queries for a FileMaker database.
+A tool to help you write and test SQL queries for a FileMaker database while handling some of the limitations and quirks of the driver. It warns you about things to avoid, and supports syntax highlighting for all of FileMakers' reserved keywords (see [full feature list below](#features)).
 
 ## Motivation
 
-FileMaker's ODBC driver has its own flavour of SQL syntax, as well as some lesser-known quirks. This tool helps you write and test SQL queries to a FileMaker database while handling some of these quirks. It also warns you about things to avoid, and supports syntax highlighting for all of FileMakers' reserved keywords (see [full feature list below](#features)).
+FileMaker's ODBC driver has its own flavour of SQL syntax, as well as some lesser-known quirks. In addition, FileMaker ODBC performance can be very slow . To help with performance testing it shows the total execution time split into 3 different times; 'connect', 'execute', and 'stream'. This can sometimes give insight into where the bottleneck is (calculation fields are usually the culprit).
 
-In addition, FileMaker ODBC performance can be very slow, which can often be solved by optimising the query. So to help with performance testing it shows the total execution time split into 3 different times; 'connect', 'execute', and 'stream'. This can sometimes give insight into where the bottleneck is (calculation fields are usually the culprit).
-
-To dig deeper with optimising FileMaker queries, refer to this [article about the `ExecuteSQL` function](https://www.soliantconsulting.com/blog/executesql-filemaker-performance/).
+To dig deeper with optimising FileMaker queries, refer to [this Stack Overflow thread](https://stackoverflow.com/a/13677727/737393), and [this article about the `ExecuteSQL` function](https://www.soliantconsulting.com/blog/executesql-filemaker-performance/).
 
 ## Installing
 
@@ -27,8 +25,8 @@ First get familiar with the [FileMaker ODBC Guide](https://fmhelp.filemaker.com/
 ## Technical Notes
 
 - Works with 64 bit drivers only.
-- Depending on the data, concurrent queries to FileMaker can be very slow. With some experimentation, tweaking, and simplifying the query, you might be able to get it to acceptable speeds. Sadly, support for concurrent queries was [removed in v16 onwards](https://community.claris.com/en/s/question/0D50H00006ezLy6/issue-with-concurrent-odbc-connections-in-fms16-and-fms17), significantly reducing the usefulness of FileMaker's ODBC driver.
 - The FileMaker ODBC Driver doesn't allow you to specify a port other than 2399.
+- Generally ODBC is fast, but in the past there have been issues with executing two or more queries in parallel. Please read [this thread](https://community.claris.com/en/s/question/0D50H00006ezLy6/issue-with-concurrent-odbc-connections-in-fms16-and-fms17) which explains the issue in more detail, and may be fixed in version 19.
 
 ## Features
 
