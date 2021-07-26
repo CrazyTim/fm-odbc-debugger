@@ -3,28 +3,28 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 
-
-namespace FileMakerOdbcDebugger.Util {
-
+namespace FileMakerOdbcDebugger.Util
+{
+    /// <summary>
+    /// See https://stackoverflow.com/a/9034247/737393
+    /// </summary>
     [DebuggerStepThrough]
-    public static class Security {
-
-        // refer: https://stackoverflow.com/a/9034247/737393
-
-        public static string Encrypt(this string text) {
+    public static class Security
+    {
+        public static string Encrypt(this string s)
+        {
             return Convert.ToBase64String(
                 ProtectedData.Protect(
-                    Encoding.Unicode.GetBytes(text), null, DataProtectionScope.CurrentUser)
+                    Encoding.Unicode.GetBytes(s), null, DataProtectionScope.CurrentUser)
                 );
         }
 
-        public static string Derypt(this string text) {
+        public static string Derypt(this string s)
+        {
             return Encoding.Unicode.GetString(
                 ProtectedData.Unprotect(
-                     Convert.FromBase64String(text), null, DataProtectionScope.CurrentUser)
+                     Convert.FromBase64String(s), null, DataProtectionScope.CurrentUser)
                 );
         }
-
     }
-
 }

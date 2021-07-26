@@ -10,7 +10,7 @@ namespace FileMakerOdbcDebugger.Util.Tests {
             public void ReturnsSomething() {
 
                 // Act
-                string actual = Util.FileMaker.GetOdbcDriverVersion64Bit();
+                string actual = Common.GetOdbcDriverVersion64Bit();
 
                 // Assert
                 Assert.False(string.IsNullOrWhiteSpace(actual));

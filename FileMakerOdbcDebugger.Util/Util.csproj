@@ -47,19 +47,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\Extensions - DataGridView.cs" />
-    <Compile Include="Extensions\Extensions - List.cs" />
     <Compile Include="Extensions\Extensions - Forms.cs" />
     <Compile Include="Extensions\Extensions - Int.cs" />
     <Compile Include="Extensions\Extensions - String.cs" />
     <Compile Include="Extensions\Extensions - Enum.cs" />
     <Compile Include="FileMaker\CheckQueryForIssues.cs" />
-    <Compile Include="FileMaker\FileMaker.cs" />
+    <Compile Include="FileMaker\PrepareQuery.cs" />
+    <Compile Include="FileMaker\GetOdbcDriverVersion64Bit.cs" />
+    <Compile Include="FileMaker\EscapeIdentifiyersStartingWithUnderscore.cs" />
     <Compile Include="IO\IO.cs" />
     <Compile Include="Json\Json.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Encrypt.cs" />
+    <Compile Include="Sql\SplitQuery.cs" />
     <Compile Include="Sql\SplitQueryIntoStatements.cs" />
-    <Compile Include="Sql\SplitQueryByStringLiteral.cs" />
     <Compile Include="Sql\ExecuteTransaction.cs" />
   </ItemGroup>
   <ItemGroup>

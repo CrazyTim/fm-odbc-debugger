@@ -4,7 +4,7 @@ namespace FileMakerOdbcDebugger.Util.Tests {
 
     public partial class Sql {
 
-        public class SplitQueryByStringLiteral {
+        public class SplitQuery {
 
             [Theory]
             [InlineData(0, "")]
@@ -16,10 +16,10 @@ namespace FileMakerOdbcDebugger.Util.Tests {
             public void ReturnListWithCorrectCount_Split(int expectedCount, string query) {
 
                 // Act
-                var actual = Util.Sql.SplitQueryByStringLiteral(query);
+                var split = new Util.Sql.SplitQuery(query);
 
                 // Assert
-                Assert.Equal(expectedCount, actual.Parts.Count);
+                Assert.Equal(expectedCount, split.Parts.Count);
 
             }
 
@@ -30,13 +30,13 @@ namespace FileMakerOdbcDebugger.Util.Tests {
             [InlineData("'str''ing'")] // Escaped single quote inside string
             [InlineData("_''_")] // Escaped single quote surrounded by other characters
             [InlineData("''")] // Escaped single quote
-            public void ReturnListWithCorrectCount_Rejoin(string query) {
+            public void ReturnListWithCorrectCount_Join(string query) {
 
                 // Act
-                var actual = Util.Sql.SplitQueryByStringLiteral(query).Rejoin();
+                var split = new Util.Sql.SplitQuery(query);
 
                 // Assert
-                Assert.Equal(query, actual);
+                Assert.Equal(query, split.Join());
 
             }
 

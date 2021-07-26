@@ -78,10 +78,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileMaker\GetOdbcDriverVersion.cs" />
+    <Compile Include="Common\GetOdbcDriverVersion.cs" />
     <Compile Include="IO\PathExists.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sql\SplitQueryByStringLiteral.cs" />
+    <Compile Include="Sql\SplitQuery.cs" />
     <Compile Include="Sql\SplitQueryIntoStatements.cs" />
   </ItemGroup>
   <ItemGroup>
