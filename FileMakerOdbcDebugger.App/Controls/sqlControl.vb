@@ -1,4 +1,3 @@
-Imports System.ComponentModel
 Imports FastColoredTextBoxNS
 Imports FileMakerOdbcDebugger.Util
 Imports System.IO
@@ -10,22 +9,17 @@ Public Class SqlControl
     Public Event TitleChanged(ByVal e As TitleChangedArgs)
     Public Event BeginExecute()
 
-    Private _Query As String = ""                       ' The query to be executed.
-    Private _Statements As List(Of String)                 ' The statements to be executed. 
-    Private _Result As Sql.TransactionResult      ' The result of the query.
-
     Private Sub Me_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 
         txtSQL.Select()
         InitaliseTextBoxSettings(txtSQL)
-        lblLoading.BringToFront() ' Just in case it gets lost in the designer
+        lblLoading.BringToFront() ' Just in case it goes missing in the designer
         SplitContainer1.Panel2Collapsed = True
-
         Me.DoubleBuffered = True
 
     End Sub
 
-    Public Async Function Execute() As Threading.Tasks.Task
+    Public Async Function Execute() As Task
 
         If String.IsNullOrWhiteSpace(txtSQL.Text) Then Return
 
@@ -39,15 +33,25 @@ Public Class SqlControl
         RaiseEvent_TitleChanged()
         Me.Refresh()
 
-        Query_Prepare()
-
-        If String.IsNullOrWhiteSpace(_Result.Error) Then ' There may have been errors when preparing the query (see above).
-
-            Await Task.Run(Sub() Query_Execute(ConnectionString:=GetConnectionString(), RowsToReturn:=RowsToReturn))
-
+        Dim Query As String
+        If txtSQL.SelectionLength > 0 Then
+            Query = txtSQL.SelectedText
+        Else
+            Query = txtSQL.Text
         End If
 
-        Query_DisplayResults()
+        Try
+
+            Dim Transaction = Await ExecuteTransaction(Query)
+
+            Console.WriteLine(Transaction.Query)
+            File.AppendAllText(Path_LastQuery, Transaction.Query)
+
+            DisplayResults(Transaction)
+
+        Catch ex As Exception
+            ParentForm.ShowMsg(ex.Message, MessageBoxIcon.Error)
+        End Try
 
         ' Set UI
         Panel1.Enabled = True
@@ -56,82 +60,63 @@ Public Class SqlControl
 
     End Function
 
-    Public Sub Query_Prepare()
+    Public Async Function ExecuteTransaction(ByVal Query As String) As Task(Of Sql.Transaction)
 
-        Try
+        Dim Tran As New Sql.Transaction
 
-            _Result = New Util.Sql.TransactionResult
+        If SelectedDriver = SelectedDriverIndex.Other Then
 
-
-            If txtSQL.SelectionLength > 0 Then
-                _Query = txtSQL.SelectedText ' Execute selected text.
-            Else
-                _Query = txtSQL.Text ' Execute all.
+            If String.IsNullOrWhiteSpace(ConnectionString) Then
+                Tran.Error = Sql.ExecuteError.NullConnectionString.Description
+                Return Tran
             End If
 
-            If SelectedDriver = SelectedDriverIndex.Other Then
+        Else
 
-                If String.IsNullOrWhiteSpace(ConnectionString) Then
-                    _Result.Error = Sql.ExecuteError.NullConnectionString.Description
-                    Return
-                End If
-
-            Else
-
-                If String.IsNullOrWhiteSpace(ServerAddress) Then
-                    _Result.Error = Sql.ExecuteError.NullServer.Description
-                    Return
-                End If
-
-                If String.IsNullOrWhiteSpace(DatabaseName) Then
-                    _Result.Error = Sql.ExecuteError.NullDatabaseName.Description
-                    Return
-                End If
-
-                If String.IsNullOrWhiteSpace(Username) Then
-                    _Result.Error = Sql.ExecuteError.NullUsername.Description
-                    Return
-                End If
-
-                _Query = Sql.PrepareQuery(_Query, SelectedDriver = SelectedDriverIndex.FileMaker)
-
+            If String.IsNullOrWhiteSpace(ServerAddress) Then
+                Tran.Error = Sql.ExecuteError.NullServer.Description
+                Return Tran
             End If
 
-            ' Debugging
-            Console.WriteLine(_Query)
-            File.AppendAllText(Path_LastQuery, _Query)
+            If String.IsNullOrWhiteSpace(DatabaseName) Then
+                Tran.Error = Sql.ExecuteError.NullDatabaseName.Description
+                Return Tran
+            End If
 
-        Catch ex As Exception
-            ParentForm.ShowMsg(ex.Message, MessageBoxIcon.Error)
-        End Try
+            If String.IsNullOrWhiteSpace(Username) Then
+                Tran.Error = Sql.ExecuteError.NullUsername.Description
+                Return Tran
+            End If
 
-    End Sub
+            Tran.Query = Sql.PrepareQuery(Query, SelectedDriver = SelectedDriverIndex.FileMaker)
 
-    Public Sub Query_Execute(ConnectionString As String, RowsToReturn As Integer)
+            Await Sql.ExecuteTransaction(
+                Tran,
+                Me,
+                RowsToReturn,
+                GetConnectionString())
 
-        Dim sw As New System.Diagnostics.Stopwatch
+        End If
 
-        _Statements = Sql.SplitQueryIntoStatements(_Query)
+        Return Tran
 
-        _Result = Sql.ExecuteTransaction(_Statements, Me, RowsToReturn, ConnectionString)
+    End Function
 
-    End Sub
-
-    Public Sub Query_DisplayResults()
+    Public Sub DisplayResults(Tran As Sql.Transaction)
 
         lblDurationConnect.Visible = True
-        lblDurationConnect.Text = "Connect: " & _Result.Duration_Connect.ToDisplayString
+        lblDurationConnect.Text = "Connect: " & Tran.Duration_Connect.ToDisplayString
 
         SplitContainer1.Panel2.Refresh()
 
-        If Not String.IsNullOrEmpty(_Result.Error) Then
+        If Not String.IsNullOrEmpty(Tran.Error) Then
 
             Panel_Results.Controls.Add(CreateDivider(DockStyle.Top))
 
             Dim c = New TextBox With {
                 .Dock = DockStyle.Fill,
                 .Font = txtSQL.Font,
-                .Text = _Result.Error,
+                .Text = Tran.Error,
                 .BorderStyle = BorderStyle.None,
                 .Multiline = True,
                 .ScrollBars = ScrollBars.Vertical,
@@ -147,22 +132,24 @@ Public Class SqlControl
 
         End If
 
-        Dim SplitDistance = (Panel_Results.Height / _Result.Results.Count)
+        Dim SplitDistance = Panel_Results.Height / Tran.Results.Count
         Dim LastSplitContainer As SplitContainer
 
-        For Each r In _Result.Results
+        For Each r In Tran.Results
 
             Dim thisSplitContainer As SplitContainer
 
             If LastSplitContainer Is Nothing Then
 
-                LastSplitContainer = New SplitContainer
-                LastSplitContainer.Dock = DockStyle.Fill
-                LastSplitContainer.Location = New System.Drawing.Point(0, 1)
-                LastSplitContainer.Size = New System.Drawing.Size(50, 50)
-                LastSplitContainer.Location = New System.Drawing.Point(0, 0)
-                LastSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal
-                LastSplitContainer.Panel2Collapsed = True
+                LastSplitContainer = New SplitContainer With {
+                    .Dock = DockStyle.Fill,
+                    .Location = New Point(0, 1),
+                    .Size = New Size(50, 50),
+                    .Orientation = Orientation.Horizontal,
+                    .Panel2Collapsed = True,
+                    .Left = 0,
+                    .Top = 0
+                }
 
                 Panel_Results.Controls.Add(LastSplitContainer)
                 thisSplitContainer = LastSplitContainer
@@ -171,10 +158,11 @@ Public Class SqlControl
 
                 ' todo: size each split panel evenly
 
-                thisSplitContainer = New SplitContainer
-                thisSplitContainer.Dock = DockStyle.Fill
-                thisSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal
-                thisSplitContainer.Panel2Collapsed = True
+                thisSplitContainer = New SplitContainer With {
+                    .Dock = DockStyle.Fill,
+                    .Orientation = Orientation.Horizontal,
+                    .Panel2Collapsed = True
+                }
 
                 LastSplitContainer.Panel2Collapsed = False
                 LastSplitContainer.Panel2.Controls.Add(thisSplitContainer)
@@ -183,16 +171,16 @@ Public Class SqlControl
 
             End If
 
-            Dim rp As New ResultPanel
-            rp.Dock = DockStyle.Fill
+            Dim rp As New ResultPanel With {
+                .Dock = DockStyle.Fill
+            }
 
             thisSplitContainer.SplitterDistance = SplitDistance
-
             thisSplitContainer.Panel1.Controls.Add(rp)
 
             rp.UI_RenderRowCount(r.Data.Count - 1, r.RowsAffected, RowsToReturn)
 
-            rp.UI_RenderQueryWarnings(Sql.CheckQueryForIssues(_Query, SelectedDriver = SelectedDriverIndex.FileMaker))
+            rp.UI_RenderQueryWarnings(Sql.CheckQueryForIssues(Tran.Query, SelectedDriver = SelectedDriverIndex.FileMaker))
 
             Me.Refresh()
 

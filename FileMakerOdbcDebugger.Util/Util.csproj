@@ -70,7 +70,7 @@
     <Compile Include="Extensions\Enum.cs" />
     <Compile Include="Sql\CheckQueryForIssues.cs" />
     <Compile Include="Sql\ExecuteError.cs" />
-    <Compile Include="Sql\TransactionResult.cs" />
+    <Compile Include="Sql\Transaction.cs" />
     <Compile Include="Sql\ExecuteStatus.cs" />
     <Compile Include="Sql\PrepareQuery.cs" />
     <Compile Include="Common\GetOdbcDriverVersion64Bit.cs" />

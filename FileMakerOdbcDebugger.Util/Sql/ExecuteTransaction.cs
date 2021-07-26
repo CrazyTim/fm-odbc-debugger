@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.Odbc;
+using System.Threading.Tasks;
 
 namespace FileMakerOdbcDebugger.Util
 {
@@ -9,16 +11,17 @@ namespace FileMakerOdbcDebugger.Util
         /// <summary>
         /// Execute one or more SQL statements as a transaction. Roll back the transaction if any of them fail.
         /// </summary>
-        public static TransactionResult ExecuteTransaction(List<string> sqlStatements,
-                                                           IUi ui,
-                                                           int rowLimit,
-                                                           string connectionString)
+        public async static Task ExecuteTransaction(
+            Transaction transaction,
+            IUi ui,
+            int rowLimit,
+            string connectionString)
         {
-            var transactionResult = new TransactionResult();
+            List<string> statements = SplitQueryIntoStatements(transaction.Query);
+            if (statements.Count == 0) return;
+
             var sw = new System.Diagnostics.Stopwatch();
             var currentStatement = "";
-
-            if (sqlStatements.Count == 0) return transactionResult;
 
             try
             {
@@ -28,7 +31,7 @@ namespace FileMakerOdbcDebugger.Util
                     ui.SetStatusLabel(ExecuteStatus.Connecting.Description());
                     sw.Restart();
                     cn.Open();
-                    transactionResult.Duration_Connect = sw.Elapsed;
+                    transaction.Duration_Connect = sw.Elapsed;
                     // END CONNECT
 
                     using (var cmd = new OdbcCommand())
@@ -43,7 +46,7 @@ namespace FileMakerOdbcDebugger.Util
                         {
                             cmd.Transaction = t; // Assign transaction object for a pending local transaction.
 
-                            foreach (var statement in sqlStatements)
+                            foreach (var statement in statements)
                             {
                                 if (string.IsNullOrEmpty(statement)) continue;
                             
@@ -54,13 +57,13 @@ namespace FileMakerOdbcDebugger.Util
 
                                 if (!currentStatement.StartsWith("select", StringComparison.OrdinalIgnoreCase))
                                 {
-                                    statementResult.RowsAffected = cmd.ExecuteNonQuery();
+                                    statementResult.RowsAffected = await cmd.ExecuteNonQueryAsync();
                                     statementResult.Duration_Execute = sw.Elapsed;
                                     // END EXECUTE
                                 }
                                 else
                                 {
-                                    using (var reader = cmd.ExecuteReader())
+                                    using (var reader = await cmd.ExecuteReaderAsync())
                                     {
                                         statementResult.Duration_Execute = sw.Elapsed;
                                         // END EXECUTE
@@ -86,7 +89,7 @@ namespace FileMakerOdbcDebugger.Util
                                         statementResult.RowsAffected = reader.RecordsAffected;
                                     }
                                 }
-                                transactionResult.Results.Add(statementResult);
+                                transaction.Results.Add(statementResult);
                             }
 
                             try
@@ -107,24 +110,22 @@ namespace FileMakerOdbcDebugger.Util
                 if (ex.Message == "Year, Month, and Day parameters describe an un-representable DateTime.")
                 {
                     // filemaker allows importing incorrect data into fields, so we need to catch these errors!
-                    transactionResult.Error = ExecuteError.UnrepresentableDateTimeValue.Description();
+                    transaction.Error = ExecuteError.UnrepresentableDateTimeValue.Description();
                 }
                 else
                 {
-                    transactionResult.Error = ex.Message;
+                    transaction.Error = ex.Message;
                 }
 
-                transactionResult.Error += Environment.NewLine + Environment.NewLine + currentStatement;
+                transaction.Error += Environment.NewLine + Environment.NewLine + currentStatement;
             }
             catch (Exception ex)
             {
-                transactionResult.Error = ex.Message + Environment.NewLine + Environment.NewLine + currentStatement;
+                transaction.Error = ex.Message + Environment.NewLine + Environment.NewLine + currentStatement;
             }
-
-            return transactionResult;
         }
 
-        private static List<string> GetColumns(OdbcDataReader reader)
+        private static List<string> GetColumns(DbDataReader reader)
         {
             var columns = new List<string>();
 
@@ -136,7 +137,7 @@ namespace FileMakerOdbcDebugger.Util
             return columns;
         }
 
-        private static List<string> GetData(OdbcDataReader reader)
+        private static List<string> GetData(DbDataReader reader)
         {
             var data = new List<string>();
 

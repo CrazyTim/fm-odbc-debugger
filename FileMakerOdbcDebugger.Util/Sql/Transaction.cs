@@ -5,8 +5,10 @@ namespace FileMakerOdbcDebugger.Util
 {
     public static partial class Sql
     {
-        public class TransactionResult
+        public class Transaction
         {
+            public string Query { get; set; }
+
             public TimeSpan Duration_Connect { get; set; }
 
             public List<StatementResult> Results { get; set; } = new List<StatementResult>();
