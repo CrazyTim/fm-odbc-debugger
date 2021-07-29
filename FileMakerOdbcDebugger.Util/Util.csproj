@@ -75,7 +75,7 @@
     <Compile Include="Sql\PrepareQuery.cs" />
     <Compile Include="Common\GetOdbcDriverVersion64Bit.cs" />
     <Compile Include="Sql\EscapeIdentifiyersStartingWithUnderscore.cs" />
-    <Compile Include="IO\IO.cs" />
+    <Compile Include="IO\PathExists.cs" />
     <Compile Include="Json\Json.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Encrypt.cs" />

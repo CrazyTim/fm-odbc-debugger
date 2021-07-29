@@ -3,7 +3,7 @@ using System.Text;
 
 namespace FileMakerOdbcDebugger.Util
 {
-    public static class IO
+    public static partial class IO
     {
         // Note: a StringBuilder is required for interops calls that use strings.
         [DllImport("Shlwapi.dll", SetLastError = true, CharSet = CharSet.Auto)]

@@ -18,8 +18,8 @@ namespace FileMakerOdbcDebugger.Util
 
             var split = new Sql.SplitQuery(sqlQuery);
 
-            // Loop over Statements.
             // Clean spaces (just so they print nicely in logs).
+            // Loop over Statements:
             for (int i = 0; i <= split.Parts.Count - 1; i += 2)
             {
                 var s = split.Parts[i];
@@ -40,17 +40,16 @@ namespace FileMakerOdbcDebugger.Util
 
             if (forFileMaker)
             {
-                // Loop over String Literals.
-                // Replace all newline characters with CR (FileMaker only uses CR for newlines).
+                // Loop over String Literals:
                 for (int i = 1; i <= split.Parts.Count - 1; i += 2)
                 {
+                    // Replace all newline characters with CR (FileMaker only uses CR for newlines).
                     var s = split.Parts[i];
                     split.Parts[i] = s.Replace("\r\n", "\r");
                     split.Parts[i] = s.Replace("\n", "\r");
                 }
 
-                // Loop over Statements.
-                // Surround any field names that start with an underscore (_) with double quotes (").
+                // Loop over Statements:
                 for (int i = 0; i <= split.Parts.Count - 1; i += 2)
                 {
                     var s = split.Parts[i];
