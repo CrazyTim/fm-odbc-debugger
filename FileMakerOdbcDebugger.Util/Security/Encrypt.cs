@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -8,8 +7,7 @@ namespace FileMakerOdbcDebugger.Util
     /// <summary>
     /// See https://stackoverflow.com/a/9034247/737393
     /// </summary>
-    [DebuggerStepThrough]
-    public static class Security
+    public static partial class Security
     {
         public static string Encrypt(this string s)
         {
@@ -19,7 +17,7 @@ namespace FileMakerOdbcDebugger.Util
                 );
         }
 
-        public static string Derypt(this string s)
+        public static string Decrypt(this string s)
         {
             return Encoding.Unicode.GetString(
                 ProtectedData.Unprotect(

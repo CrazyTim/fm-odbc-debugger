@@ -71,7 +71,7 @@ Module Main
 
         If Util.IO.PathExists(Path_Settings) Then
 
-            Dim s As String = IO.File.ReadAllText(Path_Settings).Derypt()
+            Dim s As String = IO.File.ReadAllText(Path_Settings).Decrypt()
             Settings = s.FromJson(GetType(List(Of Settings)))
 
         End If
