@@ -37,14 +37,14 @@ namespace FileMakerOdbcDebugger.Util
             var split = new Sql.SplitQuery(sqlQuery);
 
             // Check if there is an odd number of single quotes (') in the query (syntax error):
-            if (sqlQuery.Count(c => c == '/').IsOdd()) issues.Add(QueryIssue.ApostrophesNotEscaped);
+            if (sqlQuery.Count(c => c == '\'').IsOdd()) issues.Add(QueryIssue.ApostrophesNotEscaped);
 
             if (forFileMaker)
             {
                 // Warn about empty string comparisons:
                 foreach (var s in split.Statements)
                 {
-                    if (containsEmptyString1.Match(s).Success | containsEmptyString2.Match(s).Success)
+                    if (containsEmptyString1.Match(s).Success || containsEmptyString2.Match(s).Success)
                     {
                         issues.Add(QueryIssue.EmptyStringComparisonAlwaysReturns0Results);
                         break;
@@ -54,7 +54,7 @@ namespace FileMakerOdbcDebugger.Util
                 // Check for TRUE and FALSE keywords (syntax error):
                 foreach (var s in split.Statements)
                 {
-                    if (containsTrue.Match(s).Success | containsFalse.Match(s).Success)
+                    if (containsTrue.Match(s).Success || containsFalse.Match(s).Success)
                     {
                         issues.Add(QueryIssue.TrueFalseKeywordNotSupported);
                         break;
