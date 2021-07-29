@@ -83,6 +83,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sql\CheckQueryForIssues.cs" />
     <Compile Include="Sql\SplitQuery.cs" />
+    <Compile Include="Sql\EscapeIdentifiyersStartingWithUnderscore.cs" />
     <Compile Include="Sql\SplitQueryIntoStatements.cs" />
   </ItemGroup>
   <ItemGroup>

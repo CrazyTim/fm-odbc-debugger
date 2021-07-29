@@ -1,61 +1,66 @@
+using System.Linq;
+
 namespace FileMakerOdbcDebugger.Util
 {
     public static partial class Sql
     {
+        public static readonly char[] IdentifierStartCharacters = { ' ', ',', '(', '.', '\t', '\r', '\n', '=' };
+        public static readonly char[] IdentifierEndCharacters = { ' ', ',', ')', '.', '\t', '\r', '\n', '=' };
+
         /// <summary>
         /// Insert double-quotes around identifiyers starting with "_" (which is illegal in odbc, but not for FileMaker).
+        /// In FileMaker its common to name fields starting with a underscore (_).
         /// </summary>
-        public static string EscapeIdentifiersStartingWithUnderscore(string sql)
+        public static string EscapeIdentifiersStartingWithUnderscore(string sqlStatement)
         {
-            if (string.IsNullOrEmpty(sql)) return "";
+            if (string.IsNullOrEmpty(sqlStatement)) return "";
 
-            bool flag = false;
-            int startIndex = -1;
-            int endIndex;
+            bool isWordFound = false;
+            int startIndexOfWord = -1;
+            int endIndexOfWord;
 
             // Test first char:
-            if (sql[0] == '_')
+            if (sqlStatement[0] == '_')
             {
-                flag = true;
-                startIndex = 0;
+                isWordFound = true;
+                startIndexOfWord = 0;
             }
 
             // Test middle chars:
             int i = 1;
-            while (i <= sql.Length - 1)
+            while (i <= sqlStatement.Length - 1)
             {
-                if (!flag)
+                var thisChar = sqlStatement[i];
+                var prevChar = sqlStatement[i - 1];
+
+                if (!isWordFound)
                 {
-                    // DETECT START OF WORD:
-                    // The following characters signify the START of a word:
-                    if (sql[i] == '_' & (sql[i - 1] == ' ' | sql[i - 1] == ',' | sql[i - 1] == '(' | sql[i - 1] == '.' | sql[i - 1] == '\t' | sql[i - 1] == '\r' | sql[i - 1] == '\n' | sql[i - 1] == '='))
+                    if (thisChar == '_' & IdentifierStartCharacters.Contains(prevChar))
                     {
-                        flag = true;
-                        startIndex = i;
+                        isWordFound = true;
+                        startIndexOfWord = i;
                     }
                 }
-                // DETECT END OF WORD:
-                // The following characters signify the END of a word:
-                else if (sql[i] == ' ' | sql[i] == ',' | sql[i] == ')' | sql[i] == '.' | sql[i] == '\t' | sql[i] == '\r' | sql[i] == '\n' | sql[i] == '=')
+                else if (IdentifierEndCharacters.Contains(thisChar))
                 {
-                    endIndex = i;
-                    sql = sql.Insert(endIndex, "\"");
-                    sql = sql.Insert(startIndex, "\"");
+                    endIndexOfWord = i;
+                    sqlStatement = sqlStatement.Insert(endIndexOfWord, "\"");
+                    sqlStatement = sqlStatement.Insert(startIndexOfWord, "\"");
                     i += 2;
-                    flag = false;
+                    isWordFound = false;
                 }
                 i += 1;
             }
 
             // Test last char:
-            if (flag)
+            if (isWordFound)
             {
-                endIndex = sql.Length;
-                sql = sql.Insert(endIndex, "\"");
-                sql = sql.Insert(startIndex, "\"");
+                endIndexOfWord = sqlStatement.Length;
+                sqlStatement = sqlStatement.Insert(endIndexOfWord, "\"");
+                sqlStatement = sqlStatement.Insert(startIndexOfWord, "\"");
             }
 
-            return sql;
+            return sqlStatement;
         }
     }
 }
