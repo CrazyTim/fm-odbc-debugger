@@ -7,12 +7,12 @@ namespace FileMakerOdbcDebugger.Util.Tests
         public class CheckQueryForIssues
         {
             [Theory]
-            [InlineData(Util.Sql.QueryIssue.EmptyStringComparisonAlwaysReturns0Results, "SELECT * FROM test WHERE column = ''")]
-            [InlineData(Util.Sql.QueryIssue.EmptyStringComparisonAlwaysReturns0Results, "SELECT * FROM test WHERE column <> ''")]
-            [InlineData(Util.Sql.QueryIssue.TrueFalseKeywordNotSupported, "SELECT * FROM test WHERE column = TRUE")]
-            [InlineData(Util.Sql.QueryIssue.TrueFalseKeywordNotSupported, "SELECT * FROM test WHERE column = FALSE")]
-            [InlineData(Util.Sql.QueryIssue.ApostrophesNotEscaped, "SELECT ''' FROM test")]
-            [InlineData(Util.Sql.QueryIssue.BetweenKeywordIsVerySlow, "WHERE column BETWEEN x AND y")]
+            [InlineData(Util.Sql.QueryIssue.EmptyStringComparisonAlwaysReturnsZeroResults, "WHERE column = ''")]
+            [InlineData(Util.Sql.QueryIssue.EmptyStringComparisonAlwaysReturnsZeroResults, "WHERE column <> ''")]
+            [InlineData(Util.Sql.QueryIssue.TrueFalseKeywordNotSupported, "WHERE column = TRUE")]
+            [InlineData(Util.Sql.QueryIssue.TrueFalseKeywordNotSupported, "WHERE column = FALSE")]
+            [InlineData(Util.Sql.QueryIssue.ApostrophesNotEscaped, "'''")]
+            [InlineData(Util.Sql.QueryIssue.BetweenKeywordIsVerySlow, "WHERE column BETWEEN x")]
             public void Query_contains_issue(Util.Sql.QueryIssue expectedIssue, string query)
             {
                 // Act
@@ -23,10 +23,14 @@ namespace FileMakerOdbcDebugger.Util.Tests
             }
 
             [Theory]
-            [InlineData(Util.Sql.QueryIssue.TrueFalseKeywordNotSupported, "SELECT '= TRUE' FROM test")]
-            [InlineData(Util.Sql.QueryIssue.TrueFalseKeywordNotSupported, "SELECT '= FALSE' FROM test")]
-            [InlineData(Util.Sql.QueryIssue.ApostrophesNotEscaped, "SELECT '' FROM test")]
-            [InlineData(Util.Sql.QueryIssue.BetweenKeywordIsVerySlow, "SELECT 'BETWEEN' FROM test")]
+            [InlineData(Util.Sql.QueryIssue.EmptyStringComparisonAlwaysReturnsZeroResults, "")]
+            [InlineData(Util.Sql.QueryIssue.TrueFalseKeywordNotSupported, "")]
+            [InlineData(Util.Sql.QueryIssue.TrueFalseKeywordNotSupported, "SELECT '= TRUE'")]
+            [InlineData(Util.Sql.QueryIssue.TrueFalseKeywordNotSupported, "SELECT '= FALSE'")]
+            [InlineData(Util.Sql.QueryIssue.ApostrophesNotEscaped, "")]
+            [InlineData(Util.Sql.QueryIssue.ApostrophesNotEscaped, "''")]
+            [InlineData(Util.Sql.QueryIssue.BetweenKeywordIsVerySlow, "")]
+            [InlineData(Util.Sql.QueryIssue.BetweenKeywordIsVerySlow, "SELECT 'WHERE column BETWEEN x'")]
             public void Query_does_not_contain_issue(Util.Sql.QueryIssue expectedIssue, string query)
             {
                 // Act

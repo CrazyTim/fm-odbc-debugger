@@ -10,7 +10,7 @@ namespace FileMakerOdbcDebugger.Util
         public enum QueryIssue
         {
             [Description("Warning: FileMaker stores empty strings as NULL, so using \"WHERE column = ''\" or \"WHERE column <> ''\" on a \"Text\" field will always return 0 results. Use \"IS NULL\" instead.")]
-            EmptyStringComparisonAlwaysReturns0Results,
+            EmptyStringComparisonAlwaysReturnsZeroResults,
 
             [Description("Syntax error: FileMaker ODBC does not support the keywords \"TRUE\" or \"FALSE\". Use \"1\" or \"0\" instead.")]
             TrueFalseKeywordNotSupported,
@@ -22,11 +22,10 @@ namespace FileMakerOdbcDebugger.Util
             BetweenKeywordIsVerySlow,
         }
 
-        private static readonly Regex containsEmptyString1 = new Regex(@"WHERE[\s\S]*=[\s\S]*''", RegexOptions.IgnoreCase);
-        private static readonly Regex containsEmptyString2 = new Regex(@"WHERE[\s\S]*<>[\s\S]*''", RegexOptions.IgnoreCase);
-        private static readonly Regex containsTrue = new Regex(@"=\s*?TRUE", RegexOptions.IgnoreCase);
-        private static readonly Regex containsFalse = new Regex(@"=\s*?FALSE", RegexOptions.IgnoreCase);
-        private static readonly Regex containsBetween = new Regex(@"\b(" + "BETWEEN" + @")\b", RegexOptions.IgnoreCase);
+        private static readonly string whereClause = @"(?<=WHERE\s.*)\w+\s+((<>)|=)\s*";
+        private static readonly Regex containsEmptyStringComparison = new Regex(whereClause + "''", RegexOptions.IgnoreCase);
+        private static readonly Regex containsTrueOrFalse = new Regex(whereClause + "((TRUE)|(FALSE))", RegexOptions.IgnoreCase);
+        private static readonly Regex containsBetween = new Regex(@"\bBETWEEN\b", RegexOptions.IgnoreCase);
 
         /// <summary>
         /// Check a SQL query for certain issues.
@@ -44,9 +43,9 @@ namespace FileMakerOdbcDebugger.Util
                 // Warn about empty string comparisons:
                 foreach (var s in split.Statements)
                 {
-                    if (containsEmptyString1.Match(s).Success || containsEmptyString2.Match(s).Success)
+                    if (containsEmptyStringComparison.Match(s).Success)
                     {
-                        issues.Add(QueryIssue.EmptyStringComparisonAlwaysReturns0Results);
+                        issues.Add(QueryIssue.EmptyStringComparisonAlwaysReturnsZeroResults);
                         break;
                     }
                 }
@@ -54,7 +53,7 @@ namespace FileMakerOdbcDebugger.Util
                 // Check for TRUE and FALSE keywords (syntax error):
                 foreach (var s in split.Statements)
                 {
-                    if (containsTrue.Match(s).Success || containsFalse.Match(s).Success)
+                    if (containsTrueOrFalse.Match(s).Success)
                     {
                         issues.Add(QueryIssue.TrueFalseKeywordNotSupported);
                         break;
