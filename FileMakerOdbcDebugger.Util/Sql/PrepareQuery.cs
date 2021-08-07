@@ -16,44 +16,42 @@ namespace FileMakerOdbcDebugger.Util
             sqlQuery = inlineComments.Replace(sqlQuery, "");
             sqlQuery = multilineComments.Replace(sqlQuery, "");
 
-            var split = new Sql.SplitQuery(sqlQuery);
+            var split = new SplitQuery(sqlQuery);
 
             // Clean spaces (just so they print nicely in logs).
-            // Loop over Statements:
-            for (int i = 0; i <= split.Parts.Count - 1; i += 2)
+            foreach (var s in split.Parts)
             {
-                var s = split.Parts[i];
+                if (s.Type == SqlPartType.Other)
+                {
+                    // Replace double spaces with a single space:
+                    while (s.Value.Contains("  "))
+                    {
+                        s.Value = s.Value.Replace("  ", " ");
+                    }
 
-                // Replace double spaces with a single space:
-                while (s.Contains("  "))
-                {
-                    split.Parts[i] = s.Replace("  ", " ");
-                }
-                    
-                // Remove single white spaces after a new line.
-                // Note: we preserve new lines so its still easy to read when debugging.
-                while (s.Contains("\r\n "))
-                {
-                    split.Parts[i] = s.Replace("\r\n ", "\r\n");
+                    // Remove single white spaces after a new line.
+                    // Note: we preserve new lines so its still easy to read when debugging.
+                    s.Value.Replace("\r\n ", "\r\n");
                 }
             }
 
             if (forFileMaker)
             {
-                // Loop over String Literals:
-                for (int i = 1; i <= split.Parts.Count - 1; i += 2)
+                foreach (var s in split.Parts)
                 {
-                    // Replace all newline characters with CR (FileMaker only uses CR for newlines).
-                    var s = split.Parts[i];
-                    split.Parts[i] = s.Replace("\r\n", "\r");
-                    split.Parts[i] = s.Replace("\n", "\r");
-                }
-
-                // Loop over Statements:
-                for (int i = 0; i <= split.Parts.Count - 1; i += 2)
-                {
-                    var s = split.Parts[i];
-                    split.Parts[i] = EscapeIdentifiersStartingWithUnderscore(s);
+                    if (s.Type == SqlPartType.StringLiteral)
+                    {
+                        // Replace all newline characters with CR (FileMaker only uses CR for newlines).
+                        while (s.Value.Contains("\r\n"))
+                        {
+                            s.Value = s.Value.Replace("\r\n", "\r");
+                        }
+                        s.Value.Replace("\n", "\r");
+                    }
+                    if (s.Type == SqlPartType.Other)
+                    {
+                        s.Value = EscapeIdentifiersStartingWithUnderscore(s.Value);
+                    }
                 }
             }
 

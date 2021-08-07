@@ -36,14 +36,19 @@ namespace FileMakerOdbcDebugger.Util
             var split = new Sql.SplitQuery(sqlQuery);
 
             // Check if there is an odd number of single quotes (') in the query (syntax error):
-            if (sqlQuery.Count(c => c == '\'').IsOdd()) issues.Add(QueryIssue.ApostrophesNotEscaped);
+            if (sqlQuery.Count(c => c == '\'').IsOdd())
+            {
+                issues.Add(QueryIssue.ApostrophesNotEscaped);
+                return issues; // No point in contining, other checks will be wrong until this is fixed.
+            }
 
             if (forFileMaker)
             {
                 // Warn about empty string comparisons:
-                foreach (var s in split.Statements)
+                foreach (var i in split.Parts)
                 {
-                    if (containsEmptyStringComparison.Match(s).Success)
+                    if (i.Type == SqlPartType.Other &&
+                        containsEmptyStringComparison.Match(i.Value).Success)
                     {
                         issues.Add(QueryIssue.EmptyStringComparisonAlwaysReturnsZeroResults);
                         break;
@@ -51,9 +56,10 @@ namespace FileMakerOdbcDebugger.Util
                 }
 
                 // Check for TRUE and FALSE keywords (syntax error):
-                foreach (var s in split.Statements)
+                foreach (var i in split.Parts)
                 {
-                    if (containsTrueOrFalse.Match(s).Success)
+                    if (i.Type == SqlPartType.Other &&
+                        containsTrueOrFalse.Match(i.Value).Success)
                     {
                         issues.Add(QueryIssue.TrueFalseKeywordNotSupported);
                         break;
@@ -61,9 +67,10 @@ namespace FileMakerOdbcDebugger.Util
                 }
 
                 // Warn about the BETWEEN statement:
-                foreach (var s in split.Statements)
+                foreach (var i in split.Parts)
                 {
-                    if (containsBetween.Match(s).Success)
+                    if (i.Type == SqlPartType.Other &&
+                        containsBetween.Match(i.Value).Success)
                     {
                         issues.Add(QueryIssue.BetweenKeywordIsVerySlow);
                         break;

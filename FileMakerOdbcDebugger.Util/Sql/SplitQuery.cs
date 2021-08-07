@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 
 namespace FileMakerOdbcDebugger.Util
 {
@@ -15,33 +14,30 @@ namespace FileMakerOdbcDebugger.Util
         /// </summary>
         public class SplitQuery
         {
-            public List<string> Parts { get; set; }
+            public List<SqlPart> Parts { get; set; } = new List<SqlPart>();
 
             public SplitQuery(string sqlQuery)
             {
-                Parts = new List<string>();
-
+                var tempParts = new List<string>();
                 var singleQuote = '\'';
 
                 if (string.IsNullOrEmpty(sqlQuery)) return;
 
-                // If query starts with a single quote, but its not an escape, add an empty string before it so string literals are always at even numbered indexes.
+                // If query starts with a single quote and its not an escape (even though this is not a valid query),
+                // add an empty string before it so string literals are always at even numbered indexes.
                 if (sqlQuery[0] == singleQuote && sqlQuery[1] != singleQuote)
                 {
-                    Parts.Add("");
+                    tempParts.Add("");
                 }
 
-                if (sqlQuery.Length >= 2)
+                if (sqlQuery.Length >= 2) // Note: query must be at least two chars long because we look ahead one char.
                 {
-                    // Note: query has to be at least two chars long because we look ahead one char.
-
                     var i = 0;
 
                     while (i < sqlQuery.Length)
                     {
                         if ((sqlQuery[i]) == singleQuote)
                         {
-
                             if (i == sqlQuery.Length - 1)
                             {
                                 // Trim last single quote.
@@ -63,7 +59,7 @@ namespace FileMakerOdbcDebugger.Util
                                 continue;
                             }
 
-                            Parts.Add(sqlQuery.Substring(0, i));
+                            tempParts.Add(sqlQuery.Substring(0, i));
                             sqlQuery = sqlQuery.TrimNCharsFromStart(i + 1);
                             i = 0;
                         }
@@ -72,30 +68,19 @@ namespace FileMakerOdbcDebugger.Util
                     }
                 }
 
-                Parts.Add(sqlQuery); // Add remainder
-            }
+                tempParts.Add(sqlQuery); // Add remainder
 
-            public List<string> Statements
-            {
-                get { return GetParts(0); }
-            }
-
-            public List<string> StringLiterals
-            {
-                get { return GetParts(1); }
-            }
-
-            private List<string> GetParts(int partType)
-            {
-                var r = new List<string>();
-
-                for (var i = partType; i < Parts.Count; i++)
+                // Create Parts
+                for (int i = 0; i < tempParts.Count; i += 1)
                 {
-                    r.Add(Parts[i]);
-                    i += 2;
-                }
+                    if (i == 0 && tempParts[i] == "") continue; // Skip empty first string.
 
-                return r;
+                    Parts.Add(new SqlPart()
+                    {
+                        Type = (i + 1).IsOdd() ? SqlPartType.Other : SqlPartType.StringLiteral,
+                        Value = tempParts[i],
+                    });
+                }
             }
 
             /// <summary>
@@ -104,13 +89,29 @@ namespace FileMakerOdbcDebugger.Util
             public string Join()
             {
                 if (Parts.Count == 0) return "";
-
-                var joined = string.Join("'", Parts.ToArray<string>()) + "'";
-
-                if (Parts.Count.IsOdd()) joined = joined.TrimNCharsFromEnd(1);
-
-                return joined;
+                return string.Join("", Parts);
             }
+        }
+
+        public class SqlPart
+        {
+            public SqlPartType Type { get; set; }
+            public string Value { get; set; }
+
+            public override string ToString()
+            {
+                if (Type == SqlPartType.StringLiteral)
+                {
+                    return "'" + Value + "'";
+                }
+                return Value;
+            }
+        }
+
+        public enum SqlPartType
+        {
+            StringLiteral,
+            Other,
         }
     }
 }
