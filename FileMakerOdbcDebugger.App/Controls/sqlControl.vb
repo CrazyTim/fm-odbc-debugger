@@ -60,41 +60,37 @@ Public Class SqlControl
 
     End Function
 
-    Public Async Function ExecuteTransaction(ByVal Query As String) As Task(Of Sql.Transaction)
+    Public Async Function ExecuteTransaction(ByVal Query As String) As Task(Of SqlTransaction)
 
-        Dim Tran As New Sql.Transaction
+        Dim Tran As New SqlTransaction
 
         If SelectedDriver = SelectedDriverIndex.Other Then
 
             If String.IsNullOrWhiteSpace(ConnectionString) Then
-                Tran.Error = Sql.ExecuteError.NullConnectionString.Description
+                Tran.Error = SqlTransaction.ExecuteError.NullConnectionString.Description
                 Return Tran
             End If
 
         Else
 
             If String.IsNullOrWhiteSpace(ServerAddress) Then
-                Tran.Error = Sql.ExecuteError.NullServer.Description
+                Tran.Error = SqlTransaction.ExecuteError.NullServer.Description
                 Return Tran
             End If
 
             If String.IsNullOrWhiteSpace(DatabaseName) Then
-                Tran.Error = Sql.ExecuteError.NullDatabaseName.Description
+                Tran.Error = SqlTransaction.ExecuteError.NullDatabaseName.Description
                 Return Tran
             End If
 
             If String.IsNullOrWhiteSpace(Username) Then
-                Tran.Error = Sql.ExecuteError.NullUsername.Description
+                Tran.Error = SqlTransaction.ExecuteError.NullUsername.Description
                 Return Tran
             End If
 
             Tran.Query = SqlQuery.Prepare(Query, SelectedDriver = SelectedDriverIndex.FileMaker)
 
-            Await Sql.ExecuteTransaction(
-                Tran,
-                Me,
-                RowsToReturn,
-                GetConnectionString())
+            Await Tran.Execute(Me, RowsToReturn, GetConnectionString())
 
         End If
 
@@ -102,7 +98,7 @@ Public Class SqlControl
 
     End Function
 
-    Public Sub DisplayResults(Tran As Sql.Transaction)
+    Public Sub DisplayResults(Tran As SqlTransaction)
 
         lblDurationConnect.Visible = True
         lblDurationConnect.Text = "Connect: " & Tran.Duration_Connect.ToDisplayString
@@ -126,7 +122,7 @@ Public Class SqlControl
 
             Panel_Results.Controls.Add(c)
 
-            lblStatus.Text = Sql.ExecuteStatus.Error.Description
+            lblStatus.Text = SqlTransaction.ExecuteStatus.Error.Description
 
             Return
 

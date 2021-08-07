@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FileMakerOdbcDebugger.Util
 {
-    public static partial class Sql
+    public partial class SqlTransaction
     {
         public class StatementResult
         {

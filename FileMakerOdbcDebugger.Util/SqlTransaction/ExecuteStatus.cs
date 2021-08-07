@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace FileMakerOdbcDebugger.Util
 {
-    public static partial class Sql
+    public partial class SqlTransaction
     {
         public enum ExecuteStatus
         {

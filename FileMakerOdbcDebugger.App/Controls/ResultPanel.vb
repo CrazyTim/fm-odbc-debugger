@@ -31,7 +31,7 @@ Public Class ResultPanel
 
     End Sub
 
-    Public Sub UI_DisplayData(Result As Sql.StatementResult)
+    Public Sub UI_DisplayData(Result As SqlTransaction.StatementResult)
 
         If Result.Data.Count > 0 Then
 

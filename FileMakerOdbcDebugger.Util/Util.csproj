@@ -72,9 +72,9 @@
     <Compile Include="Extensions\String.cs" />
     <Compile Include="Extensions\Enum.cs" />
     <Compile Include="SqlQuery\CheckForIssues.cs" />
-    <Compile Include="Sql\ExecuteError.cs" />
-    <Compile Include="Sql\Transaction.cs" />
-    <Compile Include="Sql\ExecuteStatus.cs" />
+    <Compile Include="SqlTransaction\ExecuteError.cs" />
+    <Compile Include="SqlTransaction\Transaction.cs" />
+    <Compile Include="SqlTransaction\ExecuteStatus.cs" />
     <Compile Include="SqlQuery\Prepare.cs" />
     <Compile Include="Common\GetOdbcDriverVersion64Bit.cs" />
     <Compile Include="SqlQuery\RemoveComments.cs" />
@@ -84,8 +84,8 @@
     <Compile Include="Security\Encrypt.cs" />
     <Compile Include="SqlQuery\Split.cs" />
     <Compile Include="SqlQuery\SplitIntoStatements.cs" />
-    <Compile Include="Sql\ExecuteTransaction.cs" />
-    <Compile Include="Sql\StatementResult.cs" />
+    <Compile Include="SqlTransaction\Execute.cs" />
+    <Compile Include="SqlTransaction\StatementResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

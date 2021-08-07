@@ -6,18 +6,17 @@ using System.Threading.Tasks;
 
 namespace FileMakerOdbcDebugger.Util
 {
-    public static partial class Sql
+    public partial class SqlTransaction
     {
         /// <summary>
         /// Execute one or more SQL statements as a transaction. Roll back the transaction if any of them fail.
         /// </summary>
-        public async static Task ExecuteTransaction(
-            Transaction transaction,
+        public async Task Execute(
             IUi ui,
             int rowLimit,
             string connectionString)
         {
-            List<string> statements = SqlQuery.SplitIntoStatements(transaction.Query);
+            List<string> statements = SqlQuery.SplitIntoStatements(Query);
             if (statements.Count == 0) return;
 
             var sw = new System.Diagnostics.Stopwatch();
@@ -31,7 +30,7 @@ namespace FileMakerOdbcDebugger.Util
                     ui.SetStatusLabel(ExecuteStatus.Connecting.Description());
                     sw.Restart();
                     cn.Open();
-                    transaction.Duration_Connect = sw.Elapsed;
+                    Duration_Connect = sw.Elapsed;
                     // END CONNECT
 
                     using (var cmd = new OdbcCommand())
@@ -89,7 +88,7 @@ namespace FileMakerOdbcDebugger.Util
                                         statementResult.RowsAffected = reader.RecordsAffected;
                                     }
                                 }
-                                transaction.Results.Add(statementResult);
+                                Results.Add(statementResult);
                             }
 
                             try
@@ -110,18 +109,18 @@ namespace FileMakerOdbcDebugger.Util
                 if (ex.Message == "Year, Month, and Day parameters describe an un-representable DateTime.")
                 {
                     // filemaker allows importing incorrect data into fields, so we need to catch these errors!
-                    transaction.Error = ExecuteError.UnrepresentableDateTimeValue.Description();
+                    Error = ExecuteError.UnrepresentableDateTimeValue.Description();
                 }
                 else
                 {
-                    transaction.Error = ex.Message;
+                    Error = ex.Message;
                 }
 
-                transaction.Error += Environment.NewLine + Environment.NewLine + currentStatement;
+                Error += Environment.NewLine + Environment.NewLine + currentStatement;
             }
             catch (Exception ex)
             {
-                transaction.Error = ex.Message + Environment.NewLine + Environment.NewLine + currentStatement;
+                Error = ex.Message + Environment.NewLine + Environment.NewLine + currentStatement;
             }
         }
 
