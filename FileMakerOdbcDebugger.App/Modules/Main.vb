@@ -3,7 +3,7 @@ Imports FastColoredTextBoxNS
 Imports FileMakerOdbcDebugger.Util.Json
 Imports FileMakerOdbcDebugger.Util.Security
 Imports FileMakerOdbcDebugger.Util.Common
-Imports FileMakerOdbcDebugger.Util.Sql
+Imports FileMakerOdbcDebugger.Util.SqlSyntax
 
 Module Main
 
@@ -108,16 +108,16 @@ Module Main
     Public Sub SetRangeStyle(ByVal Range As FastColoredTextBoxNS.Range)
 
         Range.ClearStyle(StyleColor_Green, StyleColor_Red, StyleColor_Magenta, StyleColor_Blue, StyleColor_Maroon, StyleColor_Gray)
-        Range.SetStyle(StyleColor_Green, Syntax.Filemaker.Comment1)
-        Range.SetStyle(StyleColor_Green, Syntax.Filemaker.Comment2)
-        Range.SetStyle(StyleColor_Green, Syntax.Filemaker.Comment3)
-        Range.SetStyle(StyleColor_Red, Syntax.Filemaker.String)
-        Range.SetStyle(StyleColor_Magenta, Syntax.Filemaker.SpecialKeywords)
-        Range.SetStyle(StyleColor_Gray, Syntax.Filemaker.Operators)
-        Range.SetStyle(StyleColor_Blue, Syntax.Filemaker.Keywords)
-        Range.SetStyle(StyleColor_Magenta, Syntax.Filemaker.Functions)
-        Range.SetStyle(StyleColor_Maroon, Syntax.Filemaker.Types)
-        Range.SetStyle(StyleColor_GrayStrike, Syntax.Filemaker.ReservedKeywords) ' Do last, so we don't override partial syntax of something that is actually supported.
+        Range.SetStyle(StyleColor_Green, Filemaker.Comment1)
+        Range.SetStyle(StyleColor_Green, Filemaker.Comment2)
+        Range.SetStyle(StyleColor_Green, Filemaker.Comment3)
+        Range.SetStyle(StyleColor_Red, Filemaker.String)
+        Range.SetStyle(StyleColor_Magenta, Filemaker.SpecialKeywords)
+        Range.SetStyle(StyleColor_Gray, Filemaker.Operators)
+        Range.SetStyle(StyleColor_Blue, Filemaker.Keywords)
+        Range.SetStyle(StyleColor_Magenta, Filemaker.Functions)
+        Range.SetStyle(StyleColor_Maroon, Filemaker.Types)
+        Range.SetStyle(StyleColor_GrayStrike, Filemaker.ReservedKeywords) ' Do last, so we don't override partial syntax of something that is actually supported.
 
         Range.ClearFoldingMarkers()
         Range.SetFoldingMarkers("\bBEGIN\b", "\bEND\b", RegexOptions.IgnoreCase)

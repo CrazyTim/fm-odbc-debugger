@@ -4,38 +4,38 @@ namespace FileMakerOdbcDebugger.Util.Tests
 {
     public partial class Sql
     {
-        public class SplitQuery
+        public class Split
         {
             [Theory]
             [InlineData(0, "")]
-            [InlineData(2, "'str'")] // Starts and ends with a string
+            [InlineData(1, "'str'")] // Starts and ends with a string
             [InlineData(3, "_'str'_")] // String surrounded by other characters
-            [InlineData(2, "'str''ing'")] // Escaped single quote inside string
-            [InlineData(1, "_''_")] // Escaped single quote surrounded by other characters
-            [InlineData(1, "''")] // Escaped single quote
+            [InlineData(1, "'str''ing'")] // Escaped single quote at middle of string
+            [InlineData(1, "_''_")] // Empty string surrounded by other characters
+            [InlineData(1, "''")] // Empty string
             public void Query_is_split_into_correct_number_of_parts(int expectedPartCount, string query)
             {
                 // Act
-                var result = new Util.Sql.SplitQuery(query);
+                var result = new SqlQuery.Split(query).Parts;
 
                 // Assert
-                Assert.Equal(expectedPartCount, result.Parts.Count);
+                Assert.Equal(expectedPartCount, result.Count);
             }
 
             [Theory]
             [InlineData("")]
             [InlineData("'str'")] // Starts and ends with a string
             [InlineData("_'str'_")] // String surrounded by other characters
-            [InlineData("'str''ing'")] // Escaped single quote inside string
-            [InlineData("_''_")] // Escaped single quote surrounded by other characters
-            [InlineData("''")] // Escaped single quote
+            [InlineData("'str''ing'")] // Escaped single quote at middle of string
+            [InlineData("_''_")] // Empty string surrounded by other characters
+            [InlineData("''")] // Empty string
             public void Query_is_unchanged_after_it_is_split_and_rejoined(string query)
             {
                 // Act
-                var result = new Util.Sql.SplitQuery(query);
+                var result = new SqlQuery.Split(query).Join();
 
                 // Assert
-                Assert.Equal(query, result.Join());
+                Assert.Equal(query, result);
             }
         }
     }

@@ -102,7 +102,7 @@ Public Class ResultPanel
 
     End Sub
 
-    Public Sub UI_RenderQueryWarnings(ByVal Warnings As List(Of Sql.QueryIssue))
+    Public Sub UI_RenderQueryWarnings(ByVal Warnings As List(Of SqlQuery.Issue))
 
         If Warnings.Count = 0 Then
             lblWarning.Visible = False

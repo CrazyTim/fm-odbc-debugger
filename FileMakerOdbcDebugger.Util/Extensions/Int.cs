@@ -9,13 +9,5 @@ namespace FileMakerOdbcDebugger.Util
         {
             return (value % 2 != 0);
         }
-
-        /// <summary>
-        /// Return True if the int is "even" (can be divided evenly by 2).
-        /// </summary>
-        public static bool IsEven(this int value)
-        {
-            return (value % 2 == 0);
-        }
     }
 }

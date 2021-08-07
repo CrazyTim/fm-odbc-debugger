@@ -2,21 +2,21 @@ using System.Collections.Generic;
 
 namespace FileMakerOdbcDebugger.Util
 {
-    public static partial class Sql
+    public static partial class SqlQuery
     {
         /// <summary>
-        /// Represents a SQL query that has been split by its string literals.
+        /// Split a SQL query by its string literals.
         /// Can be used to process string literals separate from everything else.
-        /// For Example this query: "SELECT * FROM table WHERE field = 'test'"
+        /// For Example, this query: "SELECT * FROM table WHERE field = 'test'"
         /// will be split into:
         /// 1. "SELECT * FROM table WHERE field = "
         /// 2. "test"
         /// </summary>
-        public class SplitQuery
+        public class Split
         {
             public List<SqlPart> Parts { get; set; } = new List<SqlPart>();
 
-            public SplitQuery(string sqlQuery)
+            public Split(string sqlQuery)
             {
                 var tempParts = new List<string>();
                 var singleQuote = '\'';

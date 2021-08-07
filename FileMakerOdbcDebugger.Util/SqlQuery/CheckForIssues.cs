@@ -5,23 +5,8 @@ using System.Text.RegularExpressions;
 
 namespace FileMakerOdbcDebugger.Util
 {
-    public static partial class Sql
+    public static partial class SqlQuery
     {
-        public enum QueryIssue
-        {
-            [Description("Warning: FileMaker stores empty strings as NULL, so using \"WHERE column = ''\" or \"WHERE column <> ''\" on a \"Text\" field will always return 0 results. Use \"IS NULL\" instead.")]
-            EmptyStringComparisonAlwaysReturnsZeroResults,
-
-            [Description("Syntax error: FileMaker ODBC does not support the keywords \"TRUE\" or \"FALSE\". Use \"1\" or \"0\" instead.")]
-            TrueFalseKeywordNotSupported,
-
-            [Description("Syntax error: one or more apostrophes (\"'\") need to be escaped.")]
-            ApostrophesNotEscaped,
-            
-            [Description("Warning: FileMaker ODBC is very slow when comparing dates with the \"BETWEEN\" keyword. Use \">=\" and \"<=\" instead.")]
-            BetweenKeywordIsVerySlow,
-        }
-
         private static readonly string whereClause = @"(?<=WHERE\s.*)\w+\s+((<>)|=)\s*";
         private static readonly Regex containsEmptyStringComparison = new Regex(whereClause + "''", RegexOptions.IgnoreCase);
         private static readonly Regex containsTrueOrFalse = new Regex(whereClause + "((TRUE)|(FALSE))", RegexOptions.IgnoreCase);
@@ -30,15 +15,15 @@ namespace FileMakerOdbcDebugger.Util
         /// <summary>
         /// Check a SQL query for certain issues.
         /// </summary>
-        public static List<QueryIssue> CheckQueryForIssues(string sqlQuery, bool forFileMaker)
+        public static List<Issue> CheckForIssues(string sqlQuery, bool forFileMaker)
         {
-            var issues = new List<QueryIssue>();
-            var split = new Sql.SplitQuery(sqlQuery);
+            var issues = new List<Issue>();
+            var split = new Split(sqlQuery);
 
             // Check if there is an odd number of single quotes (') in the query (syntax error):
             if (sqlQuery.Count(c => c == '\'').IsOdd())
             {
-                issues.Add(QueryIssue.ApostrophesNotEscaped);
+                issues.Add(Issue.ApostrophesNotEscaped);
                 return issues; // No point in contining, other checks will be wrong until this is fixed.
             }
 
@@ -50,7 +35,7 @@ namespace FileMakerOdbcDebugger.Util
                     if (i.Type == SqlPartType.Other &&
                         containsEmptyStringComparison.Match(i.Value).Success)
                     {
-                        issues.Add(QueryIssue.EmptyStringComparisonAlwaysReturnsZeroResults);
+                        issues.Add(Issue.EmptyStringComparisonAlwaysReturnsZeroResults);
                         break;
                     }
                 }
@@ -61,7 +46,7 @@ namespace FileMakerOdbcDebugger.Util
                     if (i.Type == SqlPartType.Other &&
                         containsTrueOrFalse.Match(i.Value).Success)
                     {
-                        issues.Add(QueryIssue.TrueFalseKeywordNotSupported);
+                        issues.Add(Issue.TrueFalseKeywordNotSupported);
                         break;
                     }
                 }
@@ -72,13 +57,28 @@ namespace FileMakerOdbcDebugger.Util
                     if (i.Type == SqlPartType.Other &&
                         containsBetween.Match(i.Value).Success)
                     {
-                        issues.Add(QueryIssue.BetweenKeywordIsVerySlow);
+                        issues.Add(Issue.BetweenKeywordIsVerySlow);
                         break;
                     }
                 }
             }
 
             return issues;
+        }
+
+        public enum Issue
+        {
+            [Description("Warning: FileMaker stores empty strings as NULL, so using \"WHERE column = ''\" or \"WHERE column <> ''\" on a \"Text\" field will always return 0 results. Use \"IS NULL\" instead.")]
+            EmptyStringComparisonAlwaysReturnsZeroResults,
+
+            [Description("Syntax error: FileMaker ODBC does not support the keywords \"TRUE\" or \"FALSE\". Use \"1\" or \"0\" instead.")]
+            TrueFalseKeywordNotSupported,
+
+            [Description("Syntax error: one or more apostrophes (\"'\") need to be escaped.")]
+            ApostrophesNotEscaped,
+
+            [Description("Warning: FileMaker ODBC is very slow when comparing dates with the \"BETWEEN\" keyword. Use \">=\" and \"<=\" instead.")]
+            BetweenKeywordIsVerySlow,
         }
     }
 }

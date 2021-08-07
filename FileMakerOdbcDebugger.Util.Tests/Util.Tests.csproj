@@ -82,10 +82,10 @@
     <Compile Include="IO\PathExists.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Encrypt.cs" />
-    <Compile Include="Sql\CheckQueryForIssues.cs" />
-    <Compile Include="Sql\SplitQuery.cs" />
-    <Compile Include="Sql\EscapeIdentifiyersStartingWithUnderscore.cs" />
-    <Compile Include="Sql\SplitQueryIntoStatements.cs" />
+    <Compile Include="SqlQuery\CheckForIssues.cs" />
+    <Compile Include="SqlQuery\Split.cs" />
+    <Compile Include="SqlQuery\EscapeIdentifiyersStartingWithUnderscore.cs" />
+    <Compile Include="SqlQuery\SplitIntoStatements.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -88,7 +88,7 @@ Public Class SqlControl
                 Return Tran
             End If
 
-            Tran.Query = Sql.PrepareQuery(Query, SelectedDriver = SelectedDriverIndex.FileMaker)
+            Tran.Query = SqlQuery.Prepare(Query, SelectedDriver = SelectedDriverIndex.FileMaker)
 
             Await Sql.ExecuteTransaction(
                 Tran,
@@ -180,7 +180,7 @@ Public Class SqlControl
 
             rp.UI_RenderRowCount(r.Data.Count - 1, r.RowsAffected, RowsToReturn)
 
-            rp.UI_RenderQueryWarnings(Sql.CheckQueryForIssues(Tran.Query, SelectedDriver = SelectedDriverIndex.FileMaker))
+            rp.UI_RenderQueryWarnings(SqlQuery.CheckForIssues(Tran.Query, SelectedDriver = SelectedDriverIndex.FileMaker))
 
             Me.Refresh()
 

@@ -17,7 +17,7 @@ namespace FileMakerOdbcDebugger.Util
             int rowLimit,
             string connectionString)
         {
-            List<string> statements = SplitQueryIntoStatements(transaction.Query);
+            List<string> statements = SqlQuery.SplitIntoStatements(transaction.Query);
             if (statements.Count == 0) return;
 
             var sw = new System.Diagnostics.Stopwatch();

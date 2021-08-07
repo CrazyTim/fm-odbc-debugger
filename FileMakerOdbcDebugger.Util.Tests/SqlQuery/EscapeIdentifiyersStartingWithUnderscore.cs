@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Xunit;
+using static FileMakerOdbcDebugger.Util.SqlQuery;
 
 namespace FileMakerOdbcDebugger.Util.Tests
 {
@@ -24,10 +25,15 @@ namespace FileMakerOdbcDebugger.Util.Tests
             public void Words_starting_with_an_underscore_are_escaped(string query, string expectedResult)
             {
                 // Act
-                var result = Util.Sql.EscapeIdentifiersStartingWithUnderscore(query);
+                var result = new List<SqlPart>() { new SqlPart() {
+                    Type = SqlPartType.Other,
+                    Value = query,
+                }};
+
+                EscapeIdentifiersStartingWithUnderscore(result);
 
                 // Assert
-                Assert.Equal(expectedResult, result);
+                Assert.Equal(expectedResult, result[0].Value);
             }
         }
     }

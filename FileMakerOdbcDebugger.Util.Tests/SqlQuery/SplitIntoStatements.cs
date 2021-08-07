@@ -4,7 +4,7 @@ namespace FileMakerOdbcDebugger.Util.Tests
 {
     public partial class Sql
     {
-        public class SplitQueryIntoStatements
+        public class SplitIntoStatements
         {
             [Theory]
             [InlineData(0, null)]
@@ -15,7 +15,7 @@ namespace FileMakerOdbcDebugger.Util.Tests
             public void SQL_query_is_split_into_the_correct_number_of_statements(int expectedStatementCount, string query)
             {
                 // Act
-                var result = Util.Sql.SplitQueryIntoStatements(query);
+                var result = SqlQuery.SplitIntoStatements(query);
 
                 // Assert
                 Assert.Equal(expectedStatementCount, result.Count);

@@ -4,14 +4,14 @@ using System.Text;
 
 namespace FileMakerOdbcDebugger.Util
 {
-    public static partial class Sql
+    public static partial class SqlQuery
     {
-        private static readonly char tempSeparator = '\u009f'; // &#159
+        private static readonly char tempStatementSeparator = '\u009f'; // &#159
 
         /// <summary>
-        /// Split a SQL query into an List of statements based on any "statement terminators" (";").
+        /// Split a SQL query into a List of statements based on any "statement terminators" (";").
         /// </summary>
-        public static List<string> SplitQueryIntoStatements(string sqlQuery)
+        public static List<string> SplitIntoStatements(string sqlQuery)
         {
             int singleQuoteCount = 0;
             var builder = new StringBuilder(sqlQuery);
@@ -26,11 +26,11 @@ namespace FileMakerOdbcDebugger.Util
                 }
                 else if (s == ';')
                 {
-                    if (singleQuoteCount == 0) builder[i] = tempSeparator;
+                    if (singleQuoteCount == 0) builder[i] = tempStatementSeparator;
                 }
             }
 
-            var l = builder.ToString().Split(tempSeparator).ToList();
+            var l = builder.ToString().Split(tempStatementSeparator).ToList();
             l.RemoveAll(s => string.IsNullOrWhiteSpace(s));
 
             return l;

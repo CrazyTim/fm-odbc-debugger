@@ -60,7 +60,10 @@
   <ItemGroup>
     <Compile Include="Common\BuildConnectionString.cs" />
     <Compile Include="Common\ExportToCsv.cs" />
-    <Compile Include="Sql\Syntax.cs" />
+    <Compile Include="SqlQuery\CleanSpaces.cs" />
+    <Compile Include="SqlQuery\ReplaceNewlinesWithCR.cs" />
+    <Compile Include="SqlQuery\EscapeIdentifiyersStartingWithUnderscore.cs" />
+    <Compile Include="SqlSyntax\FileMaker.cs" />
     <Compile Include="Extensions\TimeSpan.cs" />
     <Compile Include="Interfaces\IUi.cs" />
     <Compile Include="Extensions\DataGridView.cs" />
@@ -68,19 +71,19 @@
     <Compile Include="Extensions\Int.cs" />
     <Compile Include="Extensions\String.cs" />
     <Compile Include="Extensions\Enum.cs" />
-    <Compile Include="Sql\CheckQueryForIssues.cs" />
+    <Compile Include="SqlQuery\CheckForIssues.cs" />
     <Compile Include="Sql\ExecuteError.cs" />
     <Compile Include="Sql\Transaction.cs" />
     <Compile Include="Sql\ExecuteStatus.cs" />
-    <Compile Include="Sql\PrepareQuery.cs" />
+    <Compile Include="SqlQuery\Prepare.cs" />
     <Compile Include="Common\GetOdbcDriverVersion64Bit.cs" />
-    <Compile Include="Sql\EscapeIdentifiyersStartingWithUnderscore.cs" />
+    <Compile Include="SqlQuery\RemoveComments.cs" />
     <Compile Include="IO\PathExists.cs" />
     <Compile Include="Json\Json.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Encrypt.cs" />
-    <Compile Include="Sql\SplitQuery.cs" />
-    <Compile Include="Sql\SplitQueryIntoStatements.cs" />
+    <Compile Include="SqlQuery\Split.cs" />
+    <Compile Include="SqlQuery\SplitIntoStatements.cs" />
     <Compile Include="Sql\ExecuteTransaction.cs" />
     <Compile Include="Sql\StatementResult.cs" />
   </ItemGroup>
