@@ -62,7 +62,7 @@
     <Compile Include="Common\ExportToCsv.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="SqlQuery\CleanSpaces.cs" />
-    <Compile Include="SqlQuery\ReplaceNewlinesWithCR.cs" />
+    <Compile Include="SqlQuery\ReplaceLineBreaksInStringLiteralsWithCR.cs" />
     <Compile Include="SqlQuery\EscapeIdentifiyersStartingWithUnderscore.cs" />
     <Compile Include="SqlSyntax\FileMaker.cs" />
     <Compile Include="Extensions\TimeSpan.cs" />

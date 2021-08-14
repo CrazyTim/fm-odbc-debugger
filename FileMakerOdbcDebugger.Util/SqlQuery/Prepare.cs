@@ -15,7 +15,7 @@ namespace FileMakerOdbcDebugger.Util
 
             if (forFileMaker)
             {
-                ReplaceNewlinesInStringLiteralsWithCR(split.Parts);
+                ReplaceLineBreaksInStringLiteralsWithCR(split.Parts);
                 EscapeIdentifiersStartingWithUnderscore(split.Parts);
             }
 
