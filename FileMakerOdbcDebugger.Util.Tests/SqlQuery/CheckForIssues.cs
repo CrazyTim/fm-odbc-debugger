@@ -1,40 +1,41 @@
 using Xunit;
+using static FileMakerOdbcDebugger.Util.SqlQuery;
 
 namespace FileMakerOdbcDebugger.Util.Tests
 {
-    public partial class Sql
+    public partial class SqlQuery
     {
         public class CheckForIssues
         {
             [Theory]
-            [InlineData(SqlQuery.Issue.EmptyStringComparisonAlwaysReturnsZeroResults, "WHERE column = ''")]
-            [InlineData(SqlQuery.Issue.EmptyStringComparisonAlwaysReturnsZeroResults, "WHERE column <> ''")]
-            [InlineData(SqlQuery.Issue.TrueFalseKeywordNotSupported, "WHERE column = TRUE")]
-            [InlineData(SqlQuery.Issue.TrueFalseKeywordNotSupported, "WHERE column = FALSE")]
-            [InlineData(SqlQuery.Issue.ApostrophesNotEscaped, "'''")]
-            [InlineData(SqlQuery.Issue.BetweenKeywordIsVerySlow, "WHERE column BETWEEN x")]
-            public void Query_contains_issue(SqlQuery.Issue expectedIssue, string sqlQuery)
+            [InlineData(Issue.EmptyStringComparisonAlwaysReturnsZeroResults, "WHERE column = ''")]
+            [InlineData(Issue.EmptyStringComparisonAlwaysReturnsZeroResults, "WHERE column <> ''")]
+            [InlineData(Issue.TrueFalseKeywordNotSupported, "WHERE column = TRUE")]
+            [InlineData(Issue.TrueFalseKeywordNotSupported, "WHERE column = FALSE")]
+            [InlineData(Issue.ApostrophesNotEscaped, "'''")]
+            [InlineData(Issue.BetweenKeywordIsVerySlow, "WHERE column BETWEEN x")]
+            public void Query_contains_issue(Issue expectedIssue, string sqlQuery)
             {
                 // Act
-                var result = SqlQuery.CheckForIssues(sqlQuery, true);
+                var result = Util.SqlQuery.CheckForIssues(sqlQuery, true);
 
                 // Assert
                 Assert.Contains(expectedIssue, result);
             }
 
             [Theory]
-            [InlineData(SqlQuery.Issue.EmptyStringComparisonAlwaysReturnsZeroResults, "")]
-            [InlineData(SqlQuery.Issue.TrueFalseKeywordNotSupported, "")]
-            [InlineData(SqlQuery.Issue.TrueFalseKeywordNotSupported, "SELECT '= TRUE'")]
-            [InlineData(SqlQuery.Issue.TrueFalseKeywordNotSupported, "SELECT '= FALSE'")]
-            [InlineData(SqlQuery.Issue.ApostrophesNotEscaped, "")]
-            [InlineData(SqlQuery.Issue.ApostrophesNotEscaped, "''")]
-            [InlineData(SqlQuery.Issue.BetweenKeywordIsVerySlow, "")]
-            [InlineData(SqlQuery.Issue.BetweenKeywordIsVerySlow, "SELECT 'WHERE column BETWEEN x'")]
-            public void Query_does_not_contain_issue(SqlQuery.Issue expectedIssue, string sqlQuery)
+            [InlineData(Issue.EmptyStringComparisonAlwaysReturnsZeroResults, "")]
+            [InlineData(Issue.TrueFalseKeywordNotSupported, "")]
+            [InlineData(Issue.TrueFalseKeywordNotSupported, "SELECT '= TRUE'")]
+            [InlineData(Issue.TrueFalseKeywordNotSupported, "SELECT '= FALSE'")]
+            [InlineData(Issue.ApostrophesNotEscaped, "")]
+            [InlineData(Issue.ApostrophesNotEscaped, "''")]
+            [InlineData(Issue.BetweenKeywordIsVerySlow, "")]
+            [InlineData(Issue.BetweenKeywordIsVerySlow, "SELECT 'WHERE column BETWEEN x'")]
+            public void Query_does_not_contain_issue(Issue expectedIssue, string sqlQuery)
             {
                 // Act
-                var result = SqlQuery.CheckForIssues(sqlQuery, true);
+                var result = Util.SqlQuery.CheckForIssues(sqlQuery, true);
 
                 // Assert
                 Assert.DoesNotContain(expectedIssue, result);

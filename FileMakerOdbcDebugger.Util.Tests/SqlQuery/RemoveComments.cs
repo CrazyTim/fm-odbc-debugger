@@ -4,7 +4,7 @@ using static FileMakerOdbcDebugger.Util.SqlQuery;
 
 namespace FileMakerOdbcDebugger.Util.Tests
 {
-    public partial class Sql
+    public partial class SqlQuery
     {
         public class RemoveComments
         {
@@ -50,7 +50,7 @@ namespace FileMakerOdbcDebugger.Util.Tests
                     Value = sqlPart,
                 }};
 
-                RemoveComments(result);
+                Util.SqlQuery.RemoveComments(result);
 
                 // Assert
                 Assert.Equal(expectedResult, result[0].Value);

@@ -2,7 +2,7 @@ using Xunit;
 
 namespace FileMakerOdbcDebugger.Util.Tests
 {
-    public partial class Sql
+    public partial class SqlQuery
     {
         public class SplitIntoStatements
         {
@@ -15,7 +15,7 @@ namespace FileMakerOdbcDebugger.Util.Tests
             public void SQL_query_is_split_into_the_correct_number_of_statements(int expectedStatementCount, string sqlQuery)
             {
                 // Act
-                var result = SqlQuery.SplitIntoStatements(sqlQuery);
+                var result = Util.SqlQuery.SplitIntoStatements(sqlQuery);
 
                 // Assert
                 Assert.Equal(expectedStatementCount, result.Count);

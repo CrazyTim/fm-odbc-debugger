@@ -2,7 +2,7 @@ using Xunit;
 
 namespace FileMakerOdbcDebugger.Util.Tests
 {
-    public partial class Sql
+    public partial class SqlQuery
     {
         public class Split
         {
@@ -16,7 +16,7 @@ namespace FileMakerOdbcDebugger.Util.Tests
             public void Query_is_split_into_correct_number_of_parts(int expectedPartCount, string sqlQuery)
             {
                 // Act
-                var result = new SqlQuery.Split(sqlQuery).Parts;
+                var result = new Util.SqlQuery.Split(sqlQuery).Parts;
 
                 // Assert
                 Assert.Equal(expectedPartCount, result.Count);
@@ -32,7 +32,7 @@ namespace FileMakerOdbcDebugger.Util.Tests
             public void Query_is_unchanged_after_it_is_split_and_rejoined(string sqlQuery)
             {
                 // Act
-                var result = new SqlQuery.Split(sqlQuery).Join();
+                var result = new Util.SqlQuery.Split(sqlQuery).Join();
 
                 // Assert
                 Assert.Equal(sqlQuery, result);

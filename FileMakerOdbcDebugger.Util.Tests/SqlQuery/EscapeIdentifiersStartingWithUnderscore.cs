@@ -4,9 +4,9 @@ using static FileMakerOdbcDebugger.Util.SqlQuery;
 
 namespace FileMakerOdbcDebugger.Util.Tests
 {
-    public partial class Sql
+    public partial class SqlQuery
     {
-        public class EscapeIdentifiyersStartingWithUnderscore
+        public class EscapeIdentifiersStartingWithUnderscore
         {
             public static IEnumerable<object[]> NonWhiteSpaceTestData = new List<object[]>()
             {
@@ -39,7 +39,7 @@ namespace FileMakerOdbcDebugger.Util.Tests
                     Value = sqlPart,
                 }};
 
-                EscapeIdentifiersStartingWithUnderscore(result);
+                Util.SqlQuery.EscapeIdentifiersStartingWithUnderscore(result);
 
                 // Assert
                 Assert.Equal(expectedResult, result[0].Value);
