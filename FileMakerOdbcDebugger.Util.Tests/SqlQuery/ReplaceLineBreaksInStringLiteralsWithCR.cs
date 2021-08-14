@@ -38,7 +38,7 @@ namespace FileMakerOdbcDebugger.Util.Tests
                     Value = sqlPart,
                 }};
 
-                Util.SqlQuery.ReplaceLineBreaksInStringLiteralsWithCR(result);
+                result.ReplaceLineBreaksInStringLiteralsWithCR();
 
                 // Assert
                 Assert.Equal(expectedResult, result[0].Value);

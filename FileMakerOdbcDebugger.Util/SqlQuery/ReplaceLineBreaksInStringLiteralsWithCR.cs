@@ -11,7 +11,7 @@ namespace FileMakerOdbcDebugger.Util
         /// Replace CRLF and LF linebreak sequences with CR.
         /// Note: FileMaker only uses CR for newlines.
         /// </summary>
-        public static void ReplaceLineBreaksInStringLiteralsWithCR(List<SqlPart> parts)
+        public static List<SqlPart> ReplaceLineBreaksInStringLiteralsWithCR(this List<SqlPart> parts)
         {
             foreach (var s in parts)
             {
@@ -20,6 +20,8 @@ namespace FileMakerOdbcDebugger.Util
                     s.Value = findCrlfAndLfLineBreakSequences.Replace(s.Value, Constants.CR);
                 }
             }
+
+            return parts;
         }
     }
 }

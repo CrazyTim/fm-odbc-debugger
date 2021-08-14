@@ -15,7 +15,7 @@ namespace FileMakerOdbcDebugger.Util
         /// <summary>
         /// Remove single and multiline comments
         /// </summary>
-        public static void RemoveComments(List<SqlPart> parts)
+        public static List<SqlPart> RemoveComments(this List<SqlPart> parts)
         {
             foreach (var s in parts)
             {
@@ -25,6 +25,8 @@ namespace FileMakerOdbcDebugger.Util
                     s.Value = multilineComments.Replace(s.Value, "");
                 }
             }
+
+            return parts;
         }
     }
 }

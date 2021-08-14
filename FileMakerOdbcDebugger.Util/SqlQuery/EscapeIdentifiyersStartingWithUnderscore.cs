@@ -11,7 +11,7 @@ namespace FileMakerOdbcDebugger.Util
         /// Insert double-quotes around identifiyers starting with an underscore ("_") (which is illegal for OBDC, but not FileMaker).
         /// Note: in FileMaker its common to name fields starting with a underscore.
         /// </summary>
-        public static void EscapeIdentifiersStartingWithUnderscore(List<SqlPart> parts)
+        public static List<SqlPart> EscapeIdentifiersStartingWithUnderscore(this List<SqlPart> parts)
         {
             foreach (var s in parts)
             {
@@ -20,6 +20,8 @@ namespace FileMakerOdbcDebugger.Util
                     s.Value = findIdentifiersStartingWithUnderscore.Replace(s.Value, m => '"' + m.ToString() + '"');
                 }
             }
+
+            return parts;
         }
     }
 }

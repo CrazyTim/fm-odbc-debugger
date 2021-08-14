@@ -39,7 +39,7 @@ namespace FileMakerOdbcDebugger.Util.Tests
                     Value = sqlPart,
                 }};
 
-                Util.SqlQuery.EscapeIdentifiersStartingWithUnderscore(result);
+                result.EscapeIdentifiersStartingWithUnderscore();
 
                 // Assert
                 Assert.Equal(expectedResult, result[0].Value);

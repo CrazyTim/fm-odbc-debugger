@@ -7,7 +7,7 @@ namespace FileMakerOdbcDebugger.Util
         /// <summary>
         /// Clean spaces so the query will print nicely in logs.
         /// </summary>
-        public static void CleanSpaces(List<SqlPart> parts)
+        public static List<SqlPart> CleanSpaces(this List<SqlPart> parts)
         {
             foreach (var s in parts)
             {
@@ -23,6 +23,8 @@ namespace FileMakerOdbcDebugger.Util
                     s.Value.Replace("\r\n ", "\r\n");
                 }
             }
+
+            return parts;
         }
     }
 }

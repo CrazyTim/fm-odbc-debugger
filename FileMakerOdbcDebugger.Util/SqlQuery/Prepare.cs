@@ -9,14 +9,15 @@ namespace FileMakerOdbcDebugger.Util
         {
             var split = new Split(sqlQuery);
 
-            RemoveComments(split.Parts);
-
-            CleanSpaces(split.Parts);
+            split.Parts
+                .RemoveComments()
+                .CleanSpaces();
 
             if (forFileMaker)
             {
-                ReplaceLineBreaksInStringLiteralsWithCR(split.Parts);
-                EscapeIdentifiersStartingWithUnderscore(split.Parts);
+                split.Parts
+                    .ReplaceLineBreaksInStringLiteralsWithCR()
+                    .EscapeIdentifiersStartingWithUnderscore();
             }
 
             return split.Join().Trim();

@@ -67,7 +67,7 @@ namespace FileMakerOdbcDebugger.Util.Tests
                     Value = sqlPart,
                 }};
 
-                Util.SqlQuery.RemoveComments(result);
+                result.RemoveComments();
 
                 // Assert
                 Assert.Equal(expectedResult, result[0].Value);
