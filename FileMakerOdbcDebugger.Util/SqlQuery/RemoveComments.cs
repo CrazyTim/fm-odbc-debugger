@@ -9,7 +9,8 @@ namespace FileMakerOdbcDebugger.Util
         // Also need to use lazy matching with `.` or it will match to the end of the string.
         private static readonly Regex inlineComments = new Regex(@"(--.+?)(?=[\r\n]|\Z)");
 
-        private static readonly Regex multilineComments = new Regex(@"\/\*[\s\S]*?\*\/"); // TODO: add tests
+        // TODO: add support for nested multiline comments
+        private static readonly Regex multilineComments = new Regex(@"\/\*[\s\S]*?\*\/");
 
         /// <summary>
         /// Remove single and multiline comments

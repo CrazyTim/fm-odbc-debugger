@@ -40,8 +40,25 @@ namespace FileMakerOdbcDebugger.Util.Tests
                 },
             };
 
+            public static IEnumerable<object[]> MultilineCommentTestData = new List<object[]>()
+            {
+                new object[] {
+                    "/*comment*/",
+                    "",
+                },
+                new object[] {
+                    "start/*comment*/end",
+                    "startend",
+                },
+                new object[] {
+                    $"{Constants.CR}/*comment*/{Constants.CR}",
+                    $"{Constants.CR}{Constants.CR}",
+                },
+            };
+
             [Theory]
             [MemberData(nameof(InlineCommentTestData))]
+            [MemberData(nameof(MultilineCommentTestData))]
             public void SQL_query_is_split_into_the_correct_number_of_statements(string sqlPart, string expectedResult)
             {
                 // Act
