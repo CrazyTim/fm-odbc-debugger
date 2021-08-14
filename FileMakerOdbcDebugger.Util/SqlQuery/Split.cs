@@ -4,6 +4,10 @@ namespace FileMakerOdbcDebugger.Util
 {
     public static partial class SqlQuery
     {
+        // Note: apparently Microsoft has a library to work with sql queries,
+        // Might be good to look into this if requirements get complicated:
+        // https://www.dbdelta.com/microsoft-sql-server-script-dom/
+
         /// <summary>
         /// Split a SQL query by its string literals.
         /// Can be used to process string literals separate from everything else.

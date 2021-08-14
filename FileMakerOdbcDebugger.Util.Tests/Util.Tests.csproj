@@ -85,6 +85,7 @@
     <Compile Include="SqlQuery\CheckForIssues.cs" />
     <Compile Include="SqlQuery\Split.cs" />
     <Compile Include="SqlQuery\EscapeIdentifiyersStartingWithUnderscore.cs" />
+    <Compile Include="SqlQuery\RemoveComments.cs" />
     <Compile Include="SqlQuery\SplitIntoStatements.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Common\BuildConnectionString.cs" />
     <Compile Include="Common\ExportToCsv.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="SqlQuery\CleanSpaces.cs" />
     <Compile Include="SqlQuery\ReplaceNewlinesWithCR.cs" />
     <Compile Include="SqlQuery\EscapeIdentifiyersStartingWithUnderscore.cs" />

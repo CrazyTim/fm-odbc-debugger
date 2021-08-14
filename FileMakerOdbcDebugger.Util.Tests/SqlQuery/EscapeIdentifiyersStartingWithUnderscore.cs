@@ -8,11 +8,20 @@ namespace FileMakerOdbcDebugger.Util.Tests
     {
         public class EscapeIdentifiyersStartingWithUnderscore
         {
-            public static IEnumerable<object[]> Tests = new List<object[]>()
+            public static IEnumerable<object[]> NonWhiteSpaceTestData = new List<object[]>()
             {
-                new object[] { '\r' + "_test" + '\r', '\r' + "\"_test\"" + '\r' },
-                new object[] { '\t' + "_test" + '\t', '\t' + "\"_test\"" + '\t' },
-                new object[] { '\n' + "_test" + '\n', '\n' + "\"_test\"" + '\n' },
+                new object[] {
+                    $"{Constants.CR}_test{Constants.CR}",
+                    $"{Constants.CR}\"_test\"{Constants.CR}",
+                },
+                new object[] {
+                    '\t' + "_test" + '\t',
+                    '\t' + "\"_test\"" + '\t',
+                },
+                new object[] {
+                    $"{Constants.LF}_test{Constants.LF}",
+                    $"{Constants.LF}\"_test\"{Constants.LF}",
+                },
             };
 
             [Theory]
@@ -21,13 +30,13 @@ namespace FileMakerOdbcDebugger.Util.Tests
             [InlineData("_test _test", "\"_test\" \"_test\"")] // multiple words
             [InlineData("test_test", "test_test")] // underscore in the middle of a word
             [InlineData(" test_test ", " test_test ")]
-            [MemberData(nameof(Tests))]
-            public void Words_starting_with_an_underscore_are_escaped(string query, string expectedResult)
+            [MemberData(nameof(NonWhiteSpaceTestData))]
+            public void Words_starting_with_an_underscore_are_escaped(string sqlPart, string expectedResult)
             {
                 // Act
                 var result = new List<SqlPart>() { new SqlPart() {
                     Type = SqlPartType.Other,
-                    Value = query,
+                    Value = sqlPart,
                 }};
 
                 EscapeIdentifiersStartingWithUnderscore(result);

@@ -10,6 +10,8 @@ namespace FileMakerOdbcDebugger.Util
         /// </summary>
         public static void ReplaceNewlinesInStringLiteralsWithCR(List<SqlPart> parts)
         {
+            // TODO: add tests
+            // TODO: use regexp instead of while loops: @"\r\n?|\n"
             foreach (var s in parts)
             {
                 if (s.Type == SqlPartType.StringLiteral)

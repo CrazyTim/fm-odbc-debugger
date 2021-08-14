@@ -13,10 +13,10 @@ namespace FileMakerOdbcDebugger.Util.Tests
             [InlineData(1, "'str''ing'")] // Escaped single quote at middle of string
             [InlineData(1, "_''_")] // Empty string surrounded by other characters
             [InlineData(1, "''")] // Empty string
-            public void Query_is_split_into_correct_number_of_parts(int expectedPartCount, string query)
+            public void Query_is_split_into_correct_number_of_parts(int expectedPartCount, string sqlQuery)
             {
                 // Act
-                var result = new SqlQuery.Split(query).Parts;
+                var result = new SqlQuery.Split(sqlQuery).Parts;
 
                 // Assert
                 Assert.Equal(expectedPartCount, result.Count);
@@ -29,13 +29,13 @@ namespace FileMakerOdbcDebugger.Util.Tests
             [InlineData("'str''ing'")] // Escaped single quote at middle of string
             [InlineData("_''_")] // Empty string surrounded by other characters
             [InlineData("''")] // Empty string
-            public void Query_is_unchanged_after_it_is_split_and_rejoined(string query)
+            public void Query_is_unchanged_after_it_is_split_and_rejoined(string sqlQuery)
             {
                 // Act
-                var result = new SqlQuery.Split(query).Join();
+                var result = new SqlQuery.Split(sqlQuery).Join();
 
                 // Assert
-                Assert.Equal(query, result);
+                Assert.Equal(sqlQuery, result);
             }
         }
     }

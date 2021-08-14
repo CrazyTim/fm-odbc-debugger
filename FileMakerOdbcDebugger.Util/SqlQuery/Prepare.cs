@@ -7,9 +7,9 @@ namespace FileMakerOdbcDebugger.Util
         /// </summary>
         public static string Prepare(string sqlQuery, bool forFileMaker)
         {
-            sqlQuery = RemoveComments(sqlQuery);
-
             var split = new Split(sqlQuery);
+
+            RemoveComments(split.Parts);
 
             CleanSpaces(split.Parts);
 

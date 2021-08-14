@@ -13,10 +13,10 @@ namespace FileMakerOdbcDebugger.Util.Tests
             [InlineData(SqlQuery.Issue.TrueFalseKeywordNotSupported, "WHERE column = FALSE")]
             [InlineData(SqlQuery.Issue.ApostrophesNotEscaped, "'''")]
             [InlineData(SqlQuery.Issue.BetweenKeywordIsVerySlow, "WHERE column BETWEEN x")]
-            public void Query_contains_issue(SqlQuery.Issue expectedIssue, string query)
+            public void Query_contains_issue(SqlQuery.Issue expectedIssue, string sqlQuery)
             {
                 // Act
-                var result = SqlQuery.CheckForIssues(query, true);
+                var result = SqlQuery.CheckForIssues(sqlQuery, true);
 
                 // Assert
                 Assert.Contains(expectedIssue, result);
@@ -31,10 +31,10 @@ namespace FileMakerOdbcDebugger.Util.Tests
             [InlineData(SqlQuery.Issue.ApostrophesNotEscaped, "''")]
             [InlineData(SqlQuery.Issue.BetweenKeywordIsVerySlow, "")]
             [InlineData(SqlQuery.Issue.BetweenKeywordIsVerySlow, "SELECT 'WHERE column BETWEEN x'")]
-            public void Query_does_not_contain_issue(SqlQuery.Issue expectedIssue, string query)
+            public void Query_does_not_contain_issue(SqlQuery.Issue expectedIssue, string sqlQuery)
             {
                 // Act
-                var result = SqlQuery.CheckForIssues(query, true);
+                var result = SqlQuery.CheckForIssues(sqlQuery, true);
 
                 // Assert
                 Assert.DoesNotContain(expectedIssue, result);

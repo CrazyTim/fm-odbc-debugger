@@ -20,6 +20,8 @@ namespace FileMakerOdbcDebugger.Util
             var issues = new List<Issue>();
             var split = new Split(sqlQuery);
 
+            RemoveComments(split.Parts);
+
             // Check if there is an odd number of single quotes (') in the query (syntax error):
             if (sqlQuery.Count(c => c == '\'').IsOdd())
             {
